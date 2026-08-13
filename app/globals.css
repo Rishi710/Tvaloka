@@ -2,25 +2,83 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
+
+  /* space.1 - space.7 — see docs/design-guidelines.md §2.3.
+     space.7/space.8 were a near-duplicate in the source brief;
+     consolidated to a single space.7 per that doc's migration note. */
+  --space-1: 8px;
+  --space-2: 10px;
+  --space-3: 15px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 30px;
+  --space-7: 96.66px;
+
+  --radius-xs: 5px;
+
+  --motion-instant: 250ms;
+  --motion-fast: 300ms;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-open-sans);
+  --font-display: var(--font-aboreto);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Type scale — docs/design-guidelines.md §2.1 */
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-md: 18px;
+  --text-md--line-height: 26px;
+  --text-lg: 30px;
+  --text-lg--line-height: 38px;
+  --text-xl: 40px;
+  --text-xl--line-height: 48px;
+
+  /* Color tokens — docs/design-guidelines.md §2.2.
+     PROVIDED base tokens plus the DERIVED onDark/action tokens that
+     the token accessibility audit requires (text.inverse/tertiary and
+     border.muted fail contrast on surface.base — see that doc).
+     Named to avoid Tailwind utility-prefix stutter (e.g. "hairline"
+     instead of "border-muted", which would yield class `border-border-muted`). */
+  --color-surface-base: #000000;
+  --color-surface-muted: #ffffff;
+  --color-hairline: #333333;
+  --color-hairline-ondark: #ffffff;
+
+  --color-primary: #000000;
+  --color-ondark: #ffffff;
+  --color-tertiary: #666666;
+  --color-ondark-secondary: #a6a6a6;
+
+  --color-action-onlight-bg: #000000;
+  --color-action-onlight-bg-hover: #1a1a1a;
+  --color-action-onlight-bg-active: #333333;
+  --color-action-onlight-text: #ffffff;
+
+  --color-action-ondark-bg: #ffffff;
+  --color-action-ondark-bg-hover: #f2f2f2;
+  --color-action-ondark-bg-active: #e5e5e5;
+  --color-action-ondark-text: #000000;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-open-sans), Arial, Helvetica, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
