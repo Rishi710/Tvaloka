@@ -90,7 +90,7 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="border-b border-hairline bg-surface-muted">
+    <header className="bg-surface-muted">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-[var(--space-4)] px-[var(--space-4)] py-[var(--space-3)]">
         {/* Left utility */}
         <div className="flex flex-1 items-center gap-[var(--space-4)]">
@@ -109,7 +109,7 @@ export function SiteHeader() {
                 ref={searchInputRef}
                 type="search"
                 placeholder="Search products"
-                className={`w-40 border-b border-hairline bg-transparent py-[var(--space-1)] text-sm text-primary placeholder:text-tertiary focus-visible:border-b-2 focus-visible:border-black focus-visible:outline-none sm:w-56`}
+                className={`w-40 bg-transparent py-[var(--space-1)] text-sm text-primary placeholder:text-tertiary focus-visible:border-b-2 focus-visible:border-black focus-visible:outline-none sm:w-56`}
                 onKeyDown={(event) => {
                   if (event.key === "Escape") closeSearch();
                 }}
@@ -193,7 +193,7 @@ export function SiteHeader() {
       </div>
 
       {/* Category nav — desktop */}
-      <nav aria-label="Product categories" className="hidden border-t border-hairline lg:block">
+      <nav aria-label="Product categories" className="hidden lg:block">
         <ul className="mx-auto flex max-w-7xl justify-item-center items-center gap-[var(--space-1)] overflow-x-auto px-[var(--space-4)]">
           {categories.map((category) => {
             const isActive = pathname === category.href;
@@ -232,7 +232,7 @@ export function SiteHeader() {
             aria-labelledby={drawerTitleId}
             className="absolute inset-y-0 right-0 flex w-full max-w-xs flex-col bg-surface-muted"
           >
-            <div className="flex items-center justify-between border-b border-hairline px-[var(--space-4)] py-[var(--space-3)]">
+            <div className="flex items-center justify-between px-[var(--space-4)] py-[var(--space-3)]">
               <span id={drawerTitleId} className="font-display text-md text-primary">
                 Menu
               </span>
@@ -250,7 +250,7 @@ export function SiteHeader() {
                 {categories.map((category) => {
                   const isActive = pathname === category.href;
                   return (
-                    <li key={category.href} className="border-b border-hairline">
+                    <li key={category.href}>
                       <Link
                         href={category.href}
                         aria-current={isActive ? "page" : undefined}
@@ -266,7 +266,7 @@ export function SiteHeader() {
                 })}
               </ul>
             </nav>
-            <div className="flex flex-col gap-[var(--space-3)] border-t border-hairline px-[var(--space-4)] py-[var(--space-4)]">
+            <div className="flex flex-col gap-[var(--space-3)] px-[var(--space-4)] py-[var(--space-4)]">
               <Link
                 href="/account"
                 onClick={() => setIsMenuOpen(false)}

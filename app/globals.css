@@ -60,6 +60,9 @@
   --color-action-onlight-bg-active: #333333;
   --color-action-onlight-text: #ffffff;
 
+  /* 6.53:1 on surface.muted — see docs/design-guidelines.md §2.2 */
+  --color-error: #b3261e;
+
   --color-action-ondark-bg: #ffffff;
   --color-action-ondark-bg-hover: #f2f2f2;
   --color-action-ondark-bg-active: #e5e5e5;
@@ -70,6 +73,17 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-open-sans), Arial, Helvetica, sans-serif;
+}
+
+/* For touch/pointer-swipeable strips (e.g. the horizontal scroller in
+   TrustedTales) where scroll-snap + on-screen prev/next controls are
+   the intended affordance, not the native scrollbar. */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

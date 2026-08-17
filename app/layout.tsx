@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans, Aboreto } from "next/font/google";
 import { AnnouncementBar } from "./components/AnnouncementBar";
+import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import "./globals.css";
 
@@ -31,10 +32,15 @@ export default function RootLayout({
       lang="en"
       className={`${openSans.variable} ${aboreto.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla's
+          cz-shortcut-listen) inject attributes onto <body> before React
+          hydrates. That's a real DOM mismatch but not a bug in our markup,
+          so only body's own attributes are exempted from the check. */}
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <AnnouncementBar />
         <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

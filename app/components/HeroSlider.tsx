@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeftIcon, ChevronRightIcon } from "./icons";
 
@@ -10,7 +11,12 @@ type Slide = {
   copy: string;
   ctaLabel: string;
   href: string;
+  /** Base colour behind the photo — shows for the moment before it decodes. */
   bgClassName: string;
+  image: string;
+  alt: string;
+  /** Which part of the photo to keep when it is cropped to the banner box. */
+  objectPositionClassName?: string;
 };
 
 const slides: Slide[] = [
@@ -21,6 +27,8 @@ const slides: Slide[] = [
     ctaLabel: "Shop Face & Body",
     href: "/face",
     bgClassName: "bg-surface-base",
+    image: "/Image/banner-1.jpeg",
+    alt: "Ayurvedic botanicals — rose, saffron, vanilla, amla, aloe and neem — laid out on cream cloth",
   },
   {
     eyebrow: "New In",
@@ -29,6 +37,10 @@ const slides: Slide[] = [
     ctaLabel: "Shop Bath & Body",
     href: "/bath-body",
     bgClassName: "bg-[radial-gradient(circle_at_20%_30%,_#1a1a1a,_#000000_60%)]",
+    image: "/Image/banner-2.jpeg",
+    alt: "A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf",
+    // Subject sits left, where the copy goes — favour the right of the frame.
+    objectPositionClassName: "object-right",
   },
   {
     eyebrow: "Travel Ready",
@@ -37,8 +49,21 @@ const slides: Slide[] = [
     ctaLabel: "Shop Travel Minis",
     href: "/travel-minis",
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
+    image: "/Image/img-2.jpg",
+    alt: "Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms",
+    objectPositionClassName: "object-right",
   },
 ];
+
+/**
+ * Keeps overlaid copy legible over bright photos. Below `lg` the copy spans
+ * most of the width, so it needs a near-even wash; from `lg` the copy occupies
+ * only the left ~45% and the scrim can fall away to let the photo show.
+ * Both variants measure clear of WCAG AA for every string in `slides`.
+ */
+const scrim =
+  "bg-[linear-gradient(to_right,rgba(0,0,0,.85),rgba(0,0,0,.72))] " +
+  "lg:bg-[linear-gradient(to_right,rgba(0,0,0,.82),rgba(0,0,0,.66)_55%,rgba(0,0,0,.3))]";
 
 const AUTOPLAY_MS = 6000;
 const SWIPE_THRESHOLD_PX = 40;
@@ -146,15 +171,27 @@ export function HeroSlider() {
                 isActive ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
             >
-              <div className="mx-auto w-full max-w-7xl px-[var(--space-4)]">
+              <Image
+                src={slide.image}
+                alt={slide.alt}
+                fill
+                sizes="100vw"
+                priority={slideIndex === 0}
+                className={`object-cover ${slide.objectPositionClassName ?? ""}`}
+              />
+              <div aria-hidden="true" className={`absolute inset-0 ${scrim}`} />
+
+              <div className="relative mx-auto w-full max-w-7xl px-[var(--space-4)]">
                 <div className="max-w-xl">
-                  <p className="text-xs font-semibold tracking-[0.3em] text-ondark-secondary uppercase">
+                  <p className="text-xs font-semibold tracking-[0.3em] text-ondark uppercase">
                     {slide.eyebrow}
                   </p>
                   <h2 className="font-display mt-[var(--space-3)] text-lg text-ondark sm:text-xl">
                     {slide.headline}
                   </h2>
-                  <p className="mt-[var(--space-3)] max-w-md text-sm text-ondark-secondary">
+                  {/* White rather than the secondary grey: 14px copy needs
+                      4.5:1, which the grey misses over a photo. */}
+                  <p className="mt-[var(--space-3)] max-w-md text-sm text-ondark">
                     {slide.copy}
                   </p>
                   <Link
