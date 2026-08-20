@@ -39,17 +39,15 @@ function Eyebrow({ children, onDark = false }: { children: string; onDark?: bool
       {/* Full white over imagery — the dimmer secondary grey drops below the
           4.5:1 this 12px label needs once a photo is behind it. */}
       <p
-        className={`text-xs font-semibold tracking-[0.3em] uppercase ${
-          onDark ? "text-ondark" : "text-tertiary"
-        }`}
+        className={`text-xs font-semibold tracking-[0.3em] uppercase ${onDark ? "text-ondark" : "text-tertiary"
+          }`}
       >
         {children}
       </p>
       <span
         aria-hidden="true"
-        className={`mt-[var(--space-2)] block h-px w-6 ${
-          onDark ? "bg-ondark" : "bg-tertiary"
-        }`}
+        className={`mt-[var(--space-2)] block h-px w-6 ${onDark ? "bg-ondark" : "bg-tertiary"
+          }`}
       />
     </div>
   );
@@ -67,11 +65,10 @@ function KnowMoreLink({
   return (
     <Link
       href={href}
-      className={`mt-[var(--space-5)] inline-flex items-center gap-[var(--space-3)] border-b pb-[var(--space-1)] text-xs font-semibold tracking-[0.2em] uppercase ${
-        onDark
-          ? "border-ondark-secondary text-ondark hover:border-ondark focus-visible:outline-white"
-          : "border-tertiary text-primary hover:border-primary focus-visible:outline-black"
-      } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
+      className={`mt-[var(--space-5)] inline-flex items-center gap-[var(--space-3)] border-b pb-[var(--space-1)] text-xs font-semibold tracking-[0.2em] uppercase ${onDark
+        ? "border-ondark-secondary text-ondark hover:border-ondark focus-visible:outline-white"
+        : "border-tertiary text-primary hover:border-primary focus-visible:outline-black"
+        } focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
     >
       {label}
       <span aria-hidden="true">→</span>
@@ -127,7 +124,7 @@ export default function AboutUsPage() {
             src="/Image/img-3.jpg"
             alt="Ground spices and herbs in terracotta bowls arranged in the shape of a tree on dark wood"
             label="Philosophy image"
-            aspectClassName="aspect-[4/5]"
+            aspectClassName="aspect-[4/3]"
           />
           <div>
             <Eyebrow>Our Philosophy</Eyebrow>
@@ -179,7 +176,7 @@ export default function AboutUsPage() {
             src="/Image/img-2.jpg"
             alt="Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms"
             label="Manufacturing image"
-            aspectClassName="aspect-[4/5]"
+            aspectClassName="aspect-[4/3]"
           />
           <div>
             <Eyebrow>Our Manufacturing Excellence</Eyebrow>
@@ -249,7 +246,7 @@ export default function AboutUsPage() {
               Discover Ayurveda
             </h2>
             <p className="mt-[var(--space-4)] max-w-md text-sm text-tertiary">
-              Ayurveda — &lsquo;the knowledge of life&rsquo; — is one of the world&rsquo;s oldest
+              Ayurveda &lsquo;the knowledge of life&rsquo; is one of the world&rsquo;s oldest
               systems of health and healing, refined over thousands of years. It works on four
               levels: body, breath, mind and spirit. Only when these sit in balance does beauty
               read as more than surface deep.
@@ -260,48 +257,35 @@ export default function AboutUsPage() {
             src="/Image/img-1.jpg"
             alt="A smiling woman patting skincare cream beneath her eye"
             label="Expertise image"
-            aspectClassName="aspect-[4/5]"
+            aspectClassName="aspect-[4/3]"
             className="lg:order-2"
           />
         </div>
       </section>
 
-      {/* Values — copy left, image right */}
+      {/* Values — image left, copy right */}
       <section className="bg-surface-muted">
         <div className={`${sectionClass} grid items-center gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
-          <div className="lg:order-1">
+          <MediaFrame
+            src="/Image/img-2.jpg"
+            alt="Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms"
+            label="Manufacturing image"
+            aspectClassName="aspect-[4/3]"
+          />
+          <div>
             <Eyebrow>Our Values</Eyebrow>
             <h2 className="font-display mt-[var(--space-4)] text-lg text-primary">
               Social Responsibility
             </h2>
-            <p className="mt-[var(--space-4)] max-w-md text-sm text-tertiary">
+            <p className="mt-[var(--space-4)] max-w-2xl text-sm text-tertiary">
               Reviving traditional craft has been part of our purpose from the beginning. We work
               directly with rural communities and local growers, so that the knowledge and
               livelihoods behind every formulation are sustained rather than extracted.
             </p>
             <KnowMoreLink href="/social-responsibility" label="Know more" />
           </div>
-          <MediaFrame label="Values image — community partners" className="lg:order-2" />
         </div>
       </section>
-
-      {/* Certifications */}
-      {/* <section className="bg-surface-muted">
-        <div className={`${sectionClass} grid gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
-          <div>
-            <Eyebrow>Our Certifications</Eyebrow>
-            <h2 className="font-display mt-[var(--space-4)] text-lg text-primary">
-              Clean, cruelty free beauty
-            </h2>
-          </div>
-          <p className="text-sm text-tertiary lg:pt-[var(--space-6)]">
-            The Ayurvedic standard for beauty has always been fresh, seasonal and natural. We hold
-            that line across our own products — no animal testing at any stage, and clean-ingredient
-            discipline carried through sourcing, formulation and manufacturing. Certification
-            details for each range are listed alongside the products themselves.
-          </p>
-        </div>
-      </section> */}
     </main>
   );
 }

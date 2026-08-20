@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ContactForm } from "../components/ContactForm";
 import { ClockIcon, LocationIcon, MailIcon, PhoneIcon } from "../components/icons";
+import { MediaFrame } from "../components/MediaFrame";
 
 export const metadata: Metadata = {
   title: "Contact Us | Tvaloka Wellness",
@@ -41,20 +42,36 @@ const details = [
 export default function ContactPage() {
   return (
     <main className="flex flex-1 flex-col">
-      <section className="bg-[radial-gradient(circle_at_25%_30%,_#1a1a1a,_#000000_65%)]">
-        <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-7)]">
-          <p className="text-xs font-semibold tracking-[0.3em] text-ondark-secondary uppercase">
+      {/* Hero banner — MediaFrame fills behind overlaid copy */}
+      <section className="relative flex min-h-[42vw] items-center lg:min-h-[34vw]">
+        <MediaFrame
+          src="/Image/banner-1.jpeg"
+          alt="Ayurvedic botanicals arranged on cream cloth"
+          label="Contact hero banner"
+          className="rounded-none"
+          sizes="100vw"
+          fill
+          priority
+        />
+        {/* Scrim for legibility */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,.82),rgba(0,0,0,.5)_55%,rgba(0,0,0,.18))]"
+        />
+        <div className="relative mx-auto max-w-7xl w-full px-[var(--space-4)] py-[var(--space-7)]">
+          <p className="text-xs font-semibold tracking-[0.3em] text-ondark uppercase">
             We are here to help
           </p>
           <h1 className="font-display mt-[var(--space-3)] text-lg text-ondark sm:text-xl">
             Contact Us
           </h1>
-          <p className="mt-[var(--space-4)] max-w-xl text-sm text-ondark-secondary">
+          <p className="mt-[var(--space-4)] max-w-xl text-sm text-ondark/80">
             Questions about a ritual, an order, or which formulation suits your skin? Our care
             team is happy to guide you.
           </p>
         </div>
       </section>
+
 
       <section className="bg-surface-muted">
         <div className="mx-auto grid max-w-7xl gap-[var(--space-7)] px-[var(--space-4)] py-[var(--space-7)] lg:grid-cols-2">

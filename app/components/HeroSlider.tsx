@@ -28,7 +28,7 @@ const slides: Slide[] = [
     href: "/face",
     bgClassName: "bg-surface-base",
     image: "/Image/banner-1.jpeg",
-    alt: "Ayurvedic botanicals — rose, saffron, vanilla, amla, aloe and neem — laid out on cream cloth",
+    alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
   },
   {
     eyebrow: "New In",
@@ -37,7 +37,7 @@ const slides: Slide[] = [
     ctaLabel: "Shop Bath & Body",
     href: "/bath-body",
     bgClassName: "bg-[radial-gradient(circle_at_20%_30%,_#1a1a1a,_#000000_60%)]",
-    image: "/Image/banner-2.jpeg",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/banner-2.webp?v=1787263013",
     alt: "A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf",
     // Subject sits left, where the copy goes — favour the right of the frame.
     objectPositionClassName: "object-right",
@@ -49,7 +49,7 @@ const slides: Slide[] = [
     ctaLabel: "Shop Travel Minis",
     href: "/travel-minis",
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
-    image: "/Image/img-2.jpg",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-08-20_at_20.21.39.webp?v=1787262046",
     alt: "Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms",
     objectPositionClassName: "object-right",
   },
@@ -62,8 +62,8 @@ const slides: Slide[] = [
  * Both variants measure clear of WCAG AA for every string in `slides`.
  */
 const scrim =
-  "bg-[linear-gradient(to_right,rgba(0,0,0,.85),rgba(0,0,0,.72))] " +
-  "lg:bg-[linear-gradient(to_right,rgba(0,0,0,.82),rgba(0,0,0,.66)_55%,rgba(0,0,0,.3))]";
+  "bg-[linear-gradient(to_right,rgba(0,0,0,0.55),rgba(0,0,0,0.35))] " +
+  "lg:bg-[linear-gradient(to_right,rgba(0,0,0,0.5),rgba(0,0,0,0.25)_60%,transparent)]";
 
 const AUTOPLAY_MS = 6000;
 const SWIPE_THRESHOLD_PX = 40;
@@ -156,7 +156,7 @@ export function HeroSlider() {
       onTouchEnd={onTouchEnd}
       onKeyDown={onKeyDown}
     >
-      <div className="relative h-[480px] sm:h-[520px] lg:h-[600px]">
+      <div className="relative h-[480px] sm:h-[550px] lg:h-[640px]">
         {slides.map((slide, slideIndex) => {
           const isActive = slideIndex === index;
           return (
@@ -167,9 +167,8 @@ export function HeroSlider() {
               aria-label={`${slideIndex + 1} of ${slides.length}`}
               aria-hidden={!isActive}
               inert={!isActive}
-              className={`absolute inset-0 flex items-center transition-opacity duration-[var(--motion-fast)] ease-out ${slide.bgClassName} ${
-                isActive ? "opacity-100" : "pointer-events-none opacity-0"
-              }`}
+              className={`absolute inset-0 flex items-center transition-opacity duration-[var(--motion-fast)] ease-out ${slide.bgClassName} ${isActive ? "opacity-100" : "pointer-events-none opacity-0"
+                }`}
             >
               <Image
                 src={slide.image}
@@ -181,7 +180,7 @@ export function HeroSlider() {
               />
               <div aria-hidden="true" className={`absolute inset-0 ${scrim}`} />
 
-              <div className="relative mx-auto w-full max-w-7xl px-[var(--space-4)]">
+              <div className="relative mx-auto w-full max-w-7xl px-6 sm:px-14 lg:px-16">
                 <div className="max-w-xl">
                   <p className="text-xs font-semibold tracking-[0.3em] text-ondark uppercase">
                     {slide.eyebrow}
@@ -215,7 +214,7 @@ export function HeroSlider() {
       <button
         type="button"
         onClick={goPrev}
-        className={`absolute top-1/2 left-[var(--space-4)] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-xs)] bg-surface-base/40 text-ondark hover:bg-surface-base/70 ${focusRing}`}
+        className={`absolute top-1/2 left-[var(--space-4)] hidden sm:flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-xs)] bg-surface-base/40 text-ondark hover:bg-surface-base/70 ${focusRing}`}
         aria-label="Previous slide"
       >
         <ChevronLeftIcon className="h-6 w-6" />
@@ -223,7 +222,7 @@ export function HeroSlider() {
       <button
         type="button"
         onClick={goNext}
-        className={`absolute top-1/2 right-[var(--space-4)] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-xs)] bg-surface-base/40 text-ondark hover:bg-surface-base/70 ${focusRing}`}
+        className={`absolute top-1/2 right-[var(--space-4)] hidden sm:flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-xs)] bg-surface-base/40 text-ondark hover:bg-surface-base/70 ${focusRing}`}
         aria-label="Next slide"
       >
         <ChevronRightIcon className="h-6 w-6" />
@@ -247,9 +246,8 @@ export function HeroSlider() {
             onClick={() => goTo(slideIndex)}
             aria-label={`Go to slide ${slideIndex + 1}`}
             aria-current={slideIndex === index ? "true" : undefined}
-            className={`h-2.5 w-2.5 rounded-full ${focusRing} ${
-              slideIndex === index ? "bg-surface-muted" : "bg-surface-muted/40"
-            }`}
+            className={`h-2.5 w-2.5 rounded-full ${focusRing} ${slideIndex === index ? "bg-surface-muted" : "bg-surface-muted/40"
+              }`}
           />
         ))}
       </div>

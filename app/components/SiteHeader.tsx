@@ -7,17 +7,17 @@ import { CartIcon, CloseIcon, MenuIcon, SearchIcon } from "./icons";
 
 const categories = [
   { label: "Offers", href: "/" },
-  { label: "Face", href: "/face" },
-  { label: "Bath & Body", href: "/bath-body" },
-  { label: "Hair", href: "/hair" },
-  { label: "Gifting", href: "/gifting" },
-  { label: "Travel Minis", href: "/travel-minis" },
+  { label: "New Launches", href: "/new-launches" },
+  { label: "Best Sellers", href: "/best-sellers" },
   { label: "Baby Care", href: "/baby-care" },
-  { label: "Men", href: "/men" },
+  { label: "Bath & Body", href: "/bath-body" },
+  { label: "Face Care", href: "/face-care" },
+  { label: "Hair Care", href: "/hair-care" },
+  { label: "Gifting", href: "/gifting" },
   { label: "Wellness", href: "/wellness" },
   { label: "About Us", href: "/about-us" },
   { label: "Ingredients", href: "/ingredients" },
-  { label: "Exclusives", href: "/exclusives" },
+  // { label: "Exclusives", href: "/exclusives" },
   { label: "Blogs", href: "/blogs" },
 ];
 
@@ -202,11 +202,10 @@ export function SiteHeader() {
                 <Link
                   href={category.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`inline-block px-[var(--space-4)] py-[var(--space-3)] text-xs font-semibold tracking-wide whitespace-nowrap focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-black ${
-                    isActive
-                      ? "bg-action-onlight-bg text-action-onlight-text"
-                      : "text-primary hover:bg-black/[.04]"
-                  }`}
+                  className={`inline-block px-[var(--space-4)] py-[var(--space-3)] text-xs font-semibold tracking-wide whitespace-nowrap focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-black ${isActive
+                    ? "bg-action-onlight-bg text-action-onlight-text"
+                    : "text-primary hover:bg-black/[.04]"
+                    }`}
                 >
                   {category.label}
                 </Link>
@@ -255,9 +254,8 @@ export function SiteHeader() {
                         href={category.href}
                         aria-current={isActive ? "page" : undefined}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`block px-[var(--space-4)] py-[var(--space-4)] text-sm font-semibold text-primary ${
-                          isActive ? "underline" : ""
-                        } focus-visible:-outline-offset-2 ${focusRing}`}
+                        className={`block px-[var(--space-4)] py-[var(--space-4)] text-sm font-semibold text-primary ${isActive ? "underline" : ""
+                          } focus-visible:-outline-offset-2 ${focusRing}`}
                       >
                         {category.label}
                       </Link>
