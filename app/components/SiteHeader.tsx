@@ -5,19 +5,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CartIcon, CloseIcon, MenuIcon, SearchIcon } from "./icons";
 
-const categories = [
-  { label: "Offers", href: "/" },
-  { label: "New Launches", href: "/new-launches" },
-  { label: "Best Sellers", href: "/best-sellers" },
-  { label: "Baby Care", href: "/baby-care" },
-  { label: "Bath & Body", href: "/bath-body" },
-  { label: "Face Care", href: "/face-care" },
-  { label: "Hair Care", href: "/hair-care" },
-  { label: "Gifting", href: "/gifting" },
-  { label: "Wellness", href: "/wellness" },
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+/** Static items pinned at the start of the nav bar (if any). */
+const NAV_PREFIX: NavItem[] = [];
+
+/** Static items pinned at the end of the nav bar. */
+const NAV_SUFFIX: NavItem[] = [
   { label: "About Us", href: "/about-us" },
   { label: "Ingredients", href: "/ingredients" },
-  // { label: "Exclusives", href: "/exclusives" },
   { label: "Blogs", href: "/blogs" },
 ];
 
@@ -27,7 +26,14 @@ const focusRing =
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-export function SiteHeader() {
+interface SiteHeaderProps {
+  /** Dynamic collection nav items fetched from Shopify (server-side). */
+  navItems?: NavItem[];
+}
+
+export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
+  // Merge: pinned prefix → dynamic Shopify collections → pinned suffix
+  const categories: NavItem[] = [...NAV_PREFIX, ...navItems, ...NAV_SUFFIX];
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);

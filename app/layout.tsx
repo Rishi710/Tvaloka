@@ -3,6 +3,8 @@ import { Open_Sans, Aboreto } from "next/font/google";
 import { AnnouncementBar } from "./components/AnnouncementBar";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
+import type { NavItem } from "./components/SiteHeader";
+import { getNavCollections } from "./lib/shopify/queries/collection";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -22,11 +24,26 @@ export const metadata: Metadata = {
   description: "Tvaloka",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let navItems: NavItem[] = [];
+
+  try {
+    const collections = await getNavCollections();
+    navItems = collections
+      .filter((c) => c.handle !== "frontpage") // Shopify's default "Home page" collection
+      .map((c) => ({
+        label: c.title,
+        href: `/${c.handle}`,
+      }));
+  } catch (error) {
+    console.error("[RootLayout] Failed to fetch nav collections:", error);
+    // navItems stays empty — SiteHeader renders only pinned static items
+  }
+
   return (
     <html
       lang="en"
@@ -38,7 +55,7 @@ export default function RootLayout({
           so only body's own attributes are exempted from the check. */}
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <AnnouncementBar />
-        <SiteHeader />
+        <SiteHeader navItems={navItems} />
         {children}
         <SiteFooter />
       </body>

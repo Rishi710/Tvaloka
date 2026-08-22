@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeftIcon, ChevronRightIcon } from "./icons";
 
-type Slide = {
+export type Slide = {
   eyebrow: string;
   headline: string;
   copy: string;
@@ -19,13 +19,13 @@ type Slide = {
   objectPositionClassName?: string;
 };
 
-const slides: Slide[] = [
+const defaultSlides: Slide[] = [
   {
     eyebrow: "Online Exclusive",
     headline: "Rituals of Renewal",
     copy: "Cold-pressed Ayurvedic oils and serums, crafted for daily ritual.",
     ctaLabel: "Shop Face & Body",
-    href: "/face",
+    href: "/face-care",
     bgClassName: "bg-surface-base",
     image: "/Image/banner-1.jpeg",
     alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
@@ -35,7 +35,7 @@ const slides: Slide[] = [
     headline: "Bath & Body, Reimagined",
     copy: "Traditional Ayurveda, formulated for modern skin.",
     ctaLabel: "Shop Bath & Body",
-    href: "/bath-body",
+    href: "/bath-body-care",
     bgClassName: "bg-[radial-gradient(circle_at_20%_30%,_#1a1a1a,_#000000_60%)]",
     image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/banner-2.webp?v=1787263013",
     alt: "A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf",
@@ -46,8 +46,8 @@ const slides: Slide[] = [
     eyebrow: "Travel Ready",
     headline: "Wellness, Wherever You Go",
     copy: "The full ritual, in travel-friendly minis.",
-    ctaLabel: "Shop Travel Minis",
-    href: "/travel-minis",
+    ctaLabel: "Shop Hair Care",
+    href: "/hair-care",
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
     image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-08-20_at_20.21.39.webp?v=1787262046",
     alt: "Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms",
@@ -71,7 +71,12 @@ const SWIPE_THRESHOLD_PX = 40;
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
 
-export function HeroSlider() {
+interface HeroSliderProps {
+  slides?: Slide[];
+}
+
+export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
+  const activeSlides = slides.length > 0 ? slides : defaultSlides;
   const [index, setIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isInteracting, setIsInteracting] = useState(false);
@@ -92,9 +97,12 @@ export function HeroSlider() {
     return () => query.removeEventListener("change", onChange);
   }, []);
 
-  const goTo = useCallback((next: number) => {
-    setIndex(((next % slides.length) + slides.length) % slides.length);
-  }, []);
+  const goTo = useCallback(
+    (next: number) => {
+      setIndex(((next % activeSlides.length) + activeSlides.length) % activeSlides.length);
+    },
+    [activeSlides.length],
+  );
   const goNext = useCallback(() => goTo(index + 1), [goTo, index]);
   const goPrev = useCallback(() => goTo(index - 1), [goTo, index]);
 
@@ -103,10 +111,15 @@ export function HeroSlider() {
   useEffect(() => {
     if (!autoplayActive) return;
     const timer = window.setInterval(() => {
-      setIndex((current) => (current + 1) % slides.length);
+      setIndex((current) => (current + 1) % activeSlides.length);
     }, AUTOPLAY_MS);
     return () => window.clearInterval(timer);
-  }, [autoplayActive]);
+  }, [autoplayActive, activeSlides.length]);
+
+  // Reset to first slide when the slide list changes
+  useEffect(() => {
+    setIndex(0);
+  }, [activeSlides]);
 
   function onKeyDown(event: React.KeyboardEvent) {
     if (event.key === "ArrowRight") {
@@ -139,7 +152,9 @@ export function HeroSlider() {
     touchStartX.current = null;
   }
 
-  const current = slides[index];
+  if (activeSlides.length === 0) return null;
+
+  const current = activeSlides[index];
 
   return (
     <section
@@ -157,18 +172,19 @@ export function HeroSlider() {
       onKeyDown={onKeyDown}
     >
       <div className="relative h-[480px] sm:h-[550px] lg:h-[640px]">
-        {slides.map((slide, slideIndex) => {
+        {activeSlides.map((slide, slideIndex) => {
           const isActive = slideIndex === index;
           return (
             <div
               key={slide.headline}
               role="group"
               aria-roledescription="slide"
-              aria-label={`${slideIndex + 1} of ${slides.length}`}
+              aria-label={`${slideIndex + 1} of ${activeSlides.length}`}
               aria-hidden={!isActive}
               inert={!isActive}
-              className={`absolute inset-0 flex items-center transition-opacity duration-[var(--motion-fast)] ease-out ${slide.bgClassName} ${isActive ? "opacity-100" : "pointer-events-none opacity-0"
-                }`}
+              className={`absolute inset-0 flex items-center transition-opacity duration-[var(--motion-fast)] ease-out ${
+                slide.bgClassName
+              } ${isActive ? "opacity-100" : "pointer-events-none opacity-0"}`}
             >
               <Image
                 src={slide.image}
@@ -188,8 +204,6 @@ export function HeroSlider() {
                   <h2 className="font-display mt-[var(--space-3)] text-lg text-ondark sm:text-xl">
                     {slide.headline}
                   </h2>
-                  {/* White rather than the secondary grey: 14px copy needs
-                      4.5:1, which the grey misses over a photo. */}
                   <p className="mt-[var(--space-3)] max-w-md text-sm text-ondark">
                     {slide.copy}
                   </p>
@@ -208,7 +222,7 @@ export function HeroSlider() {
       </div>
 
       <p id={liveRegionId} aria-live="polite" className="sr-only">
-        Slide {index + 1} of {slides.length}: {current.headline}
+        Slide {index + 1} of {activeSlides.length}: {current.headline}
       </p>
 
       <button
@@ -228,26 +242,17 @@ export function HeroSlider() {
         <ChevronRightIcon className="h-6 w-6" />
       </button>
 
-      {/* Required alongside autoplay: WCAG 2.2.2 Pause, Stop, Hide */}
-      {/* <button
-        type="button"
-        onClick={() => setIsPlaying((playing) => !playing)}
-        className={`absolute right-[var(--space-4)] bottom-[var(--space-4)] flex h-11 items-center gap-[var(--space-1)] rounded-[var(--radius-xs)] bg-surface-base/40 px-[var(--space-3)] text-xs font-semibold text-ondark hover:bg-surface-base/70 ${focusRing}`}
-        aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
-      >
-        {isPlaying ? "Pause" : "Play"}
-      </button> */}
-
       <div className="absolute bottom-[var(--space-4)] left-1/2 flex -translate-x-1/2 gap-[var(--space-2)]">
-        {slides.map((slide, slideIndex) => (
+        {activeSlides.map((slide, slideIndex) => (
           <button
             key={slide.headline}
             type="button"
             onClick={() => goTo(slideIndex)}
             aria-label={`Go to slide ${slideIndex + 1}`}
             aria-current={slideIndex === index ? "true" : undefined}
-            className={`h-2.5 w-2.5 rounded-full ${focusRing} ${slideIndex === index ? "bg-surface-muted" : "bg-surface-muted/40"
-              }`}
+            className={`h-2.5 w-2.5 rounded-full ${focusRing} ${
+              slideIndex === index ? "bg-surface-muted" : "bg-surface-muted/40"
+            }`}
           />
         ))}
       </div>

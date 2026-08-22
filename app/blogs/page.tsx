@@ -23,7 +23,7 @@ export default async function BlogsPage() {
       {/* Hero banner — MediaFrame fills behind overlaid copy */}
       <section className="relative flex min-h-[44vw] items-center lg:min-h-[36vw]">
         <MediaFrame
-          src="/Image/banner-1.jpeg"
+          src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-08-21_at_11.28.37.webp?v=1787314543"
           alt="Ayurvedic botanicals arranged on cream cloth"
           label="Journal hero banner"
           className="rounded-none"
