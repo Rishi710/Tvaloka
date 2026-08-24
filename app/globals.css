@@ -45,9 +45,9 @@
      border.muted fail contrast on surface.base — see that doc).
      Named to avoid Tailwind utility-prefix stutter (e.g. "hairline"
      instead of "border-muted", which would yield class `border-border-muted`). */
-  --color-surface-base: #000000;
+  --color-surface-base: #ffffff;
   --color-surface-muted: #ffffff;
-  --color-hairline: #333333;
+  --color-hairline: #e5e5e5;
   --color-hairline-ondark: #ffffff;
 
   --color-primary: #000000;

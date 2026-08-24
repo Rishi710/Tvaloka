@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
       <HeroSlider />
-      {/* <FeaturedProducts /> */}
+      <FeaturedProducts />
       <RitualSpotlight />
       <TrustedTales />
       <LatestReads />

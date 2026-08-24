@@ -52,14 +52,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const price = product.priceRange?.minVariantPrice;
   const formattedPrice = price
     ? new Intl.NumberFormat("en-IN", {
-        style: "currency",
-        currency: price.currencyCode || "INR",
-        maximumFractionDigits: 0,
-      }).format(parseFloat(price.amount))
+      style: "currency",
+      currency: price.currencyCode || "INR",
+      maximumFractionDigits: 0,
+    }).format(parseFloat(price.amount))
     : null;
 
   return (
-    <main className="flex-1 bg-surface-base py-10 md:py-16">
+    <main className="flex-1 bg-white py-10 md:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
@@ -168,7 +168,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
 
             {/* Ayurvedic Quality Badges */}
-            <div className="mt-10 rounded-[var(--radius-xs)] border border-border-default bg-surface-muted p-5">
+            {/* <div className="mt-10 rounded-[var(--radius-xs)] border border-border-default bg-surface-muted p-5">
               <div className="grid grid-cols-2 gap-4 text-xs">
                 <div>
                   <p className="font-semibold text-primary">🌿 100% Ayurvedic</p>
@@ -187,7 +187,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   <p className="text-tertiary mt-0.5">Direct to your doorstep</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
