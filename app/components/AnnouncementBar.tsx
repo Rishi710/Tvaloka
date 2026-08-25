@@ -59,7 +59,7 @@ export function AnnouncementBar() {
       ref={barRef}
       role="region"
       aria-label="Store announcements"
-      className="bg-surface-base text-ondark"
+      className="bg-black text-ondark"
       onMouseEnter={() => setIsInteracting(true)}
       onMouseLeave={() => setIsInteracting(false)}
       onFocus={() => setIsInteracting(true)}
@@ -79,9 +79,8 @@ export function AnnouncementBar() {
             <p
               key={message}
               aria-hidden={messageIndex !== index}
-              className={`absolute inset-0 text-xs font-medium tracking-wide transition-opacity duration-[var(--motion-fast)] ease-out ${
-                messageIndex === index ? "opacity-100" : "pointer-events-none opacity-0"
-              }`}
+              className={`absolute inset-0 text-xs font-medium tracking-wide transition-opacity duration-[var(--motion-fast)] ease-out ${messageIndex === index ? "opacity-100" : "pointer-events-none opacity-0"
+                }`}
             >
               {message}
             </p>

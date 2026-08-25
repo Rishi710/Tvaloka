@@ -78,7 +78,7 @@ interface HeroSliderProps {
 export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
   const activeSlides = slides.length > 0 ? slides : defaultSlides;
   const [index, setIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const isPlaying = true;
   const [isInteracting, setIsInteracting] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
     typeof window === "undefined"
@@ -115,11 +115,6 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
     }, AUTOPLAY_MS);
     return () => window.clearInterval(timer);
   }, [autoplayActive, activeSlides.length]);
-
-  // Reset to first slide when the slide list changes
-  useEffect(() => {
-    setIndex(0);
-  }, [activeSlides]);
 
   function onKeyDown(event: React.KeyboardEvent) {
     if (event.key === "ArrowRight") {

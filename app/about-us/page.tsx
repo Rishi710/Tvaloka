@@ -82,7 +82,7 @@ export default function AboutUsPage() {
       {/* Hero banner — copy sets the height, image fills behind it */}
       <section className="relative flex min-h-[46vw] items-center lg:min-h-[38vw]">
         <MediaFrame
-          src="/Image/banner-1.jpeg"
+          src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/About_Us.webp?v=1787598716"
           alt="Ayurvedic botanicals — rose, saffron, vanilla, amla, aloe and neem — laid out on cream cloth"
           label="Hero banner image"
           className="rounded-none"
@@ -104,7 +104,7 @@ export default function AboutUsPage() {
         <div className={`${sectionClass} grid gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
           <div>
             <Eyebrow>About Us</Eyebrow>
-            <h2 className="font-display mt-[var(--space-4)] text-lg text-primary">
+            <h2 className="font-display mt-[var(--space-2)] text-lg text-primary">
               Welcome to a world where ancient wisdom is infused with modern aesthetic.
             </h2>
           </div>
@@ -132,11 +132,39 @@ export default function AboutUsPage() {
               If you cannot eat it, do not use it on your skin
             </h2>
             <p className="mt-[var(--space-4)] max-w-md text-sm text-tertiary">
-              This is the Ayurvedic standard we hold ourselves to: ingredients pure enough to eat
-              are ingredients good enough for your skin. Every formulation is built from living
-              substances — cold-pressed oils, herbs, flowers and roots — chosen for the purifying,
-              nutritive and balancing properties that nourish skin and support lasting beauty.
+              This is the Ayurvedic standard we hold ourselves to ingredients pure enough to eat
+              are ingredients good enough for your skin.
             </p>
+            <ul className="mt-[var(--space-3)] space-y-3 text-sm text-tertiary max-w-md">
+              <li className="flex gap-2">
+                <span className="mt-0.5 shrink-0 text-primary">•</span>
+                <span>
+                  <strong className="text-primary">Pure, Sacred Botanicals</strong>{" "}
+                  Caregiving should be clean, honest, and uncompromised. We honour your body using only pure botanical herbal extracts living plant intelligence, no fillers, no toxins, just raw nature.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="mt-0.5 shrink-0 text-primary">•</span>
+                <span>
+                  <strong className="text-primary">Intention in Every Drop</strong>{" "}
+                  Every herb, root, and leaf is chosen with deep reverence. We blend our formulas with the same warmth and patience you would use to care for someone you love.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="mt-0.5 shrink-0 text-primary">•</span>
+                <span>
+                  <strong className="text-primary">Harmonising, Not Fixing</strong>{" "}
+                  You are not broken. Your skin, mind, and body are constantly seeking harmony. Our products guide you gently back to your natural state of vitality.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="mt-0.5 shrink-0 text-primary">•</span>
+                <span>
+                  <strong className="text-primary">Sustainable Reverence</strong>{" "}
+                  Nature gives unconditionally, and we owe her the same devotion. We source ethically and mindfully, ensuring that what brings you wellness also protects the earth that grew it.
+                </span>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -145,7 +173,7 @@ export default function AboutUsPage() {
           subject occupies the left half. */}
       <section className="relative flex min-h-[56vw] items-center lg:min-h-[40vw]">
         <MediaFrame
-          src="/Image/banner-2.jpeg"
+          src="/Image/banner-22.jpeg"
           alt="A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf"
           label="Origin image"
           className="rounded-none"
@@ -181,15 +209,12 @@ export default function AboutUsPage() {
           <div>
             <Eyebrow>Our Manufacturing Excellence</Eyebrow>
             <h2 className="font-display mt-[var(--space-4)] text-lg text-primary">
-              State of the Art Manufacturing
+              Formulated With Pure Intention
+
             </h2>
             <p className="mt-[var(--space-4)] max-w-2xl text-sm text-tertiary">
-              Our facility is built to pharmaceutical-grade production standards, with a dedicated
-              R&amp;D department and green-by-design systems that keep the process as conscientious
-              as the product. Formulations are prepared using traditional, artisanal methods —
-              infusing Ayurvedic herbs, aromatic flowers and pure essential oils grown organically
-              on our own farms and sourced from the regions across India where each is at its
-              finest.
+              Crafted in pharmaceutical-grade facilities with a dedicated R&D team, our products are made through eco-conscious, green-by-design processes. We honor traditional, artisanal methods to infuse our formulations with organic, farm-grown Ayurvedic herbs, aromatic flowers, and pure essential oils sourced directly from our own fields and India's finest growing regions
+
             </p>
           </div>
         </div>
@@ -201,9 +226,8 @@ export default function AboutUsPage() {
           <div className="grid gap-[var(--space-5)] lg:grid-cols-2 lg:gap-[var(--space-7)]">
             <h2 className="font-display text-lg text-primary">Discover Luxurious Ayurveda</h2>
             <p className="max-w-2xl text-sm text-tertiary">
-              Tvaloka lives between the Himalayas and the modern city; between mythology and
-              modernity. Within these bottles and boxes, experience the profound beauty and
-              regenerative power of ancient Ayurveda.
+              Tvaloka lives between the Himalayas and the modern city; between mythology and modernity. Within these bottles and boxes, experience the profound beauty and regenerative power of ancient Ayurveda.
+
             </p>
           </div>
 
@@ -246,10 +270,13 @@ export default function AboutUsPage() {
               Discover Ayurveda
             </h2>
             <p className="mt-[var(--space-4)] max-w-md text-sm text-tertiary">
-              Ayurveda &lsquo;the knowledge of life&rsquo; is one of the world&rsquo;s oldest
-              systems of health and healing, refined over thousands of years. It works on four
-              levels: body, breath, mind and spirit. Only when these sit in balance does beauty
-              read as more than surface deep.
+              At the heart of our journey lies a simple, ancient truth: real healing is not created in a laboratory, but nurtured in the soil, whispered by the wind, and passed down through generations.
+            </p>
+            <p className="mt-[var(--space-3)] max-w-md text-sm text-tertiary">
+              We returned to Ayurveda not just as a science, but as a love letter to the human
+              spirit. In a world that constantly demands more, our formulations offer a sacred
+              pause a quiet sanctuary to slow down, breathe deeply, and reconnect with your
+              inner wisdom.
             </p>
             <KnowMoreLink href="/ingredients" label="Know more" />
           </div>
@@ -278,10 +305,37 @@ export default function AboutUsPage() {
               Social Responsibility
             </h2>
             <p className="mt-[var(--space-4)] max-w-2xl text-sm text-tertiary">
-              Reviving traditional craft has been part of our purpose from the beginning. We work
-              directly with rural communities and local growers, so that the knowledge and
-              livelihoods behind every formulation are sustained rather than extracted.
+              At Tvaloka Wellness, our responsibility begins with people. We work directly with
+              rural farming communities and local growers, preserving traditional knowledge and
+              sustaining livelihoods — not extracting them.
             </p>
+
+            <p className="mt-[var(--space-3)] text-xs font-semibold uppercase tracking-wider text-primary">
+              Caring for Every Stage of Life
+            </p>
+            <ul className="mt-[var(--space-2)] space-y-2 text-sm text-tertiary">
+              <li className="flex gap-2">
+                <span className="mt-0.5 shrink-0 text-primary">•</span>
+                <span>
+                  <strong className="text-primary">For Little Ones —</strong>{" "}
+                  Gentle, protective formulations designed to comfort delicate skin and support healthy growth.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="mt-0.5 shrink-0 text-primary">•</span>
+                <span>
+                  <strong className="text-primary">For Young Adults &amp; Professionals —</strong>{" "}
+                  Revitalising routines that combat daily stress, shield against environmental strain, and sustain energy.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <span className="mt-0.5 shrink-0 text-primary">•</span>
+                <span>
+                  <strong className="text-primary">For Elders —</strong>{" "}
+                  Deeply nourishing, grounding care crafted to support joint comfort, vitality, and graceful longevity.
+                </span>
+              </li>
+            </ul>
             <KnowMoreLink href="/social-responsibility" label="Know more" />
           </div>
         </div>

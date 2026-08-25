@@ -1,7 +1,6 @@
 import {
   ShopifyArticle,
   ShopifyCart,
-  ShopifyCollection,
   ShopifyGraphQLResponse,
   ShopifyProduct,
   ShopifyProductVariant,

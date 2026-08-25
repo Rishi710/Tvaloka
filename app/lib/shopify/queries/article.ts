@@ -1,4 +1,4 @@
-import { shopifyFetch, removeEdgesAndNodes, reshapeArticle, reshapeArticles } from "../index";
+import { shopifyFetch, removeEdgesAndNodes, reshapeArticles } from "../index";
 import { ShopifyArticle } from "../types";
 
 const articleFragment = `

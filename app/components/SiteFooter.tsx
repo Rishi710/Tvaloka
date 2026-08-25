@@ -4,7 +4,6 @@ import {
   FacebookIcon,
   InstagramIcon,
   LinkedinIcon,
-  XIcon,
   YoutubeIcon,
 } from "./icons";
 

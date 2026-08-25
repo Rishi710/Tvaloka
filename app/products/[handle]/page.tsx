@@ -87,7 +87,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Product Gallery */}
           <div className="space-y-4">
-            <div className="relative aspect-square w-full overflow-hidden rounded-[var(--radius-xs)] border border-border-default bg-surface-muted">
+            <div className="relative aspect-square w-full overflow-hidden rounded-[var(--radius-xs)] bg-surface-muted">
               {product.featuredImage ? (
                 <Image
                   src={product.featuredImage.url}
@@ -95,7 +95,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-sm text-tertiary">

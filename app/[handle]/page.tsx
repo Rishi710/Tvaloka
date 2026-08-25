@@ -62,7 +62,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   return (
     <main className="flex-1 bg-white">
       {/* ── Collection Hero Banner ────────────────────────────────────────── */}
-      <section className="relative min-h-[260px] sm:min-h-[320px] lg:min-h-[460px] flex items-center justify-center overflow-hidden bg-[#111111]">
+      <section className="relative min-h-[340px] sm:min-h-[320px] lg:min-h-[440px] flex items-center justify-center overflow-hidden bg-[#111111]">
         {collection.image ? (
           <>
             <Image
@@ -71,26 +71,26 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
               fill
               priority
               sizes="100vw"
-              className="object-cover object-center brightness-[0.82]"
+              className="object-cover"
             />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent"
             />
           </>
         ) : (
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_#222222,_#0a0a0a_70%)]" />
         )}
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-12 text-left text-white sm:px-6 sm:py-16 lg:px-8">
-          <p className="text-[11px] sm:text-xs font-bold tracking-[0.35em] text-white/80 uppercase">
+        <div className="absolute bottom-0 left-0 right-0 z-10 mx-auto w-full max-w-7xl px-4 pb-10 text-left text-white sm:px-6 sm:py-16 lg:px-8">
+          {/* <p className="text-[11px] sm:text-xs font-bold tracking-[0.35em] text-white/80 uppercase">
             Ayurvedic Ritual Collection
-          </p>
+          </p> */}
           <h1 className="font-display mt-2 text-2xl font-normal text-white sm:text-4xl lg:text-5xl tracking-wide">
             {collection.title}
           </h1>
           {collection.description && (
-            <p className="mt-3 max-w-2xl text-xs leading-relaxed text-white/90 sm:text-sm">
+            <p className="max-w-2xl text-sm leading-relaxed text-white/90 sm:text-sm">
               {collection.description}
             </p>
           )}

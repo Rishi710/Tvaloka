@@ -59,8 +59,6 @@ export interface CollectionCatalogProps {
 
 export function CollectionCatalog({
   collectionTitle,
-  collectionHandle = "all",
-  collectionDescription,
   products,
 }: CollectionCatalogProps) {
   // ── States ───────────────────────────────────────────────────────────────
@@ -334,7 +332,7 @@ export function CollectionCatalog({
             <div className="flex items-center gap-2 border-r border-[#e5e5e5] pr-6">
               <button
                 type="button"
-                aria-label="3 Columns View"
+                aria-label="2 Columns View"
                 onClick={() => setGridColumns(2)}
                 className={`p-1.5 rounded transition-colors ${gridColumns === 2 ? "text-black bg-gray-100" : "text-[#888888] hover:text-black"
                   }`}

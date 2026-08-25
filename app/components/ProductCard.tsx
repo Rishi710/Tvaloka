@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { HeartIcon } from "./icons";
 import type { ShopifyProduct } from "../lib/shopify/types";
 
 // ---------------------------------------------------------------------------
@@ -111,12 +110,9 @@ export function ProductCard({
   benefitText,
   formattedPrice: formattedPriceProp,
   currencyCode,
-  wishlisted: wishlistedProp = false,
-  onWishlistToggle,
   onAddToBag,
   className = "",
 }: ProductCardProps) {
-  const [wishlisted, setWishlisted] = useState(wishlistedProp);
   const [addingToBag, setAddingToBag] = useState(false);
   const [showSizePicker, setShowSizePicker] = useState(false);
 
@@ -181,14 +177,6 @@ export function ProductCard({
   const isSoldOut = !product.availableForSale;
 
   // ── Handlers ─────────────────────────────────────────────────────────────
-  function handleWishlistToggle(e: React.MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    const next = !wishlisted;
-    setWishlisted(next);
-    onWishlistToggle?.(next);
-  }
-
   async function handleAddVariantToBag(variantId: string, e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
@@ -346,7 +334,7 @@ export function ProductCard({
         {/* ── Product Meta Details ────────────────────────────────────────── */}
         <div className="mt-3 flex flex-col gap-1">
           {/* Title */}
-          <h3 className="font-sans text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.03em] text-black line-clamp-2 leading-snug">
+          <h3 className="font-display text-[14px] sm:text-[16px] font-semibold uppercase tracking-[0.03em] text-black line-clamp-2 leading-snug">
             <Link href={pdpHref} className="hover:text-brand-secondary">
               {product.title}
             </Link>

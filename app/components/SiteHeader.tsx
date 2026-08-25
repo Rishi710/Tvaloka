@@ -155,12 +155,12 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
           href="/"
           className={`flex flex-1 flex-col items-center text-center ${focusRing}`}
         >
-          <span className="font-display text-sm tracking-wide whitespace-nowrap text-primary sm:text-xl">
+          <span className="font-display text-sm tracking-wide whitespace-nowrap text-primary sm:text-lg">
             Tvaloka Wellness
           </span>
-          <span className="text-[10px] font-semibold tracking-[0.3em] whitespace-nowrap text-tertiary uppercase">
+          {/* <span className="text-[10px] font-semibold tracking-[0.3em] whitespace-nowrap text-tertiary uppercase">
             Pure Ayurvedic Luxury
-          </span>
+          </span> */}
         </Link>
 
         {/* Right utility */}
