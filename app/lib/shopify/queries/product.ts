@@ -38,6 +38,14 @@ const productFragment = `
         }
       }
     }
+    collections(first: 3) {
+      edges {
+        node {
+          handle
+          title
+        }
+      }
+    }
     variants(first: 25) {
       edges {
         node {

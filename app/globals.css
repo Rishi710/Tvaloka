@@ -96,3 +96,179 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ─── Product Gallery ──────────────────────────────────────────────────────── */
+
+/* Mobile-first: stack main image then thumbnails below */
+.product-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.gallery-main {
+  position: relative;
+  flex: 1;
+}
+
+.gallery-main-image {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-surface-muted);
+}
+
+.gallery-main-img {
+  object-fit: contain;
+  transition: opacity 0.25s ease;
+}
+
+.gallery-main-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-surface-muted);
+  font-size: 14px;
+  color: var(--color-tertiary);
+}
+
+/* Mobile: thumbnail strip hidden — arrow nav used instead */
+.gallery-thumbnails {
+  display: none;
+}
+
+.gallery-thumb-btn {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  width: 68px;
+  height: 68px;
+  padding: 0;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+  opacity: 0.6;
+}
+
+.gallery-thumb-btn:hover {
+  opacity: 0.85;
+  border-color: #cccccc;
+}
+
+.gallery-thumb-btn--active {
+  border-color: #000000;
+  opacity: 1;
+}
+
+.gallery-thumb-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: calc(var(--radius-xs) - 2px);
+}
+
+/* Arrow nav buttons — float inside the main image, mobile only */
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  color: #555555;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.gallery-arrow:hover {
+  color: #000000;
+}
+
+.gallery-arrow--prev {
+  left: 4px;
+}
+
+.gallery-arrow--next {
+  right: 4px;
+}
+
+/* Dash indicators — mobile only, below main image */
+.gallery-dashes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.gallery-dash {
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  background: #cccccc;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, width 0.2s ease;
+}
+
+.gallery-dash--active {
+  background: #000000;
+  width: 32px;
+}
+
+/* Desktop: thumbnails on LEFT, main image on RIGHT */
+@media (min-width: 640px) {
+  .product-gallery {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  /* Show vertical thumbnail column on desktop */
+  .gallery-thumbnails {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    order: -1;
+    width: 76px;
+    max-height: 480px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    gap: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .gallery-thumbnails::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-thumb-btn {
+    width: 68px;
+    height: 68px;
+  }
+
+  /* Hide arrow nav and dashes on desktop */
+  .gallery-arrow {
+    display: none;
+  }
+
+  .gallery-dashes {
+    display: none;
+  }
+}

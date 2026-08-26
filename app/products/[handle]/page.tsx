@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductByHandle, getProducts } from "../../lib/shopify/queries/product";
+import ProductGallery from "./ProductGallery";
 
 export const revalidate = 60; // ISR: revalidate every 60 seconds
 
@@ -86,51 +86,35 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Product Gallery */}
-          <div className="space-y-4">
-            <div className="relative aspect-square w-full overflow-hidden rounded-[var(--radius-xs)] bg-surface-muted">
-              {product.featuredImage ? (
-                <Image
-                  src={product.featuredImage.url}
-                  alt={product.featuredImage.altText || product.title}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-contain"
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-sm text-tertiary">
-                  No Image Available
-                </div>
-              )}
-            </div>
-
-            {product.images && product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-3">
-                {product.images.slice(0, 4).map((img, i) => (
-                  <div
-                    key={i}
-                    className="relative aspect-square overflow-hidden rounded-[var(--radius-xs)] border border-border-default bg-surface-muted"
-                  >
-                    <Image
-                      src={img.url}
-                      alt={img.altText || `${product.title} photo ${i + 1}`}
-                      fill
-                      sizes="25vw"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+          <div>
+            <ProductGallery
+              images={
+                product.images && product.images.length > 0
+                  ? product.images
+                  : product.featuredImage
+                  ? [product.featuredImage]
+                  : []
+              }
+              title={product.title}
+            />
           </div>
 
           {/* Product Details & Actions */}
           <div className="flex flex-col justify-start">
-            {product.vendor && (
+            {(product.collections && product.collections.length > 0
+              ? product.collections[0]
+              : null) ? (
+              <Link
+                href={`/collections/${product.collections![0].handle}`}
+                className="text-xs font-semibold tracking-widest text-tertiary uppercase hover:text-primary transition-colors"
+              >
+                {product.collections![0].title}
+              </Link>
+            ) : product.vendor ? (
               <p className="text-xs font-semibold tracking-widest text-tertiary uppercase">
                 {product.vendor}
               </p>
-            )}
+            ) : null}
             <h1 className="font-display mt-2 text-2xl font-normal text-primary sm:text-3xl">
               {product.title}
             </h1>

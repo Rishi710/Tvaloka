@@ -85,12 +85,16 @@ export function reshapeProduct(product: any): ShopifyProduct | null {
     ...variant,
     selectedOptions: variant.selectedOptions || [],
   }));
+  const collections = product.collections
+    ? removeEdgesAndNodes(product.collections)
+    : [];
 
   return {
     ...product,
     images,
     variants: variants as ShopifyProductVariant[],
     tags: product.tags || [],
+    collections,
   };
 }
 
