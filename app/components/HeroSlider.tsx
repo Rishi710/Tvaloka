@@ -27,7 +27,7 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Face & Body",
     href: "/face-care",
     bgClassName: "bg-surface-base",
-    image: "/Image/banner-1.jpeg",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Hero_best_seller.webp?v=1787821514",
     alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
   },
   {
@@ -37,7 +37,7 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Bath & Body",
     href: "/bath-body-care",
     bgClassName: "bg-[radial-gradient(circle_at_20%_30%,_#1a1a1a,_#000000_60%)]",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/banner-2.webp?v=1787263013",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/inner_bath_body.webp?v=1787821514",
     alt: "A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf",
     // Subject sits left, where the copy goes — favour the right of the frame.
     objectPositionClassName: "object-right",
@@ -49,10 +49,21 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Hair Care",
     href: "/hair-care",
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-08-20_at_20.21.39.webp?v=1787262046",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Hero_New_Launch_2.webp?v=1787821514",
     alt: "Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms",
     objectPositionClassName: "object-right",
   },
+  {
+    eyebrow: "Pure & Gentle",
+    headline: "Mother & Baby Care",
+    copy: "Nurturing Ayurvedic formulations crafted with the gentlest botanicals.",
+    ctaLabel: "Shop Baby Care",
+    href: "/baby-care",
+    bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Baby.webp?v=1787821515",
+    alt: "Gentle Ayurvedic mother and baby care products crafted with natural botanicals",
+    objectPositionClassName: "object-right",
+  }
 ];
 
 /**
@@ -166,20 +177,19 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
       onTouchEnd={onTouchEnd}
       onKeyDown={onKeyDown}
     >
-      <div className="relative h-[480px] sm:h-[550px] lg:h-[640px]">
+      <div className="relative h-[440px] sm:h-[500px] lg:h-[580px]">
         {activeSlides.map((slide, slideIndex) => {
           const isActive = slideIndex === index;
           return (
             <div
-              key={slide.headline}
+              key={`${slide.headline}-${slideIndex}`}
               role="group"
               aria-roledescription="slide"
               aria-label={`${slideIndex + 1} of ${activeSlides.length}`}
               aria-hidden={!isActive}
               inert={!isActive}
-              className={`absolute inset-0 flex items-center transition-opacity duration-[var(--motion-fast)] ease-out ${
-                slide.bgClassName
-              } ${isActive ? "opacity-100" : "pointer-events-none opacity-0"}`}
+              className={`absolute inset-0 flex items-center transition-opacity duration-[var(--motion-fast)] ease-out ${slide.bgClassName
+                } ${isActive ? "opacity-100" : "pointer-events-none opacity-0"}`}
             >
               <Image
                 src={slide.image}
@@ -240,14 +250,13 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
       <div className="absolute bottom-[var(--space-4)] left-1/2 flex -translate-x-1/2 gap-[var(--space-2)]">
         {activeSlides.map((slide, slideIndex) => (
           <button
-            key={slide.headline}
+            key={`${slide.headline}-${slideIndex}`}
             type="button"
             onClick={() => goTo(slideIndex)}
             aria-label={`Go to slide ${slideIndex + 1}`}
             aria-current={slideIndex === index ? "true" : undefined}
-            className={`h-2.5 w-2.5 rounded-full ${focusRing} ${
-              slideIndex === index ? "bg-surface-muted" : "bg-surface-muted/40"
-            }`}
+            className={`h-2.5 w-2.5 rounded-full ${focusRing} ${slideIndex === index ? "bg-surface-muted" : "bg-surface-muted/40"
+              }`}
           />
         ))}
       </div>

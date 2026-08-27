@@ -62,7 +62,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   return (
     <main className="flex-1 bg-white">
       {/* ── Collection Hero Banner ────────────────────────────────────────── */}
-      <section className="relative min-h-[340px] sm:min-h-[320px] lg:min-h-[440px] flex items-center justify-center overflow-hidden bg-[#111111]">
+      <section className="relative min-h-[340px] sm:min-h-[320px] lg:min-h-[520px] flex items-center justify-center overflow-hidden bg-[#111111]">
         {collection.image ? (
           <>
             <Image
