@@ -202,7 +202,7 @@ export function ProductCard({
     >
       <div>
         {/* ── Image container ──────────────────────────────────────────────── */}
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#fbfbfb] rounded-[var(--radius-xs)] border border-[#eeeeee]">
+        <div className="relative aspect-[4/5] w-full overflow-hidden bg-black rounded-[var(--radius-xs)] border border-[#eeeeee]">
           {/* Stretched accessible link */}
           <Link
             href={pdpHref}
@@ -216,7 +216,7 @@ export function ProductCard({
               alt={product.featuredImage.altText || product.title}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-contain p-4 sm:p-6 transition-transform duration-[var(--motion-fast)] group-hover:scale-105"
+              className="object-cover transition-transform duration-[var(--motion-fast)] group-hover:scale-105"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center text-xs text-[#707070]">
