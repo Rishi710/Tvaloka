@@ -16,23 +16,30 @@ export async function generateMetadata({
   params,
 }: CollectionPageProps): Promise<Metadata> {
   const { handle } = await params;
-  const { collection } = await getCollectionWithProducts({
-    collectionHandle: handle,
-    first: 1,
-  });
+  try {
+    const { collection } = await getCollectionWithProducts({
+      collectionHandle: handle,
+      first: 1,
+    });
 
-  if (!collection) {
+    if (!collection) {
+      return {
+        title: "Collection Not Found | Tvaloka",
+      };
+    }
+
     return {
-      title: "Collection Not Found | Tvaloka",
+      title: `${collection.title} | Tvaloka Ayurvedic Luxury`,
+      description:
+        collection.description ||
+        `Explore pure Ayurvedic luxury formulations in our ${collection.title} collection.`,
+    };
+  } catch (error) {
+    console.error(`[CollectionMetadata] Error fetching ${handle}:`, error);
+    return {
+      title: "Collection | Tvaloka Ayurvedic Luxury",
     };
   }
-
-  return {
-    title: `${collection.title} | Tvaloka Ayurvedic Luxury`,
-    description:
-      collection.description ||
-      `Explore pure Ayurvedic luxury formulations in our ${collection.title} collection.`,
-  };
 }
 
 export async function generateStaticParams() {
@@ -50,10 +57,19 @@ export async function generateStaticParams() {
 
 export default async function CollectionPage({ params }: CollectionPageProps) {
   const { handle } = await params;
-  const { collection, products } = await getCollectionWithProducts({
-    collectionHandle: handle,
-    first: 50,
-  });
+  let collection = null;
+  let products: any[] = [];
+
+  try {
+    const data = await getCollectionWithProducts({
+      collectionHandle: handle,
+      first: 50,
+    });
+    collection = data.collection;
+    products = data.products;
+  } catch (error) {
+    console.error(`[CollectionPage] Error fetching collection "${handle}":`, error);
+  }
 
   if (!collection) {
     notFound();
@@ -62,7 +78,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
   return (
     <main className="flex-1 bg-white">
       {/* ── Collection Hero Banner ────────────────────────────────────────── */}
-      <section className="relative min-h-[340px] sm:min-h-[320px] lg:min-h-[520px] flex items-center justify-center overflow-hidden bg-[#111111]">
+      <section className="relative min-h-[175px] sm:min-h-[320px] lg:min-h-[480px] flex items-end justify-center overflow-hidden bg-[#111111]">
         {collection.image ? (
           <>
             <Image
@@ -71,26 +87,26 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
               fill
               priority
               sizes="100vw"
-              className="object-cover"
+              className="object-cover object-center"
             />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent sm:from-black/60 sm:via-black/20"
             />
           </>
         ) : (
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_#222222,_#0a0a0a_70%)]" />
         )}
 
-        <div className="absolute bottom-0 left-0 right-0 z-10 mx-auto w-full max-w-7xl px-4 pb-10 text-left text-white sm:px-6 sm:py-16 lg:px-8">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-5 pt-12 text-left text-white sm:px-6 sm:pb-12 sm:pt-20 lg:px-8 lg:pb-16">
           {/* <p className="text-[11px] sm:text-xs font-bold tracking-[0.35em] text-white/80 uppercase">
             Ayurvedic Ritual Collection
           </p> */}
-          <h1 className="font-display mt-2 text-2xl font-normal text-white sm:text-4xl lg:text-5xl tracking-wide">
+          <h1 className="font-display text-2xl font-normal text-white sm:text-4xl lg:text-5xl tracking-wide">
             {collection.title}
           </h1>
           {collection.description && (
-            <p className="max-w-2xl text-sm leading-relaxed text-white/90 sm:text-sm">
+            <p className="mt-1 max-w-2xl text-xs leading-relaxed text-white/90 sm:text-sm">
               {collection.description}
             </p>
           )}

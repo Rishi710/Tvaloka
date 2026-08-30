@@ -19,12 +19,14 @@ export async function shopifyFetch<T>({
   headers,
   cache = "force-cache",
   next,
+  retries = 2,
 }: {
   query: string;
   variables?: Record<string, unknown>;
   headers?: HeadersInit;
   cache?: RequestCache;
   next?: NextFetchRequestConfig;
+  retries?: number;
 }): Promise<T> {
   // Use private token when executing server-side if available, otherwise use public storefront token
   const isServer = typeof window === "undefined";
@@ -36,38 +38,48 @@ export async function shopifyFetch<T>({
     authHeaders["X-Shopify-Storefront-Access-Token"] = storefrontPublicToken;
   }
 
-  try {
-    const result = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        ...authHeaders,
-        ...headers,
-      },
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
-      cache,
-      ...(next && { next }),
-    });
+  let attempt = 0;
+  while (attempt <= retries) {
+    try {
+      const result = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders,
+          ...headers,
+        },
+        body: JSON.stringify({
+          query,
+          variables,
+        }),
+        cache,
+        ...(next && { next }),
+      });
 
-    const body: ShopifyGraphQLResponse<T> = await result.json();
+      const body: ShopifyGraphQLResponse<T> = await result.json();
 
-    if (body.errors) {
-      console.error("[Shopify Fetch Error]:", body.errors);
-      throw new Error(body.errors[0]?.message || "Failed to fetch data from Shopify");
+      if (body.errors) {
+        console.error("[Shopify Fetch Error]:", body.errors);
+        throw new Error(body.errors[0]?.message || "Failed to fetch data from Shopify");
+      }
+
+      if (!body.data) {
+        throw new Error("[Shopify Fetch Error]: Response missing data property");
+      }
+
+      return body.data;
+    } catch (error) {
+      attempt++;
+      if (attempt > retries) {
+        console.error(`[Shopify API Call Failed after ${retries + 1} attempts]:`, error);
+        throw error;
+      }
+      // Wait before retrying (exponential backoff: 500ms, 1000ms...)
+      await new Promise((resolve) => setTimeout(resolve, attempt * 500));
     }
-
-    if (!body.data) {
-      throw new Error("[Shopify Fetch Error]: Response missing data property");
-    }
-
-    return body.data;
-  } catch (error) {
-    console.error("[Shopify API Call Failed]:", error);
-    throw error;
   }
+
+  throw new Error("Shopify request failed after retries");
 }
 
 // Data reshaping utilities

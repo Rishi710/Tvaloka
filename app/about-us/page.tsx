@@ -80,10 +80,10 @@ export default function AboutUsPage() {
   return (
     <main className="flex flex-1 flex-col">
       {/* Hero banner — copy sets the height, image fills behind it */}
-      <section className="relative flex min-h-[46vw] items-center lg:min-h-[38vw]">
+      <section className="relative flex min-h-[58vw] items-end justify-center lg:min-h-[68vw]">
         <MediaFrame
           src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/About_Us.webp?v=1787598716"
-          alt="Ayurvedic botanicals — rose, saffron, vanilla, amla, aloe and neem — laid out on cream cloth"
+          alt="About us image"
           label="Hero banner image"
           className="rounded-none"
           sizes="100vw"
@@ -93,7 +93,7 @@ export default function AboutUsPage() {
         <div aria-hidden="true" className={`absolute inset-0 ${scrimFromLeft}`} />
         <div className={`${sectionClass} relative w-full`}>
           <Eyebrow onDark>About Us</Eyebrow>
-          <h1 className="font-display mt-[var(--space-4)] max-w-2xl text-lg text-ondark sm:text-xl">
+          <h1 className="font-display mt-[var(--space-4)] max-w-2xl text-[20px] text-ondark sm:text-lg">
             Ancient wisdom, infused with modern aesthetic
           </h1>
         </div>
@@ -104,7 +104,7 @@ export default function AboutUsPage() {
         <div className={`${sectionClass} grid gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
           <div>
             <Eyebrow>About Us</Eyebrow>
-            <h2 className="font-display mt-[var(--space-2)] text-lg text-primary">
+            <h2 className="font-display mt-[var(--space-2)] text-[20px] text-primary">
               Welcome to a world where ancient wisdom is infused with modern aesthetic.
             </h2>
           </div>
@@ -182,7 +182,7 @@ export default function AboutUsPage() {
         />
         <div aria-hidden="true" className={`absolute inset-0 ${scrimFromRight}`} />
         <div className={`${sectionClass} relative w-full`}>
-          <div className="ml-auto max-w-lg">
+          <div className="ml-auto max-w-lg text-right">
             <Eyebrow onDark>Origin</Eyebrow>
             <h2 className="font-display mt-[var(--space-4)] text-lg text-ondark sm:text-xl">
               Our Spiritual Home

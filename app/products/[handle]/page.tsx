@@ -16,18 +16,25 @@ export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   const { handle } = await params;
-  const product = await getProductByHandle(handle);
+  try {
+    const product = await getProductByHandle(handle);
 
-  if (!product) {
+    if (!product) {
+      return {
+        title: "Product Not Found | Tvaloka",
+      };
+    }
+
     return {
-      title: "Product Not Found | Tvaloka",
+      title: `${product.title} | Tvaloka Ayurvedic Luxury`,
+      description: product.description || `Pure Ayurvedic ${product.title} by Tvaloka.`,
+    };
+  } catch (error) {
+    console.error(`[ProductMetadata] Error fetching ${handle}:`, error);
+    return {
+      title: "Product | Tvaloka Ayurvedic Luxury",
     };
   }
-
-  return {
-    title: `${product.title} | Tvaloka Ayurvedic Luxury`,
-    description: product.description || `Pure Ayurvedic ${product.title} by Tvaloka.`,
-  };
 }
 
 export async function generateStaticParams() {
@@ -43,7 +50,13 @@ export async function generateStaticParams() {
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { handle } = await params;
-  const product = await getProductByHandle(handle);
+  let product = null;
+
+  try {
+    product = await getProductByHandle(handle);
+  } catch (error) {
+    console.error(`[ProductDetailPage] Error fetching product "${handle}":`, error);
+  }
 
   if (!product) {
     notFound();
