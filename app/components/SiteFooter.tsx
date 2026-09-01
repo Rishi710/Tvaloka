@@ -96,8 +96,8 @@ export function SiteFooter() {
             <h3 className="font-display text-md text-primary">Contact</h3>
             <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-1)] text-sm">
               <p className="text-tertiary">Email:</p>
-              <a href="mailto:hello@tvalokawellness.com" className={linkClass}>
-                hello@tvalokawellness.com
+              <a href="mailto:support@tvaloka.com" className={linkClass}>
+                support@tvaloka.com
               </a>
             </div>
             <Link

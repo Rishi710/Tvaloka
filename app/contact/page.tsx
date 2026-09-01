@@ -13,15 +13,15 @@ const details = [
   {
     Icon: MailIcon,
     label: "Email",
-    value: "hello@tvalokawellness.com",
-    href: "mailto:hello@tvalokawellness.com",
+    value: "support@tvaloka.com",
+    href: "mailto:support@tvaloka.com",
     note: "We reply within two working days.",
   },
   {
     Icon: PhoneIcon,
     label: "Phone",
-    value: "+91 9109066839",
-    href: "tel:+919109066839",
+    value: "+919981300183",
+    href: "tel:+919981300183",
     note: "You can Connect to our Expert.",
   },
   {

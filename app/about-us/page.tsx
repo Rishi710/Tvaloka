@@ -80,7 +80,7 @@ export default function AboutUsPage() {
   return (
     <main className="flex flex-1 flex-col">
       {/* Hero banner — copy sets the height, image fills behind it */}
-      <section className="relative flex min-h-[58vw] items-end justify-center lg:min-h-[68vw]">
+      <section className="relative flex min-h-[58vw] items-center items-end justify-center lg:min-h-[38vw]">
         <MediaFrame
           src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/About_Us.webp?v=1787598716"
           alt="About us image"
@@ -121,10 +121,10 @@ export default function AboutUsPage() {
       <section className="bg-surface-muted">
         <div className={`${sectionClass} grid items-center gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
           <MediaFrame
-            src="/Image/img-3.jpg"
+            src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-08-31_at_11.59.12.webp?v=1788262273"
             alt="Ground spices and herbs in terracotta bowls arranged in the shape of a tree on dark wood"
             label="Philosophy image"
-            aspectClassName="aspect-[4/3]"
+            aspectClassName="aspect-[2/2]"
           />
           <div>
             <Eyebrow>Our Philosophy</Eyebrow>
@@ -171,7 +171,7 @@ export default function AboutUsPage() {
 
       {/* Origin — full-bleed banner. Copy sits right because this image's
           subject occupies the left half. */}
-      <section className="relative flex min-h-[56vw] items-center lg:min-h-[40vw]">
+      {/* <section className="relative flex min-h-[56vw] items-center lg:min-h-[40vw]">
         <MediaFrame
           src="/Image/banner-22.jpeg"
           alt="A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf"
@@ -182,7 +182,7 @@ export default function AboutUsPage() {
         />
         <div aria-hidden="true" className={`absolute inset-0 ${scrimFromRight}`} />
         <div className={`${sectionClass} relative w-full`}>
-          <div className="ml-auto max-w-lg text-right">
+          <div className="ml-auto max-w-lg">
             <Eyebrow onDark>Origin</Eyebrow>
             <h2 className="font-display mt-[var(--space-4)] text-lg text-ondark sm:text-xl">
               Our Spiritual Home
@@ -195,7 +195,7 @@ export default function AboutUsPage() {
             <KnowMoreLink href="/origin" label="Know more" onDark />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Manufacturing — image left, copy right */}
       <section className="bg-surface-muted">
