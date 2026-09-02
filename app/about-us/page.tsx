@@ -171,7 +171,7 @@ export default function AboutUsPage() {
 
       {/* Origin — full-bleed banner. Copy sits right because this image's
           subject occupies the left half. */}
-      {/* <section className="relative flex min-h-[56vw] items-center lg:min-h-[40vw]">
+      <section className="relative flex min-h-[56vw] items-center lg:min-h-[40vw]">
         <MediaFrame
           src="/Image/banner-22.jpeg"
           alt="A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf"
@@ -192,10 +192,10 @@ export default function AboutUsPage() {
               Uttarakhand — a sublime terrain of delicate alpine flora, snow-fed rivers and
               mountain peaks that form a natural barrier against the world&rsquo;s impurities.
             </p>
-            <KnowMoreLink href="/origin" label="Know more" onDark />
+            {/* <KnowMoreLink href="/origin" label="Know more" onDark /> */}
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* Manufacturing — image left, copy right */}
       <section className="bg-surface-muted">
@@ -223,8 +223,9 @@ export default function AboutUsPage() {
       {/* Brand film */}
       <section className="bg-surface-muted">
         <div className={sectionClass}>
+          <Eyebrow>Who we are</Eyebrow>
           <div className="grid gap-[var(--space-5)] lg:grid-cols-2 lg:gap-[var(--space-7)]">
-            <h2 className="font-display text-lg text-primary">Discover Luxurious Ayurveda</h2>
+            <h2 className="font-display text-lg text-primary mt-3">Discover Luxurious Ayurveda</h2>
             <p className="max-w-2xl text-sm text-tertiary">
               Tvaloka lives between the Himalayas and the modern city; between mythology and modernity. Within these bottles and boxes, experience the profound beauty and regenerative power of ancient Ayurveda.
 
@@ -262,7 +263,7 @@ export default function AboutUsPage() {
       </section>
 
       {/* Expertise — copy left, image right */}
-      <section className="bg-surface-muted">
+      {/* <section className="bg-surface-muted">
         <div className={`${sectionClass} grid items-center gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
           <div className="lg:order-1">
             <Eyebrow>Our Expertise</Eyebrow>
@@ -288,7 +289,7 @@ export default function AboutUsPage() {
             className="lg:order-2"
           />
         </div>
-      </section>
+      </section> */}
 
       {/* Values — image left, copy right */}
       <section className="bg-surface-muted">
@@ -336,7 +337,7 @@ export default function AboutUsPage() {
                 </span>
               </li>
             </ul>
-            <KnowMoreLink href="/social-responsibility" label="Know more" />
+            {/* <KnowMoreLink href="/social-responsibility" label="Know more" /> */}
           </div>
         </div>
       </section>

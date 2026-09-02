@@ -465,7 +465,7 @@ export function IngredientsView({ ingredients }: IngredientsViewProps) {
             </div>
 
             {/* Modal Action */}
-            <div className="mt-8 pt-4 border-t border-[#f0f0f0] flex justify-end">
+            {/* <div className="mt-8 pt-4 border-t border-[#f0f0f0] flex justify-end">
               <button
                 type="button"
                 onClick={() => setActiveModalIngredient(null)}
@@ -473,7 +473,7 @@ export function IngredientsView({ ingredients }: IngredientsViewProps) {
               >
                 Close
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

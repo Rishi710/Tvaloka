@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductByHandle, getProducts } from "../../lib/shopify/queries/product";
 import ProductGallery from "./ProductGallery";
+import { ProductAccordion } from "../../components/ProductAccordion";
 
 export const revalidate = 60; // ISR: revalidate every 60 seconds
 
@@ -72,10 +73,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     : null;
 
   return (
-    <main className="flex-1 bg-white py-10 md:py-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <main className="flex-1 bg-white py-4 sm:py-10 md:py-16">
+      <div className="mx-auto max-w-7xl px-0 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-4 sm:mb-8 px-4 sm:px-0">
           <ol className="flex items-center space-x-2 text-xs text-tertiary">
             <li>
               <Link href="/" className="hover:text-primary transition-colors">
@@ -97,9 +98,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </ol>
         </nav>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Product Gallery */}
-          <div>
+        <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
+          {/* Product Gallery (Sticky on desktop, full-width on mobile) */}
+          <div className="lg:sticky lg:top-8 w-full">
             <ProductGallery
               images={
                 product.images && product.images.length > 0
@@ -113,7 +114,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           </div>
 
           {/* Product Details & Actions */}
-          <div className="flex flex-col justify-start">
+          <div className="flex flex-col justify-start px-4 sm:px-0">
             {(product.collections && product.collections.length > 0
               ? product.collections[0]
               : null) ? (
@@ -163,6 +164,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 {product.availableForSale ? "Add to Cart" : "Sold Out"}
               </button>
             </div>
+
+            {/* Product Metafields Accordion (Key Benefits, How to Use, Ingredients, FAQs, Specifications) */}
+            <ProductAccordion metafields={product.metafields} />
 
             {/* Ayurvedic Quality Badges */}
             {/* <div className="mt-10 rounded-[var(--radius-xs)] border border-border-default bg-surface-muted p-5">

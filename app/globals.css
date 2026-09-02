@@ -113,11 +113,17 @@ body {
 
 .gallery-main-image {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   width: 100%;
   overflow: hidden;
-  border-radius: var(--radius-xs);
+  border-radius: 0;
   background-color: var(--color-surface-muted);
+}
+
+@media (min-width: 640px) {
+  .gallery-main-image {
+    border-radius: var(--radius-xs);
+  }
 }
 
 .gallery-main-img {
@@ -129,7 +135,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   width: 100%;
   border-radius: var(--radius-xs);
   background-color: var(--color-surface-muted);

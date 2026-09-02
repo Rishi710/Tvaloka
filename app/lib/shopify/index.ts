@@ -100,6 +100,9 @@ export function reshapeProduct(product: any): ShopifyProduct | null {
   const collections = product.collections
     ? removeEdgesAndNodes(product.collections)
     : [];
+  const metafields = Array.isArray(product.metafields)
+    ? product.metafields.filter(Boolean)
+    : [];
 
   return {
     ...product,
@@ -107,6 +110,7 @@ export function reshapeProduct(product: any): ShopifyProduct | null {
     variants: variants as ShopifyProductVariant[],
     tags: product.tags || [],
     collections,
+    metafields,
   };
 }
 

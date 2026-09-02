@@ -8,12 +8,11 @@ import {
 } from "./icons";
 
 const shopLinks = [
-  { label: "Makeup", href: "/makeup" },
   { label: "Facial Care", href: "/face" },
-  { label: "Body Care", href: "/bath-body" },
+  { label: "Bath & Body Care", href: "/bath-body" },
   { label: "Hair Care", href: "/hair" },
   // { label: "Men's Care", href: "/men" },
-  { label: "Mother & Baby Care", href: "/baby-care" },
+  { label: "Baby Care", href: "/baby-care" },
   { label: "Wellness", href: "/wellness" },
   { label: "Gifting", href: "/gifting" },
 ];

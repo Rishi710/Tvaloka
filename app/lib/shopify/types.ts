@@ -27,6 +27,14 @@ export interface ShopifyProductVariant {
   quantityAvailable?: number | null;
 }
 
+export interface ShopifyMetafield {
+  id?: string;
+  namespace: string;
+  key: string;
+  value: string;
+  type: string;
+}
+
 export interface ShopifyProduct {
   id: string;
   handle: string;
@@ -45,6 +53,7 @@ export interface ShopifyProduct {
   vendor: string;
   productType: string;
   collections?: { handle: string; title: string }[];
+  metafields?: ShopifyMetafield[];
 }
 
 export interface ShopifyCollection {

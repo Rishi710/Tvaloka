@@ -72,6 +72,19 @@ const productFragment = `
         }
       }
     }
+    metafields(identifiers: [
+      { namespace: "custom", key: "benefits" },
+      { namespace: "custom", key: "how_to_use" },
+      { namespace: "custom", key: "faqs" },
+      { namespace: "custom", key: "safety_information" },
+      { namespace: "custom", key: "additional_information" }
+    ]) {
+      id
+      namespace
+      key
+      value
+      type
+    }
   }
 `;
 
