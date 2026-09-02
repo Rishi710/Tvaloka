@@ -122,22 +122,27 @@ export async function getProducts({
 }
 
 export async function getProductByHandle(handle: string): Promise<ShopifyProduct | null> {
+  const decodedHandle = decodeURIComponent(handle);
   const res = await shopifyFetch<{
-    productByHandle: unknown;
+    product?: unknown;
+    productByHandle?: unknown;
   }>({
     query: `
       query getProductByHandle($handle: String!) {
+        product(handle: $handle) {
+          ...productFields
+        }
         productByHandle(handle: $handle) {
           ...productFields
         }
       }
       ${productFragment}
     `,
-    variables: { handle },
-    next: { revalidate: 60, tags: [`product-${handle}`] },
+    variables: { handle: decodedHandle },
+    next: { revalidate: 60, tags: [`product-${decodedHandle}`] },
   });
 
-  return reshapeProduct(res.productByHandle);
+  return reshapeProduct(res.product || res.productByHandle);
 }
 
 export async function getProductRecommendations(productId: string): Promise<ShopifyProduct[]> {

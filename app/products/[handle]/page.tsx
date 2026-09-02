@@ -6,6 +6,7 @@ import ProductGallery from "./ProductGallery";
 import { ProductAccordion } from "../../components/ProductAccordion";
 
 export const revalidate = 60; // ISR: revalidate every 60 seconds
+export const dynamicParams = true; // Allow dynamic generation of un-prerendered products
 
 interface ProductPageProps {
   params: Promise<{
@@ -17,8 +18,9 @@ export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   const { handle } = await params;
+  const decodedHandle = decodeURIComponent(handle);
   try {
-    const product = await getProductByHandle(handle);
+    const product = await getProductByHandle(decodedHandle);
 
     if (!product) {
       return {
@@ -51,12 +53,13 @@ export async function generateStaticParams() {
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
   const { handle } = await params;
+  const decodedHandle = decodeURIComponent(handle);
   let product = null;
 
   try {
-    product = await getProductByHandle(handle);
+    product = await getProductByHandle(decodedHandle);
   } catch (error) {
-    console.error(`[ProductDetailPage] Error fetching product "${handle}":`, error);
+    console.error(`[ProductDetailPage] Error fetching product "${decodedHandle}":`, error);
   }
 
   if (!product) {
