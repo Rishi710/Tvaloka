@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 interface GalleryImage {
   url: string;
@@ -15,8 +15,11 @@ interface ProductGalleryProps {
 
 export default function ProductGallery({ images, title }: ProductGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const isUserScrollingRef = useRef(false);
+
+  // Touch tracking refs — no state to avoid re-renders during swipe
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+  const swipeHandled = useRef(false);
 
   if (!images || images.length === 0) {
     return <div className="gallery-main-empty">No Image Available</div>;
@@ -24,34 +27,57 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
 
   const total = images.length;
 
-  const scrollToSlide = useCallback((index: number) => {
-    const nextIndex = (index + total) % total;
-    setSelectedIndex(nextIndex);
+  const goTo = useCallback(
+    (index: number) => {
+      setSelectedIndex(((index % total) + total) % total);
+    },
+    [total]
+  );
 
-    const container = scrollContainerRef.current;
-    if (container) {
-      container.scrollTo({
-        left: nextIndex * container.clientWidth,
-        behavior: "smooth",
-      });
+  const prev = () => goTo(selectedIndex - 1);
+  const next = () => goTo(selectedIndex + 1);
+
+  // ─── Touch Handlers ────────────────────────────────────────────────────────
+  // Strategy: on touchstart, record position.
+  // On touchmove, if the swipe is MORE horizontal than vertical → preventDefault
+  // to stop the page from scrolling and mark as horizontal.
+  // On touchend, if horizontal swipe distance > threshold → navigate.
+  // Otherwise, do nothing (let vertical scroll pass through to the page).
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    swipeHandled.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+
+    const dx = e.touches[0].clientX - touchStartX.current;
+    const dy = e.touches[0].clientY - touchStartY.current;
+
+    // Only lock into horizontal mode when clearly swiping horizontally
+    if (Math.abs(dx) > Math.abs(dy) + 6) {
+      e.preventDefault(); // stop page vertical scroll
+      swipeHandled.current = true;
     }
-  }, [total]);
+  };
 
-  const prev = () => scrollToSlide(selectedIndex - 1);
-  const next = () => scrollToSlide(selectedIndex + 1);
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!swipeHandled.current || touchStartX.current === null) return;
 
-  // Handle manual touch/scroll on mobile
-  const handleScroll = () => {
-    const container = scrollContainerRef.current;
-    if (!container) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const THRESHOLD = 40; // px minimum swipe distance
 
-    const width = container.clientWidth;
-    if (width > 0) {
-      const newIndex = Math.round(container.scrollLeft / width);
-      if (newIndex >= 0 && newIndex < total && newIndex !== selectedIndex) {
-        setSelectedIndex(newIndex);
-      }
+    if (dx < -THRESHOLD) {
+      next();
+    } else if (dx > THRESHOLD) {
+      prev();
     }
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+    swipeHandled.current = false;
   };
 
   return (
@@ -65,7 +91,7 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
               type="button"
               role="option"
               aria-selected={i === selectedIndex}
-              onClick={() => scrollToSlide(i)}
+              onClick={() => goTo(i)}
               className={`gallery-thumb-btn${i === selectedIndex ? " gallery-thumb-btn--active" : ""}`}
               aria-label={img.altText || `${title} image ${i + 1}`}
             >
@@ -83,21 +109,23 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
         </div>
       )}
 
-      {/* Main image area with touch/swipe by hand on mobile */}
+      {/* Main image area */}
       <div className="gallery-main relative">
-        {/* Mobile: Scrollable Snap Track / Desktop: Fixed Main View */}
+        {/* Image container — NO overflow scroll, touch events handled manually */}
         <div
-          ref={scrollContainerRef}
-          onScroll={handleScroll}
-          className="gallery-main-image flex overflow-x-auto snap-x snap-mandatory scrollbar-hide touch-pan-x sm:overflow-hidden sm:block"
+          className="gallery-main-image relative overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {images.map((img, i) => (
             <div
               key={i}
-              className={`relative aspect-[4/5] w-full flex-shrink-0 snap-center sm:absolute sm:inset-0 transition-opacity duration-300 ${i === selectedIndex
-                ? "sm:opacity-100 sm:pointer-events-auto sm:z-10"
-                : "sm:opacity-0 sm:pointer-events-none sm:z-0"
-                }`}
+              className={`absolute inset-0 transition-opacity duration-300 ${
+                i === selectedIndex
+                  ? "opacity-100 pointer-events-auto z-10"
+                  : "opacity-0 pointer-events-none z-0"
+              }`}
             >
               <Image
                 src={img.url}
@@ -109,42 +137,42 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
               />
             </div>
           ))}
-        </div>
 
-        {/* Arrow nav — clearly visible floating on left and right edges on mobile */}
-        {total > 1 && (
-          <>
-            <button
-              type="button"
-              onClick={prev}
-              className="absolute left-2.5 top-1/2 z-20 -translate-y-1/2 flex h-8.5 w-8.5 items-center justify-center rounded-full bg-white/90 text-black shadow-md border border-black/10 backdrop-blur-sm transition-all hover:bg-black hover:text-white active:scale-95 sm:hidden"
-              aria-label="Previous image"
-            >
-              <svg width="8" height="14" viewBox="0 0 10 18" fill="none" aria-hidden="true">
-                <path d="M9 1L1 9L9 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              className="absolute right-2.5 top-1/2 z-20 -translate-y-1/2 flex h-8.5 w-8.5 items-center justify-center rounded-full bg-white/90 text-black shadow-md border border-black/10 backdrop-blur-sm transition-all hover:bg-black hover:text-white active:scale-95 sm:hidden"
-              aria-label="Next image"
-            >
-              <svg width="8" height="14" viewBox="0 0 10 18" fill="none" aria-hidden="true">
-                <path d="M1 1L9 9L1 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </>
-        )}
+          {/* Arrow nav — visible on mobile, hidden on desktop (desktop uses thumbnails) */}
+          {total > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={prev}
+                className="absolute left-2.5 top-1/2 z-20 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-black shadow-md border border-black/10 backdrop-blur-sm transition-all hover:bg-black hover:text-white active:scale-95 sm:hidden"
+                aria-label="Previous image"
+              >
+                <svg width="8" height="14" viewBox="0 0 10 18" fill="none" aria-hidden="true">
+                  <path d="M9 1L1 9L9 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                className="absolute right-2.5 top-1/2 z-20 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-black shadow-md border border-black/10 backdrop-blur-sm transition-all hover:bg-black hover:text-white active:scale-95 sm:hidden"
+                aria-label="Next image"
+              >
+                <svg width="8" height="14" viewBox="0 0 10 18" fill="none" aria-hidden="true">
+                  <path d="M1 1L9 9L1 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </>
+          )}
+        </div>
 
         {/* Dash indicators — mobile only */}
         {total > 1 && (
-          <div className="gallery-dashes pt-5" aria-hidden="true">
+          <div className="gallery-dashes pt-3" aria-hidden="true">
             {images.map((_, i) => (
               <button
                 key={i}
                 type="button"
-                onClick={() => scrollToSlide(i)}
+                onClick={() => goTo(i)}
                 className={`gallery-dash${i === selectedIndex ? " gallery-dash--active" : ""}`}
                 aria-label={`Go to slide ${i + 1}`}
               />
@@ -155,4 +183,3 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
     </div>
   );
 }
-
