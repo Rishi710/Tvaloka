@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import type { ShopifyProduct } from "../lib/shopify/types";
+import { useCart } from "./CartContext";
 
 // ---------------------------------------------------------------------------
 // StarRating sub-component
@@ -115,6 +116,11 @@ export function ProductCard({
 }: ProductCardProps) {
   const [addingToBag, setAddingToBag] = useState(false);
   const [showSizePicker, setShowSizePicker] = useState(false);
+  const { addItem } = useCart();
+
+  // Use the passed-in handler or fall back to the global cart addItem
+  const handleAddToBag: ProductCardProps["onAddToBag"] =
+    onAddToBag ?? ((product, variantId) => addItem(product, variantId));
 
   // ── Derived badge from Shopify tags ─────────────────────────────────────
   const derivedBadge =
@@ -180,11 +186,11 @@ export function ProductCard({
   async function handleAddVariantToBag(variantId: string, e: React.MouseEvent) {
     e.preventDefault();
     e.stopPropagation();
-    if (!onAddToBag || addingToBag || isSoldOut) return;
+    if (addingToBag || isSoldOut) return;
     setAddingToBag(true);
     setShowSizePicker(false);
     try {
-      await onAddToBag(product, variantId);
+      await handleAddToBag?.(product, variantId);
     } finally {
       setAddingToBag(false);
     }
@@ -401,7 +407,7 @@ export function ProductCard({
               />
             </svg>
           </button>
-        ) : onAddToBag ? (
+        ) : (
           <button
             type="button"
             onClick={(e) => handleAddVariantToBag(variants[0]?.id || "", e)}
@@ -410,13 +416,6 @@ export function ProductCard({
           >
             {addingToBag ? "Adding…" : "Add to Bag"}
           </button>
-        ) : (
-          <Link
-            href={pdpHref}
-            className="flex w-full min-h-[38px] sm:min-h-[40px] items-center justify-center rounded-[var(--radius-xs)] border border-black bg-white px-3 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-black transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
-          >
-            Add to Bag
-          </Link>
         )}
       </div>
     </article>

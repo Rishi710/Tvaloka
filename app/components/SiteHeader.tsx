@@ -4,6 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CartIcon, CloseIcon, MenuIcon, SearchIcon } from "./icons";
+import { useCart } from "./CartContext";
 
 export interface NavItem {
   label: string;
@@ -37,6 +38,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { openCart, totalQuantity } = useCart();
 
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -177,13 +179,22 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
           >
             Wellness Circle
           </Link>
-          <Link
-            href="/cart"
+          <button
+            type="button"
+            onClick={openCart}
             className={`relative flex h-11 w-11 items-center justify-center text-primary ${focusRing}`}
-            aria-label="Cart, 0 items"
+            aria-label={`Open shopping bag, ${totalQuantity} ${totalQuantity === 1 ? "item" : "items"}`}
           >
             <CartIcon className="h-5 w-5" />
-          </Link>
+            {totalQuantity > 0 && (
+              <span
+                aria-hidden="true"
+                className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[9px] font-bold text-white"
+              >
+                {totalQuantity > 99 ? "99+" : totalQuantity}
+              </span>
+            )}
+          </button>
           <button
             type="button"
             ref={menuTriggerRef}

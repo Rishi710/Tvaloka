@@ -8,10 +8,8 @@ import {
 
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "tvaloka.myshopify.com";
 const apiVersion = process.env.SHOPIFY_STOREFRONT_API_VERSION || "2024-10";
-const storefrontPublicToken =
-  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
-const storefrontPrivateToken =
-  process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN || "";
+const storefrontPublicToken = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
+const storefrontPrivateToken = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN || "";
 
 const endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
 

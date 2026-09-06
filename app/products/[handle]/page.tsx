@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductByHandle, getProducts } from "../../lib/shopify/queries/product";
+import { ShareButton } from "../../components/ShareButton";
 import ProductGallery from "./ProductGallery";
 import { ProductAccordion } from "../../components/ProductAccordion";
 
@@ -136,11 +137,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               {product.title}
             </h1>
 
-            <div className="mt-4 flex items-baseline gap-3">
-              <span className="text-2xl font-semibold text-primary">
-                {formattedPrice}
-              </span>
-              <span className="text-xs text-tertiary">Inclusive of all taxes</span>
+            <div className="mt-4 flex items-center justify-between gap-4">
+              <div className="flex items-baseline gap-3">
+                <span className="text-2xl font-semibold text-primary">
+                  {formattedPrice}
+                </span>
+                <span className="text-xs text-tertiary">Inclusive of all taxes</span>
+              </div>
+              <ShareButton title={product.title} />
             </div>
 
             {product.description && (

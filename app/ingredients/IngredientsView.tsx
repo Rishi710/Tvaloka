@@ -99,7 +99,7 @@ export function IngredientsView({ ingredients }: IngredientsViewProps) {
       <section className="relative flex min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] items-center justify-center overflow-hidden bg-[#111111] py-14 sm:py-20 lg:py-24">
         {/* Background Image */}
         <Image
-          src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Hero_best_seller.webp?v=1787821514"
+          src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Ingredient_jpg.jpg?v=1788647916"
           alt="Ayurvedic herbs and sacred botanicals background"
           fill
           priority
@@ -110,7 +110,7 @@ export function IngredientsView({ ingredients }: IngredientsViewProps) {
         {/* Scrim Overlay for Contrast & Readability across all devices */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/80 sm:from-black/60 sm:via-black/50 sm:to-black/70 backdrop-blur-[0.5px]"
+          className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/80 sm:from-black/40 sm:via-black/40 sm:to-black/40 backdrop-blur-[0.1px]"
         />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">

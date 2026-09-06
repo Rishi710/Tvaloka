@@ -122,7 +122,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
       />
 
       {/* ── Ayurvedic Philosophy Section (Pure White Theme) ───────────────── */}
-      <section className="border-t border-[#eeeeee] bg-white py-12 sm:py-16">
+      {/* <section className="border-t border-[#eeeeee] bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 text-center">
             <div className="p-4 border border-[#f0f0f0] rounded-[var(--radius-xs)] bg-[#fafafa]">
@@ -159,7 +159,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

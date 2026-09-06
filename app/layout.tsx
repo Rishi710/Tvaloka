@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Open_Sans, Aboreto } from "next/font/google";
 import { AnnouncementBar } from "./components/AnnouncementBar";
+import { CartProvider } from "./components/CartContext";
+import { SideCart } from "./components/SideCart";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import type { NavItem } from "./components/SiteHeader";
@@ -54,10 +56,13 @@ export default async function RootLayout({
           hydrates. That's a real DOM mismatch but not a bug in our markup,
           so only body's own attributes are exempted from the check. */}
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <AnnouncementBar />
-        <SiteHeader navItems={navItems} />
-        {children}
-        <SiteFooter />
+        <CartProvider>
+          <AnnouncementBar />
+          <SiteHeader navItems={navItems} />
+          {children}
+          <SiteFooter />
+          <SideCart />
+        </CartProvider>
       </body>
     </html>
   );
