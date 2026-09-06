@@ -183,7 +183,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
             type="button"
             onClick={openCart}
             className={`relative flex h-11 w-11 items-center justify-center text-primary ${focusRing}`}
-            aria-label={`Open shopping bag, ${totalQuantity} ${totalQuantity === 1 ? "item" : "items"}`}
+            aria-label={`Open shopping cart, ${totalQuantity} ${totalQuantity === 1 ? "item" : "items"}`}
           >
             <CartIcon className="h-5 w-5" />
             {totalQuantity > 0 && (

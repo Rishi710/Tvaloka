@@ -112,7 +112,7 @@ export function SideCart() {
         ref={drawerRef}
         role="dialog"
         aria-modal="true"
-        aria-label="Shopping bag"
+        aria-label="Shopping cart"
         className={[
           "fixed inset-y-0 right-0 z-50 flex w-full max-w-[420px] flex-col bg-white shadow-2xl",
           "transition-transform duration-300 ease-out",
@@ -123,7 +123,7 @@ export function SideCart() {
         <div className="flex items-center justify-between border-b border-[#eeeeee] px-5 py-4">
           <div className="flex items-baseline gap-2">
             <span className="font-display text-md tracking-wide text-black">
-              Your Bag
+              Your Cart
             </span>
             {totalQuantity > 0 && (
               <span className="text-xs font-semibold text-[#666666]">
@@ -135,7 +135,7 @@ export function SideCart() {
             ref={closeButtonRef}
             type="button"
             onClick={closeCart}
-            aria-label="Close bag"
+            aria-label="Close cart"
             className="flex h-9 w-9 items-center justify-center rounded-full text-black transition-colors hover:bg-[#f5f5f5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-black"
           >
             <CloseIcon className="h-5 w-5" />
@@ -160,7 +160,7 @@ export function SideCart() {
                 <circle cx="39" cy="52" r="3.5" fill="currentColor" stroke="none" />
               </svg>
               <div>
-                <p className="font-display text-md text-black">Your bag is empty</p>
+                <p className="font-display text-md text-black">Your cart is empty</p>
                 <p className="mt-1.5 text-xs text-[#666666]">
                   Add your favourite Ayurvedic formulations to get started.
                 </p>

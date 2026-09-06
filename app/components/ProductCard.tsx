@@ -414,7 +414,7 @@ export function ProductCard({
             disabled={addingToBag}
             className="flex w-full min-h-[38px] sm:min-h-[40px] items-center justify-center rounded-[var(--radius-xs)] border border-black bg-white px-3 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-black transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
           >
-            {addingToBag ? "Adding…" : "Add to Bag"}
+            {addingToBag ? "Adding…" : "Add to Cart"}
           </button>
         )}
       </div>
