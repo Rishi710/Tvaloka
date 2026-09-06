@@ -66,7 +66,7 @@ function FooterColumn({
       <h3 className="font-display text-md text-primary">{title}</h3>
       <ul className="mt-[var(--space-4)] flex flex-col gap-[var(--space-3)]">
         {links.map((link) => (
-          <li key={link.href} className="flex items-center gap-[var(--space-2)]">
+          <li key={link.href} className="flex flex-wrap items-center gap-[var(--space-2)]">
             <Link href={link.href} className={linkClass}>
               {link.label}
             </Link>
@@ -86,7 +86,7 @@ export function SiteFooter() {
   return (
     <footer className="bg-surface-muted">
       <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-7)]">
-        <div className="grid grid-cols-1 gap-x-[var(--space-6)] gap-y-[var(--space-7)] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-[var(--space-4)] gap-y-[var(--space-7)] sm:gap-x-[var(--space-6)] lg:grid-cols-4">
           <FooterColumn title="Shop" links={shopLinks} />
           <FooterColumn title="About" links={aboutLinks} />
           <FooterColumn title="Quick Links" links={quickLinks} />
@@ -95,7 +95,7 @@ export function SiteFooter() {
             <h3 className="font-display text-md text-primary">Contact</h3>
             <div className="mt-[var(--space-4)] flex flex-col gap-[var(--space-1)] text-sm">
               <p className="text-tertiary">Email:</p>
-              <a href="mailto:support@tvaloka.com" className={linkClass}>
+              <a href="mailto:support@tvaloka.com" className={`${linkClass} break-all`}>
                 support@tvaloka.com
               </a>
             </div>
@@ -107,7 +107,7 @@ export function SiteFooter() {
             </Link>
 
             <h3 className="font-display text-md mt-[var(--space-6)] text-primary">Follow</h3>
-            <ul className="mt-[var(--space-4)] flex gap-[var(--space-3)]">
+            <ul className="mt-[var(--space-4)] flex flex-wrap gap-[var(--space-2)] sm:gap-[var(--space-3)]">
               {socialLinks.map(({ label, href, Icon }) => (
                 <li key={label}>
                   <a
