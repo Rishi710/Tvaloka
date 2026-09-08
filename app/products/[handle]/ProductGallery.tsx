@@ -21,18 +21,19 @@ export default function ProductGallery({ images, title }: ProductGalleryProps) {
   const touchStartY = useRef<number | null>(null);
   const swipeHandled = useRef(false);
 
-  if (!images || images.length === 0) {
-    return <div className="gallery-main-empty">No Image Available</div>;
-  }
-
-  const total = images.length;
+  const total = images?.length || 0;
 
   const goTo = useCallback(
     (index: number) => {
+      if (total === 0) return;
       setSelectedIndex(((index % total) + total) % total);
     },
     [total]
   );
+
+  if (!images || images.length === 0) {
+    return <div className="gallery-main-empty">No Image Available</div>;
+  }
 
   const prev = () => goTo(selectedIndex - 1);
   const next = () => goTo(selectedIndex + 1);

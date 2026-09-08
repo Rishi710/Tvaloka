@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useReducer,
+  useRef,
   useState,
 } from "react";
 import type { ShopifyProduct, ShopifyProductVariant } from "../lib/shopify/types";
@@ -50,6 +51,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return { items: action.items };
 
     case "ADD_ITEM": {
+      const addQty = action.payload.quantity || 1;
       const existing = state.items.find(
         (i) => i.variantId === action.payload.variantId
       );
@@ -57,12 +59,12 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         return {
           items: state.items.map((i) =>
             i.variantId === action.payload.variantId
-              ? { ...i, quantity: i.quantity + 1 }
+              ? { ...i, quantity: i.quantity + addQty }
               : i
           ),
         };
       }
-      return { items: [...state.items, { ...action.payload, quantity: 1 }] };
+      return { items: [...state.items, { ...action.payload, quantity: addQty }] };
     }
 
     case "REMOVE_ITEM":
@@ -102,7 +104,7 @@ interface CartContextValue {
   isOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
-  addItem: (product: ShopifyProduct, variantId: string) => void;
+  addItem: (product: ShopifyProduct, variantId: string, quantity?: number) => void;
   removeItem: (variantId: string) => void;
   updateQuantity: (variantId: string, quantity: number) => void;
 }
@@ -118,7 +120,7 @@ const STORAGE_KEY = "tvaloka_cart_v1";
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [] });
   const [isOpen, setIsOpen] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
+  const isHydrated = useRef(false);
 
   // Hydrate from localStorage on mount (client only)
   useEffect(() => {
@@ -133,18 +135,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // ignore corrupted storage
     }
-    setHydrated(true);
+    isHydrated.current = true;
   }, []);
 
   // Persist to localStorage whenever items change (after hydration)
   useEffect(() => {
-    if (!hydrated) return;
+    if (!isHydrated.current) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
     } catch {
-      // ignore storage errors
+      // ignore write errors
     }
-  }, [state.items, hydrated]);
+  }, [state.items]);
 
   // Lock body scroll when cart is open
   useEffect(() => {
@@ -162,7 +164,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const closeCart = useCallback(() => setIsOpen(false), []);
 
   const addItem = useCallback(
-    (product: ShopifyProduct, variantId: string) => {
+    (product: ShopifyProduct, variantId: string, quantity: number = 1) => {
       const variant: ShopifyProductVariant | undefined = product.variants.find(
         (v) => v.id === variantId
       );
@@ -194,7 +196,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         formattedPrice,
         priceAmount,
         currencyCode: currency,
-        quantity: 1,
+        quantity: Math.max(1, quantity),
       };
 
       dispatch({ type: "ADD_ITEM", payload: item });

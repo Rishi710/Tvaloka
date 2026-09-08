@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCollectionWithProducts, getNavCollections } from "../lib/shopify/queries/collection";
+import type { ShopifyProduct } from "../lib/shopify/types";
 import { CollectionCatalog } from "../components/CollectionCatalog";
 
 export const revalidate = 60; // ISR: revalidate collection pages every 60 seconds
@@ -58,7 +59,7 @@ export async function generateStaticParams() {
 export default async function CollectionPage({ params }: CollectionPageProps) {
   const { handle } = await params;
   let collection = null;
-  let products: any[] = [];
+  let products: ShopifyProduct[] = [];
 
   try {
     const data = await getCollectionWithProducts({

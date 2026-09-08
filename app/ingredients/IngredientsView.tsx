@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { SearchIcon, CloseIcon } from "../components/icons";
+import { IngredientThumbnail } from "../components/IngredientThumbnail";
 import type { ShopifyProduct } from "../lib/shopify/types";
 
 export interface Ingredient {
@@ -31,40 +32,6 @@ function LeafIcon({ className }: { className?: string }) {
       <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
       <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
     </svg>
-  );
-}
-
-function IngredientThumbnail({
-  src,
-  name,
-  size = "md",
-}: {
-  src?: string;
-  name: string;
-  size?: "md" | "lg";
-}) {
-  const hasImage = Boolean(src && typeof src === "string" && src.trim() !== "");
-  const initial = name ? name.trim().charAt(0).toUpperCase() : "T";
-
-  if (hasImage) {
-    return (
-      <Image
-        src={src!.trim()}
-        alt={name}
-        fill
-        sizes={size === "lg" ? "120px" : "100px"}
-        className="object-cover"
-      />
-    );
-  }
-
-  return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#f5f2eb] text-[#716353]">
-      <LeafIcon className={size === "lg" ? "h-6 w-6 text-[#8b7965]" : "h-5 w-5 text-[#8b7965]"} />
-      <span className="font-display mt-0.5 text-[10px] sm:text-[11px] font-semibold tracking-wider text-[#5f5142]">
-        {initial}
-      </span>
-    </div>
   );
 }
 

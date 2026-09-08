@@ -53,6 +53,7 @@ function Eyebrow({ children, onDark = false }: { children: string; onDark?: bool
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function KnowMoreLink({
   href,
   label,
@@ -213,7 +214,7 @@ export default function AboutUsPage() {
 
             </h2>
             <p className="mt-[var(--space-4)] max-w-2xl text-sm text-tertiary">
-              Crafted in pharmaceutical-grade facilities with a dedicated R&D team, our products are made through eco-conscious, green-by-design processes. We honor traditional, artisanal methods to infuse our formulations with organic, farm-grown Ayurvedic herbs, aromatic flowers, and pure essential oils sourced directly from our own fields and India's finest growing regions
+              Crafted in pharmaceutical-grade facilities with a dedicated R&D team, our products are made through eco-conscious, green-by-design processes. We honor traditional, artisanal methods to infuse our formulations with organic, farm-grown Ayurvedic herbs, aromatic flowers, and pure essential oils sourced directly from our own fields and India&apos;s finest growing regions
 
             </p>
           </div>

@@ -5,6 +5,10 @@ import { getProductByHandle, getProducts } from "../../lib/shopify/queries/produ
 import { ShareButton } from "../../components/ShareButton";
 import ProductGallery from "./ProductGallery";
 import { ProductAccordion } from "../../components/ProductAccordion";
+import { ProductActions } from "./ProductActions";
+import { ProductIngredientsSection } from "./ProductIngredientsSection";
+import { getIngredientsForProduct } from "../../lib/productIngredients";
+import type { ShopifyProduct } from "../../lib/shopify/types";
 
 export const revalidate = 60; // ISR: revalidate every 60 seconds
 export const dynamicParams = true; // Allow dynamic generation of un-prerendered products
@@ -57,8 +61,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const decodedHandle = decodeURIComponent(handle);
   let product = null;
 
+  let allProducts: ShopifyProduct[] = [];
   try {
     product = await getProductByHandle(decodedHandle);
+    allProducts = await getProducts({ first: 50 });
   } catch (error) {
     console.error(`[ProductDetailPage] Error fetching product "${decodedHandle}":`, error);
   }
@@ -75,6 +81,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       maximumFractionDigits: 0,
     }).format(parseFloat(price.amount))
     : null;
+
+  const productIngredients = getIngredientsForProduct(product.title);
 
   return (
     <main className="flex-1 bg-white py-4 sm:py-10 md:py-16">
@@ -110,8 +118,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 product.images && product.images.length > 0
                   ? product.images
                   : product.featuredImage
-                  ? [product.featuredImage]
-                  : []
+                    ? [product.featuredImage]
+                    : []
               }
               title={product.title}
             />
@@ -148,9 +156,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             </div>
 
             {product.description && (
-              <div className="mt-6 border-t border-border-default pt-6">
+              <div className="mt-6">
                 <h2 className="text-xs font-semibold tracking-wider text-primary uppercase">
-                  Description & Benefits
+                  Description
                 </h2>
                 <div
                   className="mt-3 text-sm leading-relaxed text-secondary space-y-3 prose"
@@ -161,43 +169,22 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               </div>
             )}
 
-            {/* Action Button */}
-            <div className="mt-8 pt-6 border-t border-border-default">
-              <button
-                type="button"
-                disabled={!product.availableForSale}
-                className="w-full rounded-[var(--radius-xs)] bg-action-onlight-bg py-4 text-sm font-semibold tracking-wider text-action-onlight-text uppercase transition-colors hover:bg-action-onlight-bg-hover disabled:bg-surface-muted disabled:text-tertiary disabled:cursor-not-allowed"
-              >
-                {product.availableForSale ? "Add to Cart" : "Sold Out"}
-              </button>
-            </div>
+            {/* Quantity Stepper & Add to Cart (No horizontal dividing lines) */}
+            <ProductActions product={product} />
 
-            {/* Product Metafields Accordion (Key Benefits, How to Use, Ingredients, FAQs, Specifications) */}
-            <ProductAccordion metafields={product.metafields} />
-
-            {/* Ayurvedic Quality Badges */}
-            {/* <div className="mt-10 rounded-[var(--radius-xs)] border border-border-default bg-surface-muted p-5">
-              <div className="grid grid-cols-2 gap-4 text-xs">
-                <div>
-                  <p className="font-semibold text-primary">🌿 100% Ayurvedic</p>
-                  <p className="text-tertiary mt-0.5">Classical formulations</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-primary">✨ Cruelty Free</p>
-                  <p className="text-tertiary mt-0.5">Ethically made in India</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-primary">📦 Eco Packaging</p>
-                  <p className="text-tertiary mt-0.5">UV-protective containers</p>
-                </div>
-                <div>
-                  <p className="font-semibold text-primary">🚚 Express Shipping</p>
-                  <p className="text-tertiary mt-0.5">Direct to your doorstep</p>
-                </div>
-              </div>
-            </div> */}
+            {/* Product Metafields Accordion with Ingredients */}
+            <ProductAccordion
+              metafields={product.metafields}
+              ingredients={productIngredients}
+            />
           </div>
         </div>
+
+        {/* ── Sacred Ingredients Section (Same card design & modal as /ingredients) ── */}
+        <ProductIngredientsSection
+          ingredients={productIngredients}
+          products={allProducts}
+        />
       </div>
     </main>
   );

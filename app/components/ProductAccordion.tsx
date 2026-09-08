@@ -1,16 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { ShopifyMetafield } from "../lib/shopify/types";
+import type { Ingredient } from "../ingredients/IngredientsView";
+import { parseBotanicalName } from "../lib/productIngredients";
 
 interface ProductAccordionProps {
   metafields?: ShopifyMetafield[];
+  ingredients?: Ingredient[];
 }
 
 interface AccordionSection {
   id: string;
   title: string;
   content: React.ReactNode;
+}
+
+interface RichTextNode {
+  type?: string;
+  value?: string;
+  level?: number;
+  listType?: "ordered" | "unordered";
+  url?: string;
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  children?: RichTextNode[];
 }
 
 /**
@@ -24,7 +40,7 @@ function renderRichText(value: string) {
     if (parsed && parsed.type === "root" && Array.isArray(parsed.children)) {
       return (
         <div className="space-y-3 text-xs sm:text-sm leading-relaxed text-[#444444]">
-          {parsed.children.map((node: any, idx: number) => renderNode(node, idx))}
+          {parsed.children.map((node: RichTextNode, idx: number) => renderNode(node, idx))}
         </div>
       );
     }
@@ -42,14 +58,14 @@ function renderRichText(value: string) {
   );
 }
 
-function renderNode(node: any, index: number): React.ReactNode {
+function renderNode(node: RichTextNode, index: number): React.ReactNode {
   if (!node) return null;
 
   switch (node.type) {
     case "paragraph":
       return (
         <p key={index} className="leading-relaxed">
-          {node.children?.map((child: any, cIdx: number) => renderChild(child, cIdx))}
+          {node.children?.map((child: RichTextNode, cIdx: number) => renderChild(child, cIdx))}
         </p>
       );
 
@@ -61,7 +77,7 @@ function renderNode(node: any, index: number): React.ReactNode {
           key={index}
           className="font-sans font-semibold text-black mt-3 mb-1 text-xs sm:text-sm tracking-wide uppercase"
         >
-          {node.children?.map((child: any, cIdx: number) => renderChild(child, cIdx))}
+          {node.children?.map((child: RichTextNode, cIdx: number) => renderChild(child, cIdx))}
         </Tag>
       );
     }
@@ -76,9 +92,9 @@ function renderNode(node: any, index: number): React.ReactNode {
             isOrdered ? "list-decimal" : "list-disc"
           } text-xs sm:text-sm text-[#444444]`}
         >
-          {node.children?.map((item: any, iIdx: number) => (
+          {node.children?.map((item: RichTextNode, iIdx: number) => (
             <li key={iIdx} className="leading-relaxed">
-              {item.children?.map((c: any, cIdx: number) => renderChild(c, cIdx))}
+              {item.children?.map((c: RichTextNode, cIdx: number) => renderChild(c, cIdx))}
             </li>
           ))}
         </ListTag>
@@ -88,7 +104,7 @@ function renderNode(node: any, index: number): React.ReactNode {
     case "list-item":
       return (
         <li key={index} className="leading-relaxed">
-          {node.children?.map((child: any, cIdx: number) => renderChild(child, cIdx))}
+          {node.children?.map((child: RichTextNode, cIdx: number) => renderChild(child, cIdx))}
         </li>
       );
 
@@ -97,7 +113,7 @@ function renderNode(node: any, index: number): React.ReactNode {
   }
 }
 
-function renderChild(child: any, index: number): React.ReactNode {
+function renderChild(child: RichTextNode, index: number): React.ReactNode {
   if (!child) return null;
 
   if (typeof child === "string") {
@@ -139,7 +155,7 @@ function renderChild(child: any, index: number): React.ReactNode {
         rel="noopener noreferrer"
         className="text-black underline underline-offset-4 hover:text-[#666666]"
       >
-        {child.children?.map((c: any, cIdx: number) => renderChild(c, cIdx))}
+        {child.children?.map((c: RichTextNode, cIdx: number) => renderChild(c, cIdx))}
       </a>
     );
   }
@@ -158,7 +174,7 @@ function renderFAQRichText(value: string) {
     if (parsed && parsed.type === "root" && Array.isArray(parsed.children)) {
       return (
         <div className="max-h-[320px] overflow-y-auto pr-3 space-y-4">
-          {parsed.children.map((node: any, idx: number) => {
+          {parsed.children.map((node: RichTextNode, idx: number) => {
             if (node.type === "heading") {
               return (
                 <div key={idx} className="flex items-start gap-2.5 pt-2 first:pt-0">
@@ -167,7 +183,7 @@ function renderFAQRichText(value: string) {
                     className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-[#bfaea0]"
                   />
                   <h4 className="font-sans font-semibold text-black text-xs sm:text-sm leading-snug">
-                    {node.children?.map((child: any, cIdx: number) => renderChild(child, cIdx))}
+                    {node.children?.map((child: RichTextNode, cIdx: number) => renderChild(child, cIdx))}
                   </h4>
                 </div>
               );
@@ -176,7 +192,7 @@ function renderFAQRichText(value: string) {
             if (node.type === "paragraph") {
               return (
                 <p key={idx} className="pl-4.5 text-xs sm:text-sm leading-relaxed text-[#555555]">
-                  {node.children?.map((child: any, cIdx: number) => renderChild(child, cIdx))}
+                  {node.children?.map((child: RichTextNode, cIdx: number) => renderChild(child, cIdx))}
                 </p>
               );
             }
@@ -199,7 +215,10 @@ function renderFAQRichText(value: string) {
   );
 }
 
-export function ProductAccordion({ metafields = [] }: ProductAccordionProps) {
+export function ProductAccordion({
+  metafields = [],
+  ingredients = [],
+}: ProductAccordionProps) {
   // Map metafields to structured sections
   const metafieldMap = new Map<string, ShopifyMetafield>();
   metafields.forEach((m) => {
@@ -227,6 +246,44 @@ export function ProductAccordion({ metafields = [] }: ProductAccordionProps) {
       id: "how_to_use",
       title: "How To Use",
       content: renderRichText(howToUse.value),
+    });
+  }
+
+  // 3. Ingredients
+  if (ingredients && ingredients.length > 0) {
+    sections.push({
+      id: "ingredients",
+      title: "Ingredients",
+      content: (
+        <div className="space-y-3.5 pt-1 text-xs sm:text-sm">
+          <div className="flex flex-wrap gap-2">
+            {ingredients.map((ing) => {
+              const { common, latin } = parseBotanicalName(ing.word);
+              return (
+                <span
+                  key={ing.word}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#e5e5e5] bg-[#fafafa] px-3 py-1 text-xs text-black"
+                >
+                  <span className="font-semibold">{common}</span>
+                  {latin && (
+                    <span className="font-serif italic text-[11px] text-[#777777]">
+                      ({latin})
+                    </span>
+                  )}
+                </span>
+              );
+            })}
+          </div>
+          <div className="pt-1">
+            <Link
+              href="/ingredients"
+              className="text-xs text-black font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity"
+            >
+              Explore more Ingredients
+            </Link>
+          </div>
+        </div>
+      ),
     });
   }
 
@@ -260,17 +317,17 @@ export function ProductAccordion({ metafields = [] }: ProductAccordionProps) {
     });
   }
 
-  // If no metafields present for this product, return null
-  if (sections.length === 0) {
-    return null;
-  }
-
   // Accordion open/close state: Open the first section by default
   const [openSectionId, setOpenSectionId] = useState<string | null>(sections[0]?.id || null);
 
   const toggleSection = (id: string) => {
     setOpenSectionId((prev) => (prev === id ? null : id));
   };
+
+  // If no metafields present for this product, return null
+  if (sections.length === 0) {
+    return null;
+  }
 
   return (
     <div className="mt-8 border-t border-[#e5e5e5]">
