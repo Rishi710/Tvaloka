@@ -27,7 +27,7 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Face & Body",
     href: "/face-care",
     bgClassName: "bg-surface-base",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Hero_best_seller.webp?v=1787821514",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_5610.png?v=1788871512",
     alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
   },
   {
@@ -37,7 +37,7 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Bath & Body",
     href: "/bath-body-care",
     bgClassName: "bg-[radial-gradient(circle_at_20%_30%,_#1a1a1a,_#000000_60%)]",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/inner_bath_body.webp?v=1787821514",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Hero_bath_body_jpg.jpg?v=1788857854",
     alt: "A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf",
     // Subject sits left, where the copy goes — favour the right of the frame.
     objectPositionClassName: "object-right",

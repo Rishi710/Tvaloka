@@ -21,7 +21,8 @@
             "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
             "Lavanya Baby Body Lotion Saffron & Shea butter",
             "Soumya Baby Body Wash Aloe Vera & Grapefruit",
-            "Komal baby Shampoo Aloe Vera, Coconut Oil, Licorice & Raspberry Seed"
+            "Komal baby Shampoo Aloe Vera, Coconut Oil, Licorice & Raspberry Seed",
+            "Tara Baby Powder Rose, Aloe Vera & Sandalwood"
         ]
     },
     {
@@ -63,7 +64,6 @@
         "work": "Almond oil helps condition and replenish the skin and hair, supporting softness, moisture, and a smoother appearance.",
         "foundIn": [
             "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
-            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
             "Lavanya Baby Body Lotion Saffron & Shea butter",
             "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
             "Navya Baby Massage Oil Almond & Sandalwood Oil",
@@ -71,7 +71,7 @@
         ]
     },
     {
-        "word": "Mulethi / Licorice (Glycyrrhiza glabra)",
+        "word": "Licorice / Mulethi (Glycyrrhiza glabra)",
         "image": "",
         "tags": [
             "Soothing",
@@ -148,7 +148,8 @@
             "Keshya Anti-Dandruff Ayurvedic Shampoo Rosemary, Amla, Neem & Aloe Vera",
             "Sugandha Body Lotion Vanilla & Shea Butter",
             "Lavanya Baby Body Lotion Saffron & Shea butter",
-            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi",
+            "Tara Baby Powder Rose, Aloe Vera & Sandalwood"
         ]
     },
     {
@@ -187,18 +188,33 @@
         ]
     },
     {
-        "word": "Neem (Azadirachta indica)",
+        "word": "Neem Seed Oil (Azadirachta indica seed oil)",
+        "image": "",
+        "tags": [
+            "Nourishing",
+            "Scalp Care",
+            "Ayurvedic"
+        ],
+        "about": "Neem Seed Oil is a traditional Ayurvedic botanical oil valued for its nourishing and conditioning properties. Derived from neem seeds, it is commonly used in natural hair and scalp care routines. Its rich botanical character makes it a useful choice for supporting a nourished scalp and healthy-looking hair as part of traditional herbal care.",
+        "subtitle": "Nourishes and conditions the scalp while supporting healthy-looking hair with traditional Ayurvedic botanical care.",
+        "work": "Neem Seed Oil helps nourish and condition the scalp and hair while supporting a fresh, healthy-looking appearance.",
+        "foundIn": [
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+        ]
+    },
+    {
+        "word": "Neem Leaf Extract (Azadirachta indica Leaf extract)",
         "image": "",
         "tags": [
             "Purifying",
             "Scalp Care",
             "Ayurvedic"
         ],
-        "about": "Neem is one of Ayurveda's most valued botanicals, traditionally known for its purifying and cleansing properties. It is widely used in skin and scalp care to help maintain a fresh, clean-feeling environment. Neem is a popular ingredient in herbal routines designed to support healthy-looking skin, scalp, and hair.",
-        "subtitle": "Helps purify and refresh the scalp while supporting a clean, balanced, and healthy-looking hair care routine.",
-        "work": "Neem helps cleanse and refresh the scalp while supporting a fresh, balanced feel as part of traditional Ayurvedic care.",
+        "about": "Neem Leaf Extract is a traditional Ayurvedic botanical valued for its purifying and cleansing properties. Derived from neem leaves, it is widely used in natural skin and scalp care to help maintain a fresh, clean-feeling environment. Its botanical character makes it well suited to herbal routines focused on balanced, healthy-looking skin and scalp.",
+        "subtitle": "Helps purify and refresh the scalp and skin while supporting a clean, balanced, and healthy-looking appearance.",
+        "work": "Neem Leaf Extract helps cleanse and refresh the skin and scalp while supporting a fresh, balanced feel in herbal care routines.",
         "foundIn": [
-            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
             "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
         ]
     },
@@ -372,27 +388,26 @@
         "foundIn": [
             "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
             "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
-            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
             "Tara Baby Powder Rose, Aloe Vera & Sandalwood"
         ]
     },
     {
-        "word": "Rose (Rosa damascena)",
+        "word": "Rose Oil (Rosa damascena)",
         "image": "",
         "tags": [
             "Soothing",
             "Aromatic",
             "Skin Care"
         ],
-        "about": "Rose Damask is a traditional botanical valued for its gentle, soothing, and naturally aromatic qualities. Rose oil is commonly incorporated into skincare to provide a comforting botanical experience while complementing nourishing formulations. Its delicate floral aroma makes it especially suited to relaxing and gentle self-care rituals.",
-        "subtitle": "Helps soothe and comfort the skin while adding a delicate natural floral aroma to gentle botanical care.",
-        "work": "Rose oil helps provide a soothing sensory experience while complementing nourishing and comforting skincare routines.",
+        "about": "Rose Oil is a delicate botanical oil traditionally valued for its soothing, comforting, and naturally aromatic properties. Derived from Rosa damascena, it is commonly used in natural skincare and wellness rituals to provide a pleasant floral experience. Its gentle character makes it a beautiful addition to nourishing routines focused on soft, comfortable, healthy-looking skin.",
+        "subtitle": "Helps soothe and comfort the skin while adding a delicate natural floral aroma to gentle botanical skincare and wellness rituals.",
+        "work": "Rose Oil helps provide a soothing and comforting feel while adding a naturally elegant floral aroma to daily skincare and self-care routines.",
         "foundIn": [
             "Sparsh Diaper Rash Cream Castor Oil & Shea Butter"
         ]
     },
     {
-        "word": "Gulab Jadi / Rose (Rosa indica)",
+        "word": "Gulab Jal / Rose Water (Rosa indica)",
         "image": "",
         "tags": [
             "Soothing",
@@ -425,7 +440,7 @@
         ]
     },
     {
-        "word": "Geranium (Pelargonium graveolens)",
+        "word": "Geranium Oil (Pelargonium graveolens)",
         "image": "",
         "tags": [
             "Aromatic",
@@ -440,7 +455,7 @@
         ]
     },
     {
-        "word": "Grapefruit (Citrus paradisi)",
+        "word": "Grapefruit Extract (Citrus paradisi)",
         "image": "",
         "tags": [
             "Refreshing",

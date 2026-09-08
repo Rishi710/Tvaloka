@@ -85,11 +85,10 @@ export function ProductActions({ product }: ProductActionsProps) {
                   key={variant.id}
                   type="button"
                   onClick={() => setSelectedVariantId(variant.id)}
-                  className={`rounded border px-3.5 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${
-                    isSelected
+                  className={`rounded border px-3.5 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${isSelected
                       ? "border-black bg-black text-white"
                       : "border-[#dddddd] bg-white text-primary hover:border-black"
-                  }`}
+                    }`}
                 >
                   {variant.title}
                 </button>
