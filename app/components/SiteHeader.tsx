@@ -211,7 +211,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
 
       {/* Category nav — desktop */}
       <nav aria-label="Product categories" className="hidden lg:block">
-        <ul className="mx-auto flex max-w-7xl justify-item-center items-center gap-[var(--space-1)] overflow-x-auto px-[var(--space-4)]">
+        <ul className="mx-auto flex max-w-7xl justify-center items-center gap-[var(--space-1)] overflow-x-auto scrollbar-hide px-[var(--space-4)]">
           {categories.map((category) => {
             const isActive = pathname === category.href;
             return (

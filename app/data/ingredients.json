@@ -1,259 +1,793 @@
 [
     {
-        "word": "Saffron",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Saffron.png?v=1777112020",
+        "word": "Aloe Vera (Aloe barbadensis)",
+        "image": "",
         "tags": [
-            "Glow",
-            "Brightening",
-            "Antioxidant"
-        ],
-        "about": "Saffron is not just for your kitchen. Your skin loves it just as much. A prized ingredient in Ayurvedic skincare, it is known for enhancing skin radiance and bringing back a natural, healthy glow. Rich in antioxidants, saffron helps brighten dull skin, improve uneven tone, and protect against environmental stressors. It is widely used in natural body care for glowing skin",
-        "subtitle": "Brightens dull skin, improves uneven tone, and boosts natural radiance with antioxidant-rich Ayurvedic care for glowing, healthy-looking skin.",
-        "work": "Saffron helps improve circulation and delivers antioxidants to the skin, reducing dullness and restoring luminosity over time.",
-        "foundIn": [
-            "Kalakand Body Lotion",
-            "Maalish Oil"
-        ]
-    },
-    {
-        "word": "Oat Milk",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Oat_Milk.png?v=1777112018",
-        "tags": [
-            "Barrier Repair",
-            "Sensitive Skin",
-            "Hydration"
-        ],
-        "about": "If your skin could ask for comfort, it would probably ask for oat milk. A gentle favourite in skincare for dry and sensitive skin, oat milk helps repair the skin barrier, calm irritation, and deeply hydrate without feeling heavy. It is especially helpful for over-washed, stressed, or reactive skin.",
-        "subtitle": "Deeply soothes and repairs dry, sensitive skin while strengthening the skin barrier and providing lightweight, non-greasy hydration.",
-        "work": "Oat milk creates a soothing layer on the skin that locks in moisture, reduces inflammation, and supports long-term skin repair.",
-        "foundIn": [
-            "Kalakand Body Lotion"
-        ]
-    },
-    {
-        "word": "Aloe Vera",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Aloe_Vera.png?v=1777112014",
-        "tags": [
+            "Hydrating",
             "Soothing",
-            "Hydration",
-            "Calming"
+            "Skin & Hair Care"
         ],
-        "about": "Aloe vera is that one ingredient your skin keeps coming back to. Known for its role in natural skincare for hydration and soothing, it helps calm irritation, reduce redness, and deliver lightweight moisture. It works especially well for sensitive, dry, or reactive skin.",
-        "subtitle": "Hydrates, cools, and calms irritated skin while supporting healing, making it ideal for sensitive, inflamed, or stressed skin.",
-        "work": "Aloe vera penetrates the skin to hydrate, cool, and support the skin’s natural healing process.",
+        "about": "Aloe Vera is a soothing botanical traditionally valued for its hydrating and conditioning properties. It helps replenish moisture while providing a comfortable, refreshed feel to the skin and scalp. Its gentle nature makes it a versatile Ayurvedic-inspired ingredient for everyday skin and hair care focused on softness, hydration, and healthy-looking results.",
+        "subtitle": "Helps hydrate and soothe the skin and scalp while supporting softness, moisture balance, and healthy-looking hair.",
+        "work": "Aloe Vera helps replenish moisture and provide a soothing feel while supporting soft, comfortable, and healthy-looking skin and hair.",
         "foundIn": [
-            "Kalakand Body Lotion",
-            "Maalish Oil"
+            "Sheetala Ayurvedic Aloe Vera Gel Pure Aloe",
+            "Keshya Anti-Dandruff Ayurvedic Shampoo Rosemary, Amla, Neem & Aloe Vera",
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Shuddhi Face Wash Khus, Aloe Vera, Mulethi & Kesar",
+            "Sugandha Body Lotion Vanilla & Shea Butter",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi",
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+            "Lavanya Baby Body Lotion Saffron & Shea butter",
+            "Soumya Baby Body Wash Aloe Vera & Grapefruit",
+            "Komal baby Shampoo Aloe Vera, Coconut Oil, Licorice & Raspberry Seed"
         ]
     },
     {
-        "word": "Coconut",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Coconut.png?v=1777112019",
+        "word": "Coconut (Cocos nucifera)",
+        "image": "",
         "tags": [
-            "Moisturising",
-            " Repair",
-            " Nourishing"
+            "Nourishing",
+            "Moisturizing",
+            "Conditioning"
         ],
-        "about": "Coconut brings deep nourishment your skin can actually feel. A staple in Ayurvedic body care for dry and damaged skin, it helps moisturise intensely, reduce inflammation, and support skin healing. It works especially well for rough, cracked, or dehydrated skin.",
-        "subtitle": "Deeply moisturises dry, rough skin while reducing inflammation and restoring the skin barrier for long-lasting nourishment.",
-        "work": "Coconut oil locks in moisture and strengthens the skin barrier, helping repair dryness and improve overall skin health.",
+        "about": "Coconut is a traditional Ayurvedic ingredient valued for its nourishing and moisturizing properties. Coconut oil helps condition dry skin and hair while supporting moisture retention and a smoother feel. Rich in naturally occurring fatty acids, it is widely used in daily skin, scalp, and hair rituals for softness and lasting nourishment.",
+        "subtitle": "Deeply nourishes and moisturizes skin, scalp, and hair while helping maintain softness and a healthy-looking protective barrier.",
+        "work": "Coconut oil helps condition the skin and hair while supporting moisture retention, leaving them feeling softer, smoother, and nourished.",
         "foundIn": [
-            "Kalakand Body Lotion"
+            "Narikela 100% Pure Extra Virgin Coconut Oil",
+            "Keshya Anti-Dandruff Ayurvedic Shampoo Rosemary, Amla, Neem & Aloe Vera",
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Sugandha Body Lotion Vanilla & Shea Butter",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+            "Lavanya Baby Body Lotion Saffron & Shea butter",
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
+            "Navya Baby Massage Oil Almond & Sandalwood Oil",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil",
+            "Komal baby Shampoo Aloe Vera, Coconut Oil, Licorice & Raspberry Seed",
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
         ]
     },
     {
-        "word": "Shea Butter",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Shea_Butter.png?v=1777112018",
-        "tags": [
-            "Deep Moisture",
-            "Softening",
-            "Protection"
-        ],
-        "about": "Shea butter is rich, restorative, and deeply comforting for the skin. Used in skincare for dry, rough, and sensitive skin, it helps improve texture, lock in moisture, and protect against dryness while keeping the skin soft and smooth.",
-        "subtitle": "Richly hydrates and softens dry skin while improving texture, locking in moisture, and protecting against dryness and roughness.",
-        "work": "Shea butter melts into the skin, forming a protective layer that prevents moisture loss and improves softness over time.",
-        "foundIn": [
-            "Kalakand Body Lotion"
-        ]
-    },
-    {
-        "word": "Almond",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Almond.png?v=1777112018",
+        "word": "Almond (Prunus amygdalus dulcis)",
+        "image": "",
         "tags": [
             "Nourishing",
             "Softening",
-            "Smoothness"
+            "Moisturizing"
         ],
-        "about": "Almond is all about deep nourishment and lasting softness. Used in natural skincare for dry and dull skin, it helps improve texture, restore moisture, and support healthy, smooth skin.",
-        "subtitle": "Nourishes and softens skin while improving texture and elasticity, leaving it smooth, healthy, and deeply moisturised.",
-        "work": "Almond oil penetrates deeply to nourish and hydrate, improving skin softness and elasticity.",
+        "about": "Almond is a nutrient-rich ingredient traditionally used to nourish and condition the skin and hair. Its natural fatty acids help soften dry areas while supporting moisture and a smooth, healthy-looking appearance. Almond oil is a gentle choice for daily Ayurvedic-inspired care focused on nourishment, softness, and comfort.",
+        "subtitle": "Nourishes and softens dry skin, scalp, and hair while helping maintain moisture and a smooth, healthy-looking feel.",
+        "work": "Almond oil helps condition and replenish the skin and hair, supporting softness, moisture, and a smoother appearance.",
         "foundIn": [
-            "Kalakand Body Lotion"
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+            "Lavanya Baby Body Lotion Saffron & Shea butter",
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
+            "Navya Baby Massage Oil Almond & Sandalwood Oil",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
         ]
     },
     {
-        "word": "Kumkumadi",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Kumkumadi.png?v=1777112018",
+        "word": "Mulethi / Licorice (Glycyrrhiza glabra)",
+        "image": "",
         "tags": [
-            "Brightening",
-            "Even Tone",
-            "Glow"
+            "Soothing",
+            "Calming",
+            "Skin Care"
         ],
-        "about": "Kumkumadi is one of Ayurveda’s best-kept glow secrets. A traditional blend used in Ayurvedic skincare for glowing and even-toned skin, it helps reduce pigmentation, improve complexion, and restore radiance. It is widely used in natural skincare for brightening and skin repair.",
-        "subtitle": "Enhances skin radiance, reduces pigmentation, and supports an even complexion using traditional Ayurvedic ingredients for brighter, healthier-looking skin.",
-        "work": "Kumkumadi works by boosting skin renewal and improving circulation, helping the skin appear brighter, clearer, and more balanced over time.",
+        "about": "Mulethi, also known as Licorice, is a cherished Ayurvedic botanical traditionally valued for its soothing and nourishing properties. It is commonly used in skin, scalp, and hair care to support a comfortable feel and healthy-looking appearance. Its gentle botanical character makes it suitable for daily herbal care focused on softness and calm.",
+        "subtitle": "Helps soothe and nourish the skin and scalp while supporting a calm, comfortable, and healthy-looking appearance.",
+        "work": "Mulethi helps provide a soothing and nourishing feel while supporting comfortable, soft, and healthy-looking skin and scalp.",
         "foundIn": [
-            "Kalakand Body Lotion"
+            "Sheetala Ayurvedic Aloe Vera Gel Pure Aloe",
+            "Keshya Anti-Dandruff Ayurvedic Shampoo Rosemary, Amla, Neem & Aloe Vera",
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Shuddhi Face Wash Khus, Aloe Vera, Mulethi & Kesar",
+            "Sugandha Body Lotion Vanilla & Shea Butter",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi",
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+            "Lavanya Baby Body Lotion Saffron & Shea butter",
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
+            "Navya Baby Massage Oil Almond & Sandalwood Oil",
+            "Komal baby Shampoo Aloe Vera, Coconut Oil, Licorice & Raspberry Seed",
+            "Soumya Baby Body Wash Aloe Vera & Grapefruit"
         ]
     },
     {
-        "word": "Turmeric",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Turmeric.png?v=1777112015",
+        "word": "Rosemary (Rosmarinus officinalis)",
+        "image": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Rosmery_ingredient.webp?v=1788822815",
         "tags": [
-            "Anti-inflammatory",
-            "Healing",
-            "Glow"
+            "Scalp Care",
+            "Invigorating",
+            "Hair Care"
         ],
-        "about": "Turmeric has been trusted in Ayurveda long before skincare trends existed. Known for its role in natural skincare for inflammation and glowing skin, it helps calm irritation, reduce redness, and improve overall skin clarity.",
-        "subtitle": "Soothes inflammation, reduces redness, and improves skin clarity with powerful Ayurvedic healing and antioxidant properties.",
-        "work": "Turmeric works through its anti-inflammatory and antioxidant properties, helping soothe the skin and support a clearer, healthier appearance.",
+        "about": "Rosemary is a revitalizing botanical valued for its nourishing and invigorating properties. Traditionally used in hair and scalp care, it helps support a healthy-looking scalp while conditioning the hair. Its refreshing herbal character makes it a popular choice for Ayurvedic-inspired routines focused on softness, shine, and revitalized-looking hair.",
+        "subtitle": "Nourishes and invigorates the scalp while supporting stronger, healthy-looking hair with natural softness and shine.",
+        "work": "Rosemary helps nourish and condition the scalp and hair while providing a refreshed botanical feel and healthy-looking appearance.",
         "foundIn": [
-            "Maalish Oil"
+            "Keshya Anti-Dandruff Ayurvedic Shampoo Rosemary, Amla, Neem & Aloe Vera",
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil",
+            "Rosemary Essential Oil for Hair, Skin & Aromatherapy"
         ]
     },
     {
-        "word": "Sandalwood",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Sandalwood.png?v=1777112013",
+        "word": "Fenugreek / Methi (Trigonella foenum-graecum)",
+        "image": "",
+        "tags": [
+            "Nourishing",
+            "Conditioning",
+            "Hair Care"
+        ],
+        "about": "Fenugreek, traditionally known as Methi, is a cherished Ayurvedic ingredient used in herbal hair care. Its naturally conditioning properties help support soft, manageable hair while nourishing the scalp. Fenugreek has long been included in traditional hair rituals focused on maintaining smoothness, moisture, and healthy-looking strands.",
+        "subtitle": "Helps nourish and condition the scalp and hair while supporting softness, smoothness, and naturally manageable-looking strands.",
+        "work": "Fenugreek helps condition and nourish the scalp and hair, supporting moisture, softness, and a smoother appearance.",
+        "foundIn": [
+            "Keshya Anti-Dandruff Ayurvedic Shampoo Rosemary, Amla, Neem & Aloe Vera",
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi"
+        ]
+    },
+    {
+        "word": "Oat (Avena sativa)",
+        "image": "",
+        "tags": [
+            "Soothing",
+            "Hydrating",
+            "Gentle Care"
+        ],
+        "about": "Oat is a gentle botanical ingredient traditionally valued for its soothing and comforting properties. Oat extracts and oat milk help provide lightweight hydration while supporting soft, comfortable skin and hair. Its mild character makes it especially suitable for gentle daily care and nourishing Ayurvedic-inspired formulations.",
+        "subtitle": "Helps soothe and hydrate delicate skin and scalp while supporting softness, comfort, and a smooth healthy-looking feel.",
+        "work": "Oat helps provide gentle hydration and a comforting feel while supporting softness and moisture balance in skin and hair care.",
+        "foundIn": [
+            "Keshya Anti-Dandruff Ayurvedic Shampoo Rosemary, Amla, Neem & Aloe Vera",
+            "Sugandha Body Lotion Vanilla & Shea Butter",
+            "Lavanya Baby Body Lotion Saffron & Shea butter",
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
+        ]
+    },
+    {
+        "word": "Peppermint (Mentha piperita)",
+        "image": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Peppermint_ingredient.webp?v=1788822815",
+        "tags": [
+            "Cooling",
+            "Refreshing",
+            "Scalp Care"
+        ],
+        "about": "Peppermint is a refreshing botanical valued for its naturally cooling and invigorating properties. Its crisp aroma creates a revitalizing wellness experience while supporting scalp and hair care. Traditionally used in aromatherapy and massage, peppermint is ideal for refreshing the scalp and creating a clean, energized feeling during everyday wellness rituals.",
+        "subtitle": "Provides a naturally cooling sensation while refreshing the scalp and supporting healthy-looking hair with an invigorating botanical feel.",
+        "work": "Peppermint provides a refreshing cooling sensation while helping invigorate the scalp and creating a revitalized feeling during hair and wellness care.",
+        "foundIn": [
+            "Keshya Anti-Dandruff Ayurvedic Shampoo Rosemary, Amla, Neem & Aloe Vera",
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Peppermint Essential Oil for Hair & Skin 100% Pure",
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
+        ]
+    },
+    {
+        "word": "Amla (Emblica officinalis)",
+        "image": "",
+        "tags": [
+            "Antioxidant",
+            "Nourishing",
+            "Hair Care"
+        ],
+        "about": "Amla is a revered Ayurvedic fruit traditionally valued for its nourishing and antioxidant-rich properties. It has long been used in Indian hair care to support stronger, healthier-looking hair while nourishing the scalp. Amla is a popular botanical for hair rituals focused on strength, softness, natural shine, and overall hair vitality.",
+        "subtitle": "Rich in antioxidants, Amla nourishes the scalp and supports stronger, healthier-looking hair with natural softness and shine.",
+        "work": "Amla helps nourish the scalp and hair while providing antioxidant support for a stronger, softer, healthy-looking appearance.",
+        "foundIn": [
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+        ]
+    },
+    {
+        "word": "Neem (Azadirachta indica)",
+        "image": "",
+        "tags": [
+            "Purifying",
+            "Scalp Care",
+            "Ayurvedic"
+        ],
+        "about": "Neem is one of Ayurveda's most valued botanicals, traditionally known for its purifying and cleansing properties. It is widely used in skin and scalp care to help maintain a fresh, clean-feeling environment. Neem is a popular ingredient in herbal routines designed to support healthy-looking skin, scalp, and hair.",
+        "subtitle": "Helps purify and refresh the scalp while supporting a clean, balanced, and healthy-looking hair care routine.",
+        "work": "Neem helps cleanse and refresh the scalp while supporting a fresh, balanced feel as part of traditional Ayurvedic care.",
+        "foundIn": [
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+        ]
+    },
+    {
+        "word": "Curry Leaves (Murraya koenigii)",
+        "image": "",
+        "tags": [
+            "Nourishing",
+            "Strengthening",
+            "Hair Care"
+        ],
+        "about": "Curry Leaves are a traditional Ayurvedic botanical valued for their nourishing properties in hair care. Naturally rich in plant compounds, they are commonly used in herbal hair rituals to support stronger, healthier-looking strands. Curry leaves complement nourishing scalp routines focused on softness, manageability, and natural-looking hair vitality.",
+        "subtitle": "Traditionally used to nourish the scalp and hair while supporting stronger, softer, and healthier-looking strands.",
+        "work": "Curry leaves help nourish the scalp and condition the hair, supporting softness, manageability, and a healthy-looking appearance.",
+        "foundIn": [
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+        ]
+    },
+    {
+        "word": "Moringa (Moringa oleifera)",
+        "image": "",
+        "tags": [
+            "Nourishing",
+            "Antioxidant",
+            "Hair Care"
+        ],
+        "about": "Moringa is a nutrient-rich botanical valued for its nourishing and antioxidant properties. Traditionally incorporated into natural hair care, it helps condition the hair while supporting a healthy-looking scalp. Its botanical richness makes it a useful ingredient for routines focused on nourishment, softness, manageability, and naturally vibrant-looking hair.",
+        "subtitle": "Nourishes and conditions the hair while providing antioxidant-rich botanical care for a healthy-looking scalp and strands.",
+        "work": "Moringa helps nourish and condition the hair while supporting a healthy-looking scalp and softer, more manageable strands.",
+        "foundIn": [
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi"
+        ]
+    },
+    {
+        "word": "Kalonji / Black Seed (Nigella sativa)",
+        "image": "",
+        "tags": [
+            "Nourishing",
+            "Scalp Care",
+            "Hair Care"
+        ],
+        "about": "Kalonji, also known as Black Seed, is a traditional botanical valued for its nourishing properties. Its oil and seed preparations are commonly used in natural hair care to condition the scalp and support soft, healthy-looking strands. Kalonji is a popular ingredient in herbal hair rituals focused on nourishment, smoothness, and everyday scalp care.",
+        "subtitle": "Nourishes the scalp and conditions the hair while supporting softer, smoother, and healthier-looking strands.",
+        "work": "Kalonji helps nourish and condition the scalp and hair, supporting moisture, softness, and a healthy-looking appearance.",
+        "foundIn": [
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi"
+        ]
+    },
+    {
+        "word": "Sesame (Sesamum indicum)",
+        "image": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Sesame_Ingredient.webp?v=1788822815",
+        "tags": [
+            "Nourishing",
+            "Moisturizing",
+            "Ayurvedic"
+        ],
+        "about": "Sesame is a timeless Ayurvedic ingredient valued for its deeply nourishing and moisturizing properties. Rich in natural fatty acids, sesame oil helps condition dry skin, scalp, and hair while supporting moisture retention. Traditionally used in massage and hair rituals, it is ideal for daily nourishment and maintaining soft, healthy-looking skin and hair.",
+        "subtitle": "Deeply nourishes and moisturizes skin, scalp, and hair while supporting softness, smoothness, and traditional Ayurvedic care.",
+        "work": "Sesame oil helps replenish moisture and nourish the skin and hair, leaving them feeling softer, smoother, and conditioned.",
+        "foundIn": [
+            "Tila Taila Cold Pressed Sesame Oil for Hair & Skin",
+            "Sanjeevani Hair Mask Amla, Bhringraj, Neem & Aloe Vera",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+            "Navya Baby Massage Oil Almond & Sandalwood Oil",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil",
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
+        ]
+    },
+    {
+        "word": "Shea Butter (Butyrospermum parkii)",
+        "image": "",
+        "tags": [
+            "Moisturizing",
+            "Nourishing",
+            "Skin Care"
+        ],
+        "about": "Shea Butter is a rich botanical ingredient valued for its deeply moisturizing and conditioning properties. It helps soften dry skin while supporting the skin's natural moisture barrier. Its creamy texture makes it ideal for nourishing daily body and baby skincare routines focused on softness, comfort, and lasting hydration.",
+        "subtitle": "Deeply moisturizes and softens dry skin while supporting the skin's natural moisture barrier for lasting comfort.",
+        "work": "Shea Butter helps replenish and retain moisture, leaving dry skin feeling softer, smoother, supple, and nourished.",
+        "foundIn": [
+            "Sugandha Body Lotion Vanilla & Shea Butter",
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+            "Lavanya Baby Body Lotion Saffron & Shea butter",
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter"
+        ]
+    },
+    {
+        "word": "Vanilla (Vanilla planifolia)",
+        "image": "",
+        "tags": [
+            "Aromatic",
+            "Soothing",
+            "Skin Care"
+        ],
+        "about": "Vanilla is a naturally aromatic botanical valued for its warm, comforting character. In skincare, vanilla preparations add a gentle sensory experience while complementing nourishing and moisturizing formulations. Its soft fragrance makes it especially suited to relaxing daily body care rituals designed to leave skin feeling smooth, comfortable, and beautifully cared for.",
+        "subtitle": "Adds a warm, comforting botanical aroma while complementing nourishing daily care for soft, smooth, healthy-looking skin.",
+        "work": "Vanilla contributes a warm natural aroma and a comforting sensory experience to nourishing body care routines.",
+        "foundIn": [
+            "Sugandha Body Lotion Vanilla & Shea Butter"
+        ]
+    },
+    {
+        "word": "Vetiver (Vetiveria zizanioides)",
+        "image": "",
+        "tags": [
+            "Cooling",
+            "Refreshing",
+            "Soothing"
+        ],
+        "about": "Vetiver is a traditional Ayurvedic botanical valued for its naturally cooling, refreshing, and soothing properties. Its root and distilled preparations are widely used in skin and wellness care to provide a calm, refreshed feel. Vetiver is especially suited to routines focused on comfort, hydration, and gentle botanical nourishment.",
+        "subtitle": "Naturally cools and refreshes the skin while supporting hydration, comfort, and a calm healthy-looking appearance.",
+        "work": "Vetiver helps provide a cooling and refreshing feel while supporting comfortable, hydrated, healthy-looking skin.",
+        "foundIn": [
+            "Shuddhi Face Wash Khus, Aloe Vera, Mulethi & Kesar",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+            "Lavanya Baby Body Lotion Saffron & Shea butter",
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
+            "Navya Baby Massage Oil Almond & Sandalwood Oil",
+            "Soumya Baby Body Wash Aloe Vera & Grapefruit"
+        ]
+    },
+    {
+        "word": "Saffron / Kesar (Crocus sativus)",
+        "image": "",
+        "tags": [
+            "Antioxidant",
+            "Radiance",
+            "Ayurvedic"
+        ],
+        "about": "Saffron, traditionally known as Kesar, is a prized Ayurvedic botanical valued for its antioxidant-rich properties. It is widely used in traditional beauty rituals to support a naturally radiant-looking complexion. Its luxurious botanical character makes it a popular ingredient in skincare designed around nourishment, glow, and refreshed-looking skin.",
+        "subtitle": "Rich in antioxidants, Saffron supports naturally radiant-looking skin while adding a luxurious touch to Ayurvedic beauty rituals.",
+        "work": "Saffron provides antioxidant-rich botanical care that complements routines focused on nourishment and a radiant-looking complexion.",
+        "foundIn": [
+            "Shuddhi Face Wash Khus, Aloe Vera, Mulethi & Kesar",
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi",
+            "Lavanya Baby Body Lotion Saffron & Shea butter"
+        ]
+    },
+    {
+        "word": "Rice (Oryza sativa)",
+        "image": "",
+        "tags": [
+            "Gentle",
+            "Smoothing",
+            "Skin Care"
+        ],
+        "about": "Rice is a gentle botanical ingredient traditionally incorporated into natural skincare routines. Rice-derived preparations are valued for their softening and smoothing character and can complement cleansing formulations designed to leave skin feeling fresh and comfortable. Its mild botanical profile makes it suitable for everyday skincare rituals.",
+        "subtitle": "Provides gentle botanical care that supports a smoother, softer, and refreshed-looking complexion during daily cleansing.",
+        "work": "Rice-derived ingredients help provide a gentle, softening feel while complementing daily cleansing and skin care routines.",
+        "foundIn": [
+            "Shuddhi Face Wash Khus, Aloe Vera, Mulethi & Kesar"
+        ]
+    },
+    {
+        "word": "Rose (Rosa centifolia)",
+        "image": "",
+        "tags": [
+            "Soothing",
+            "Refreshing",
+            "Skin Care"
+        ],
+        "about": "Rose is a cherished botanical traditionally valued for its soothing, refreshing, and aromatic properties. Rose flower preparations are commonly used in natural skincare to help leave skin feeling soft, comfortable, and refreshed. Its delicate floral character makes it a natural fit for gentle Ayurvedic-inspired beauty and baby care rituals.",
+        "subtitle": "Helps soothe and refresh the skin while supporting softness and a naturally pleasant botanical feel.",
+        "work": "Rose helps provide a soothing and refreshing feel while complementing gentle skincare routines focused on softness and comfort.",
+        "foundIn": [
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
+            "Tara Baby Powder Rose, Aloe Vera & Sandalwood"
+        ]
+    },
+    {
+        "word": "Rose (Rosa damascena)",
+        "image": "",
+        "tags": [
+            "Soothing",
+            "Aromatic",
+            "Skin Care"
+        ],
+        "about": "Rose Damask is a traditional botanical valued for its gentle, soothing, and naturally aromatic qualities. Rose oil is commonly incorporated into skincare to provide a comforting botanical experience while complementing nourishing formulations. Its delicate floral aroma makes it especially suited to relaxing and gentle self-care rituals.",
+        "subtitle": "Helps soothe and comfort the skin while adding a delicate natural floral aroma to gentle botanical care.",
+        "work": "Rose oil helps provide a soothing sensory experience while complementing nourishing and comforting skincare routines.",
+        "foundIn": [
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter"
+        ]
+    },
+    {
+        "word": "Gulab Jadi / Rose (Rosa indica)",
+        "image": "",
+        "tags": [
+            "Soothing",
+            "Refreshing",
+            "Skin Care"
+        ],
+        "about": "Gulab Jadi, derived from the rose plant, is a traditional botanical valued for its soothing and refreshing properties. Rose preparations are commonly used in natural and Ayurvedic-inspired skincare to provide a fresh, pleasant feel. It complements gentle daily routines focused on maintaining soft, calm, and healthy-looking skin.",
+        "subtitle": "Helps soothe and refresh the skin while supporting a soft, comfortable, and healthy-looking complexion with gentle botanical care.",
+        "work": "Gulab Jadi helps provide a soothing and refreshing feel while supporting softness and a calm-looking complexion.",
+        "foundIn": [
+            "Sheetala Ayurvedic Aloe Vera Gel Pure Aloe",
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
+        ]
+    },
+    {
+        "word": "Sandalwood (Santalum album)",
+        "image": "",
         "tags": [
             "Cooling",
             "Soothing",
-            "Anti-acne"
+            "Skin Care"
         ],
-        "about": "Sandalwood is calm, grounding, and deeply skin-loving. Used in Ayurvedic skincare for soothing and cooling the skin, it helps reduce inflammation, calm sensitivity, and improve skin texture. It is especially beneficial for irritated or acne-prone skin.",
-        "subtitle": "Calms irritation, cools the skin, and improves texture while supporting balanced, clear, and soothed skin.",
-        "work": "Sandalwood cools the skin, reduces redness, and supports a more balanced and even complexion.",
+        "about": "Sandalwood is a revered Ayurvedic botanical traditionally valued for its cooling, soothing, and aromatic properties. Its wood-derived preparations are commonly used in skincare and wellness rituals to provide a calm, refreshed feel. Sandalwood complements gentle routines designed to comfort and nourish the skin.",
+        "subtitle": "Traditionally valued for its cooling and soothing character while supporting a calm, refreshed, healthy-looking complexion.",
+        "work": "Sandalwood helps provide a cooling and comforting feel while complementing gentle Ayurvedic-inspired skin care.",
         "foundIn": [
-            "Maalish Oil"
+            "Tara Baby Powder Rose, Aloe Vera & Sandalwood",
+            "Navya Baby Massage Oil Almond & Sandalwood Oil",
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
         ]
     },
     {
-        "word": "Jasmine",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Jasmine.png?v=1777112016",
+        "word": "Geranium (Pelargonium graveolens)",
+        "image": "",
         "tags": [
-            "Nourishing",
-            "Relaxing",
-            "Elasticity"
+            "Aromatic",
+            "Refreshing",
+            "Skin Care"
         ],
-        "about": "Jasmine brings softness to both your skin and your senses. Used in natural body care for nourishment and relaxation, it helps improve skin elasticity, enhance hydration, and support overall skin health.",
-        "subtitle": "Hydrates, nourishes, and improves skin elasticity while offering a calming aroma that supports relaxation and overall well-being.",
-        "work": "Jasmine helps retain moisture in the skin while its natural aroma supports relaxation and emotional well-being.",
+        "about": "Geranium is a fragrant botanical valued for its fresh floral aroma and gentle botanical character. It is commonly used in natural body and skincare formulations to enhance the sensory experience of daily care. Its floral profile makes it a complementary ingredient for gentle, refreshing wellness and baby care rituals.",
+        "subtitle": "Adds a gentle natural floral aroma while complementing refreshing and comforting botanical skin care routines.",
+        "work": "Geranium contributes a fresh floral aroma and a pleasant botanical sensory experience to gentle skincare.",
         "foundIn": [
-            "Maalish Oil"
+            "Tara Baby Powder Rose, Aloe Vera & Sandalwood"
         ]
     },
     {
-        "word": "Grapeseed",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Grapeseed.png?v=1777112307",
+        "word": "Grapefruit (Citrus paradisi)",
+        "image": "",
+        "tags": [
+            "Refreshing",
+            "Antioxidant",
+            "Skin Care"
+        ],
+        "about": "Grapefruit is a bright, refreshing botanical valued for its naturally uplifting character and antioxidant-rich fruit compounds. Grapefruit extract helps complement gentle cleansing routines while providing a fresh botanical feel. Its light citrus aroma makes it especially suitable for refreshing everyday body care.",
+        "subtitle": "Helps refresh and revitalize the skin while providing antioxidant-rich botanical care and a light citrus freshness.",
+        "work": "Grapefruit extract helps provide a refreshing botanical feel while complementing cleansing and everyday skincare routines.",
+        "foundIn": [
+            "Soumya Baby Body Wash Aloe Vera & Grapefruit"
+        ]
+    },
+    {
+        "word": "Castor (Ricinus communis)",
+        "image": "",
+        "tags": [
+            "Moisturizing",
+            "Conditioning",
+            "Nourishing"
+        ],
+        "about": "Castor is a rich botanical oil traditionally valued for its nourishing, conditioning, and moisturizing properties. Its naturally thick texture helps support moisture retention while conditioning dry skin, scalp, and hair. Castor oil is widely used in Ayurvedic-inspired routines focused on deep nourishment and smooth, healthy-looking hair and skin.",
+        "subtitle": "Deeply nourishes and conditions dry skin, scalp, and hair while helping retain moisture for a softer, smoother feel.",
+        "work": "Castor oil helps condition and support moisture retention, leaving skin and hair feeling nourished, soft, and protected.",
+        "foundIn": [
+            "Castor Cold Pressed Oil for Hair & Skin 100% Pure",
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+        ]
+    },
+    {
+        "word": "Argan (Argania spinosa)",
+        "image": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Argon_Ingredient.webp?v=1788822815",
+        "tags": [
+            "Moisturizing",
+            "Nourishing",
+            "Hair Care"
+        ],
+        "about": "Argan is a nutrient-rich botanical oil valued for its deeply moisturizing and nourishing properties. Rich in naturally occurring fatty acids, argan oil helps soften dry skin while conditioning dry, damaged, and frizzy hair. Its lightweight feel makes it a versatile choice for daily skin, hair, and scalp care.",
+        "subtitle": "Deeply nourishes and moisturizes dry skin while helping condition damaged and frizzy hair for smooth, healthy-looking care.",
+        "work": "Argan oil helps replenish moisture and condition the skin and hair, supporting softness, smoothness, and a healthy-looking appearance.",
+        "foundIn": [
+            "Argan Cold Pressed Oil for Hair & Skin 100% Pure"
+        ]
+    },
+    {
+        "word": "Jojoba (Simmondsia chinensis)",
+        "image": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Jojoba_Ingredient.webp?v=1788822815",
         "tags": [
             "Lightweight",
-            "Anti-ageing",
-            "Barrier Support"
+            "Moisturizing",
+            "Scalp Care"
         ],
-        "about": "Grapeseed is lightweight, fast-absorbing, and quietly effective. Used in skincare for oily, combination, and sensitive skin, it helps moisturise without clogging pores while supporting skin repair and elasticity. It is rich in antioxidants and supports anti-ageing skincare.",
-        "subtitle": "Lightweight oil that hydrates, strengthens the skin barrier, and supports anti-ageing without clogging pores.",
-        "work": "Grapeseed oil absorbs quickly into the skin, delivering hydration and antioxidants that help strengthen the skin barrier.",
+        "about": "Jojoba is a lightweight natural ingredient valued for its moisturizing and conditioning properties. It helps nourish the scalp and hair without a heavy feel while supporting dry, rough, and dehydrated skin. Its versatile nature makes jojoba oil ideal for daily skin, scalp, hair, massage, and self-care rituals.",
+        "subtitle": "Nourishes the scalp and hair without feeling heavy while helping reduce dryness and keeping skin soft and hydrated.",
+        "work": "Jojoba oil helps condition and retain moisture in the skin, scalp, and hair while supporting a soft, smooth, healthy-looking feel.",
         "foundIn": [
-            "Maalish Oil"
+            "Jojoba Cold Pressed Oil for Hair & Skin 100% Pure"
         ]
     },
     {
-        "word": "Ginger",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Ginger.png?v=1777112018",
+        "word": "Lavender (Lavandula angustifolia)",
+        "image": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Lavender_Ingredients.webp?v=1788822815",
+        "tags": [
+            "Calming",
+            "Soothing",
+            "Aromatherapy"
+        ],
+        "about": "Lavender is a beloved botanical valued for its calming, soothing, and aromatic properties. Its gentle nature makes it a popular choice for skin, scalp, and hair care, while its relaxing aroma creates a peaceful atmosphere. Traditionally used in wellness rituals, lavender oil is ideal for massage, bedtime routines, and everyday aromatherapy care.",
+        "subtitle": "Soothes and comforts the skin while supporting scalp and hair care, with a calming aroma ideal for relaxing wellness rituals.",
+        "work": "Lavender oil helps soothe and comfort the skin while its naturally calming aroma supports relaxation during massage and aromatherapy routines.",
+        "foundIn": [
+            "Lavender Essential Oil for Hair & Skin"
+        ]
+    },
+    {
+        "word": "Tea Tree (Melaleuca alternifolia)",
+        "image": "",
+        "tags": [
+            "Purifying",
+            "Refreshing",
+            "Scalp Care"
+        ],
+        "about": "Tea Tree is a refreshing botanical valued for its purifying and cleansing properties. Traditionally used in skin and scalp care, tea tree oil helps keep skin feeling fresh while supporting a clean, healthy-looking appearance. Its invigorating botanical character also makes it suitable for scalp routines focused on freshness and comfort.",
+        "subtitle": "Helps purify and refresh the skin while supporting a clean-looking complexion and a fresh, comfortable scalp.",
+        "work": "Tea Tree oil helps cleanse and refresh the skin and scalp, supporting a fresh, balanced, healthy-looking feel.",
+        "foundIn": [
+            "Tea Tree Essential Oil for Hair & Skin 100% Pure"
+        ]
+    },
+    {
+        "word": "Mustard (Brassica juncea)",
+        "image": "",
+        "tags": [
+            "Nourishing",
+            "Scalp Care",
+            "Ayurvedic"
+        ],
+        "about": "Mustard is a traditional Ayurvedic oil valued for its warming and nourishing character. It is commonly used in scalp and body massage rituals to support a refreshed feeling while conditioning the skin and hair. Its traditional use makes it a distinctive ingredient in herbal hair and wellness care.",
+        "subtitle": "Traditionally used to nourish the scalp and support a warming, invigorating massage experience while conditioning the hair.",
+        "work": "Mustard oil helps nourish and condition the scalp and hair while complementing traditional warming massage rituals.",
+        "foundIn": [
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+        ]
+    },
+    {
+        "word": "Bhringraj (Eclipta prostrata)",
+        "image": "",
+        "tags": [
+            "Hair Care",
+            "Nourishing",
+            "Ayurvedic"
+        ],
+        "about": "Bhringraj is a renowned Ayurvedic botanical traditionally used in herbal hair care. It is valued for its nourishing character and long association with traditional scalp and hair rituals. Bhringraj complements oil-based routines focused on conditioning the scalp, supporting healthy-looking hair, and maintaining softness and resilience.",
+        "subtitle": "A traditional Ayurvedic hair botanical used to nourish the scalp and support soft, strong, healthy-looking hair.",
+        "work": "Bhringraj helps nourish the scalp and condition the hair as part of traditional Ayurvedic hair care rituals.",
+        "foundIn": [
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi"
+        ]
+    },
+    {
+        "word": "Beetroot (Beta vulgaris)",
+        "image": "",
+        "tags": [
+            "Nourishing",
+            "Botanical Care",
+            "Hair Care"
+        ],
+        "about": "Beetroot is a botanical ingredient valued for its naturally rich plant compounds and vibrant character. In herbal hair care, beetroot extract complements nourishing formulations designed to support the appearance of soft, healthy-looking hair. It adds a botanical touch to traditional hair rituals focused on natural-looking vitality and lustre.",
+        "subtitle": "Provides botanical nourishment while complementing hair care routines focused on natural-looking lustre, softness, and vitality.",
+        "work": "Beetroot extract complements nourishing hair care by supporting a healthy-looking appearance and natural-looking lustre.",
+        "foundIn": [
+            "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi"
+        ]
+    },
+    {
+        "word": "Jasmine (Jasminum sambac)",
+        "image": "",
+        "tags": [
+            "Aromatic",
+            "Conditioning",
+            "Hair Care"
+        ],
+        "about": "Jasmine is a fragrant botanical valued for its delicate floral aroma and traditional use in beauty rituals. Jasmine flower oil complements nourishing hair care by providing a pleasant sensory experience while conditioning the hair. Its gentle floral character makes it a natural addition to relaxing Ayurvedic-inspired scalp and hair routines.",
+        "subtitle": "Adds a gentle floral aroma while complementing nourishing hair care and providing a soft, pleasant sensory experience.",
+        "work": "Jasmine flower oil helps condition the hair while adding a delicate natural fragrance to everyday hair care rituals.",
+        "foundIn": [
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+        ]
+    },
+    {
+        "word": "Grape Seed (Vitis vinifera)",
+        "image": "",
+        "tags": [
+            "Lightweight",
+            "Moisturizing",
+            "Skin Care"
+        ],
+        "about": "Grape Seed Oil is a lightweight botanical oil valued for its conditioning and moisturizing properties. It helps hydrate the skin while supporting a smooth feel without a heavy finish. Its lightweight character makes it well suited to gentle baby massage and everyday skincare routines focused on softness and comfort.",
+        "subtitle": "Lightly hydrates and conditions the skin while supporting a smooth, soft feel without leaving a heavy or greasy finish.",
+        "work": "Grape Seed Oil helps moisturize and condition the skin while supporting a smooth, lightweight, comfortable feel.",
+        "foundIn": [
+            "Navya Baby Massage Oil Almond & Sandalwood Oil"
+        ]
+    },
+    {
+        "word": "Raspberry Seed (Rubus idaeus)",
+        "image": "",
+        "tags": [
+            "Nourishing",
+            "Antioxidant",
+            "Hair Care"
+        ],
+        "about": "Raspberry Seed Oil is a botanical oil valued for its essential fatty acids and antioxidant-rich character. It helps nourish and moisturize the scalp and hair while supporting softness and conditioning. Its lightweight botanical profile makes it suitable for gentle hair care designed to maintain comfortable, healthy-looking strands.",
+        "subtitle": "Nourishes and moisturizes the scalp and hair while supporting softness, conditioning, and healthy-looking baby hair.",
+        "work": "Raspberry Seed Oil helps condition and moisturize the scalp and hair while supporting a soft, healthy-looking appearance.",
+        "foundIn": [
+            "Komal baby Shampoo Aloe Vera, Coconut Oil, Licorice & Raspberry Seed"
+        ]
+    },
+    {
+        "word": "Ajwain (Trachyspermum ammi)",
+        "image": "",
+        "tags": [
+            "Ayurvedic",
+            "Warming",
+            "Wellness"
+        ],
+        "about": "Ajwain is a traditional Ayurvedic botanical valued for its warming and aromatic properties. It has long been incorporated into traditional wellness rituals, particularly massage practices. In topical formulations, Ajwain complements gentle abdominal massage by providing a warming botanical character and supporting a comforting sensory experience.",
+        "subtitle": "A traditional Ayurvedic botanical valued for its warming character and comforting role in gentle abdominal massage rituals.",
+        "work": "Ajwain provides a warming botanical character that complements gentle massage and traditional Ayurvedic wellness routines.",
+        "foundIn": [
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
+        ]
+    },
+    {
+        "word": "Fennel (Foeniculum vulgare)",
+        "image": "",
+        "tags": [
+            "Ayurvedic",
+            "Soothing",
+            "Wellness"
+        ],
+        "about": "Fennel is a traditional botanical valued in Ayurveda for its aromatic and comforting properties. Fennel seed preparations have long been used in traditional wellness practices and massage rituals. In topical care, it complements gentle abdominal massage with a naturally warming and soothing botanical character.",
+        "subtitle": "Traditionally valued for its comforting botanical properties and gentle role in Ayurvedic abdominal massage rituals.",
+        "work": "Fennel complements gentle abdominal massage by providing a comforting botanical character within traditional wellness care.",
+        "foundIn": [
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
+        ]
+    },
+    {
+        "word": "Ginger (Zingiber officinale)",
+        "image": "",
         "tags": [
             "Warming",
-            "Pain Relief",
-            "Circulation"
+            "Ayurvedic",
+            "Wellness"
         ],
-        "about": "Ginger brings warmth where your body needs it most. Used in Ayurvedic body care for inflammation and pain relief, it helps reduce stiffness, improve circulation, and support recovery from everyday tension.",
-        "subtitle": "Improves circulation, reduces stiffness, and eases body tension with warming Ayurvedic properties for relaxation and recovery.",
-        "work": "Ginger generates gentle warmth, boosts circulation, and helps the body release built-up tension.",
+        "about": "Ginger is a classic Ayurvedic botanical valued for its naturally warming and invigorating character. Traditionally used in wellness rituals, ginger complements massage formulations designed to provide a comforting sensation. Its warm botanical profile makes it particularly suited to gentle abdominal massage and traditional self-care practices.",
+        "subtitle": "Provides a gentle warming botanical sensation that complements comforting massage and traditional Ayurvedic wellness rituals.",
+        "work": "Ginger provides a gentle warming sensation that complements soothing abdominal massage and traditional wellness routines.",
         "foundIn": [
-            "Calm Balm"
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
         ]
     },
     {
-        "word": "Tea Tree",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Tea_Tree.png?v=1777112008",
+        "word": "Hing / Asafoetida (Ferula asafoetida)",
+        "image": "",
         "tags": [
-            "Anti-bacterial",
-            "Acne Care",
-            "Clarifying"
+            "Ayurvedic",
+            "Traditional",
+            "Wellness"
         ],
-        "about": "Tea tree is clarity in ingredient form. Known for its role in skincare for acne and inflammation, it helps reduce bacteria, calm irritation, and support clearer skin.",
-        "subtitle": "Helps reduce bacteria, calm inflammation, and support clearer skin, especially for acne-prone or reactive areas.",
-        "work": "Tea tree works through its antibacterial and anti-inflammatory properties, helping reduce breakouts and soothe the skin.",
+        "about": "Hing, also known as Asafoetida, is a traditional Ayurvedic botanical valued for its distinctive aromatic character. It has long been used in traditional wellness practices and is included in topical formulations designed around gentle abdominal massage. Its traditional presence adds to the botanical character of Ayurvedic tummy-care rituals.",
+        "subtitle": "A traditional Ayurvedic botanical included in gentle abdominal massage rituals for a comforting wellness experience.",
+        "work": "Hing complements gentle abdominal massage as part of a traditional Ayurvedic botanical wellness routine.",
         "foundIn": [
-            "Calm Balm"
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
         ]
     },
     {
-        "word": "Peppermint",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Peppermint.png?v=1777112009",
+        "word": "Cardamom (Elettaria cardamomum)",
+        "image": "",
         "tags": [
-            "Cooling",
-            "Relaxing",
-            "Stress Relief"
+            "Aromatic",
+            "Ayurvedic",
+            "Skin Care"
         ],
-        "about": "Peppermint feels like a deep breath your body did not know it needed. Used in natural body care for relaxation and stress relief, it cools the skin, refreshes the senses, and helps ease both physical tension and mental fatigue.",
-        "subtitle": "Cools the skin, refreshes the senses, and helps relieve stress while promoting relaxation and better sleep.",
-        "work": "Peppermint stimulates circulation and provides a cooling and warming effect that relaxes muscles and reduces discomfort.",
+        "about": "Cardamom is an aromatic botanical traditionally valued in Ayurvedic wellness and beauty rituals. Its naturally fragrant character complements nourishing skincare formulations while adding a warm, refined botanical note. Cardamom is particularly suited to luxurious self-care routines designed around refreshed, comfortable, healthy-looking skin.",
+        "subtitle": "Adds a warm botanical aroma while complementing nourishing Ayurvedic-inspired skincare and self-care rituals.",
+        "work": "Cardamom contributes an aromatic botanical character to nourishing skincare and traditional wellness routines.",
         "foundIn": [
-            "Calm Balm"
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
         ]
     },
     {
-        "word": "Licorice",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Liquorice.png?v=1777112011",
+        "word": "Ashwagandha (Withania somnifera)",
+        "image": "",
         "tags": [
-            "Brightening",
-            "Pigmentation",
-            "Even Tone"
+            "Ayurvedic",
+            "Nourishing",
+            "Skin Care"
         ],
-        "about": "Licorice works quietly but effectively on uneven skin. Used in skincare for pigmentation and brightening, it helps reduce dark spots, soothe irritation, and improve overall skin tone.",
-        "subtitle": "Brightens skin, reduces pigmentation, and evens tone while soothing irritation and improving overall complexion.",
-        "work": "Licorice helps regulate melanin production and reduce inflammation, leading to brighter and more even skin.",
+        "about": "Ashwagandha is a revered Ayurvedic botanical traditionally valued for its nourishing and restorative character. It is commonly included in traditional wellness and beauty formulations designed to support balanced, healthy-looking skin. Its botanical heritage makes it a natural fit for restorative nighttime skincare rituals.",
+        "subtitle": "A revered Ayurvedic botanical traditionally used in restorative skincare rituals focused on nourishment and healthy-looking skin.",
+        "work": "Ashwagandha complements restorative skincare by providing traditional botanical nourishment within nighttime beauty routines.",
         "foundIn": [
-            "Calm Balm"
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
         ]
     },
     {
-        "word": "Clove",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Clove.png?v=1777112009",
+        "word": "Turmeric / Haridra (Curcuma longa)",
+        "image": "",
         "tags": [
-            "Warming",
-            "Circulation",
-            "Relief"
+            "Antioxidant",
+            "Ayurvedic",
+            "Skin Care"
         ],
-        "about": "Clove brings warmth and relief where your body needs it. Used in Ayurvedic formulations for pain relief and circulation, it helps ease discomfort, reduce inflammation, and support relaxation.",
-        "subtitle": "Provides warming relief, improves circulation, and helps ease muscle stiffness and body discomfort",
-        "work": "Clove stimulates circulation and provides a warming effect that helps reduce stiffness and tension.",
+        "about": "Turmeric, traditionally known as Haridra, is one of Ayurveda's most recognized botanicals. Valued for its antioxidant-rich properties, turmeric has long been used in traditional beauty rituals. Its botanical character complements skincare routines focused on nourishment, refreshed-looking skin, and a naturally radiant appearance.",
+        "subtitle": "A traditional Ayurvedic botanical rich in antioxidants, complementing skincare routines focused on nourishment and natural radiance.",
+        "work": "Turmeric provides antioxidant-rich botanical care that complements nourishing and restorative skincare rituals.",
         "foundIn": [
-            "Calm Balm"
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
         ]
     },
     {
-        "word": "Camphor",
-        "image": "https://cdn.shopify.com/s/files/1/0649/7301/3058/files/Camphor.png?v=1777112306",
+        "word": "Haritaki / Harhad (Terminalia chebula)",
+        "image": "",
         "tags": [
-            "Pain Relief",
-            "Cooling",
-            "Relaxation"
+            "Ayurvedic",
+            "Antioxidant",
+            "Skin Care"
         ],
-        "about": "Camphor gets straight to work when your body needs relief. A staple in Ayurvedic formulations for pain relief, it helps ease stiffness, improve circulation, and soothe tired, tense areas.",
-        "subtitle": "Relieves muscle tension, improves circulation, and provides a cooling-warming effect for quick body relaxation.",
-        "work": "Camphor stimulates blood flow and creates a cooling and warming effect that relaxes muscles and reduces discomfort.",
+        "about": "Haritaki, traditionally known as Harhad, is a respected Ayurvedic botanical valued for its traditional restorative and antioxidant-rich character. It has long been included in herbal wellness and beauty preparations. Its botanical profile complements traditional skincare rituals designed around nourishment and healthy-looking skin.",
+        "subtitle": "A traditional Ayurvedic botanical valued for restorative and antioxidant-rich care in nourishing skincare rituals.",
+        "work": "Haritaki complements traditional skincare formulations with its nourishing botanical character and antioxidant-rich profile.",
         "foundIn": [
-            "Calm Balm"
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
+        ]
+    },
+    {
+        "word": "Arrowroot (Maranta arundinacea)",
+        "image": "",
+        "tags": [
+            "Absorbent",
+            "Gentle",
+            "Baby Care"
+        ],
+        "about": "Arrowroot is a finely milled botanical powder valued for its gentle absorbent properties. It helps manage excess moisture while leaving the skin feeling soft and comfortable. Its mild, powdery character makes it well suited to delicate baby skin and traditional daily care routines.",
+        "subtitle": "Helps absorb excess moisture while keeping delicate skin feeling soft, dry, smooth, and comfortable.",
+        "work": "Arrowroot helps absorb excess surface moisture while supporting a soft, dry, comfortable feel on the skin.",
+        "foundIn": [
+            "Tara Baby Powder Rose, Aloe Vera & Sandalwood"
+        ]
+    },
+    {
+        "word": "Vitamin E (Tocopherol)",
+        "image": "",
+        "tags": [
+            "Antioxidant",
+            "Moisture Support",
+            "Skin Care"
+        ],
+        "about": "Vitamin E is a well-known antioxidant commonly used in skincare to complement nourishing formulations. It helps support the skin's natural moisture barrier and maintain a soft, conditioned feel. Its protective antioxidant character makes it a useful addition to daily skin care designed around moisture and healthy-looking skin.",
+        "subtitle": "Provides antioxidant support while helping maintain skin softness, moisture, and a healthy-looking protective barrier.",
+        "work": "Vitamin E provides antioxidant support while complementing moisturizing skincare routines focused on softness and moisture retention.",
+        "foundIn": [
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E"
+        ]
+    },
+    {
+        "word": "Kumkumadi Tailam",
+        "image": "",
+        "tags": [
+            "Ayurvedic",
+            "Radiance",
+            "Nourishing"
+        ],
+        "about": "Kumkumadi Tailam is a traditional Ayurvedic oil formulation associated with nourishing and complexion-care rituals. It is used in traditional beauty practices to support soft, smooth, radiant-looking skin. Its rich botanical character makes it especially suited to restorative skincare routines focused on nourishment and natural-looking luminosity.",
+        "subtitle": "A traditional Ayurvedic oil blend used to nourish the skin and support a soft, smooth, naturally radiant-looking complexion.",
+        "work": "Kumkumadi Tailam complements nourishing skincare rituals by supporting softness, smoothness, and a naturally luminous appearance.",
+        "foundIn": [
+            "Sugandha Body Lotion Vanilla & Shea Butter",
+            "Lavanya Baby Body Lotion Saffron & Shea butter",
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
         ]
     }
 ]
