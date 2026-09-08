@@ -78,7 +78,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     ? new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: price.currencyCode || "INR",
-      maximumFractionDigits: 0,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     }).format(parseFloat(price.amount))
     : null;
 

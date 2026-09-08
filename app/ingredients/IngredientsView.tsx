@@ -90,8 +90,12 @@ function formatPrice(amount?: string, currencyCode: string = "INR") {
   if (!amount) return null;
   const num = parseFloat(amount);
   if (isNaN(num)) return null;
-  const symbol = currencyCode === "INR" ? "₹" : currencyCode + " ";
-  return `${symbol}${num.toLocaleString("en-IN")}`;
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: currencyCode || "INR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(num);
 }
 
 interface IngredientsViewProps {
@@ -322,8 +326,8 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
                     type="button"
                     onClick={() => scrollToLetter(letter)}
                     className={`min-w-[28px] sm:min-w-[32px] py-1 px-1.5 text-xs sm:text-sm font-semibold transition-all rounded text-center ${isActive
-                        ? "text-black font-bold underline underline-offset-4 decoration-2 decoration-black"
-                        : "text-[#666666] hover:text-black hover:bg-black/[0.04]"
+                      ? "text-black font-bold underline underline-offset-4 decoration-2 decoration-black"
+                      : "text-[#666666] hover:text-black hover:bg-black/[0.04]"
                       }`}
                     aria-label={`Jump to letter ${letter}`}
                   >
@@ -425,7 +429,7 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
                                 const { common, latin } = parseBotanicalName(ing.word);
                                 return (
                                   <>
-                                    <h2 className="font-display text-lg sm:text-xl font-normal text-black truncate tracking-wide">
+                                    <h2 className="font-display text-lg sm:text-lg font-normal text-black truncate tracking-wide">
                                       {common}
                                     </h2>
                                     {latin && (
