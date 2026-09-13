@@ -50,6 +50,7 @@ export default async function RootLayout({
     <html
       lang="en"
       className={`${openSans.variable} ${aboreto.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla's
           cz-shortcut-listen) inject attributes onto <body> before React

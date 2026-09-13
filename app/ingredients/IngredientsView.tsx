@@ -105,51 +105,24 @@ interface IngredientsViewProps {
 
 export function IngredientsView({ ingredients, products = [] }: IngredientsViewProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedTag, setSelectedTag] = useState<string>("ALL");
   const [activeLetter, setActiveLetter] = useState<string>("");
   const [activeModalIngredient, setActiveModalIngredient] = useState<Ingredient | null>(null);
 
-  // Extract all unique tags
-  const allTags = useMemo(() => {
-    const set = new Set<string>();
-    ingredients.forEach((item) => {
-      item.tags?.forEach((t) => {
-        const trimmed = t.trim();
-        if (trimmed) set.add(trimmed);
-      });
-    });
-    return Array.from(set).sort();
-  }, [ingredients]);
-
-  // Filter ingredients by tag and search query
+  // Filter ingredients by search query
   const filteredIngredients = useMemo(() => {
+    if (!searchQuery.trim()) return ingredients;
+    const q = searchQuery.toLowerCase().trim();
     return ingredients.filter((item) => {
-      // 1. Tag filter
-      if (selectedTag !== "ALL") {
-        const hasTag = item.tags?.some(
-          (t) => t.trim().toLowerCase() === selectedTag.toLowerCase()
-        );
-        if (!hasTag) return false;
-      }
+      const matchesName = item.word.toLowerCase().includes(q);
+      const matchesSubtitle = item.subtitle?.toLowerCase().includes(q);
+      const matchesAbout = item.about?.toLowerCase().includes(q);
+      const matchesWork = item.work?.toLowerCase().includes(q);
+      const matchesTags = item.tags?.some((t) => t.toLowerCase().includes(q));
+      const matchesFoundIn = item.foundIn?.some((p) => p.toLowerCase().includes(q));
 
-      // 2. Search query
-      if (searchQuery.trim() !== "") {
-        const q = searchQuery.toLowerCase().trim();
-        const matchesName = item.word.toLowerCase().includes(q);
-        const matchesSubtitle = item.subtitle?.toLowerCase().includes(q);
-        const matchesAbout = item.about?.toLowerCase().includes(q);
-        const matchesWork = item.work?.toLowerCase().includes(q);
-        const matchesTags = item.tags?.some((t) => t.toLowerCase().includes(q));
-        const matchesFoundIn = item.foundIn?.some((p) => p.toLowerCase().includes(q));
-
-        if (!matchesName && !matchesSubtitle && !matchesAbout && !matchesWork && !matchesTags && !matchesFoundIn) {
-          return false;
-        }
-      }
-
-      return true;
+      return matchesName || matchesSubtitle || matchesAbout || matchesWork || matchesTags || matchesFoundIn;
     });
-  }, [ingredients, selectedTag, searchQuery]);
+  }, [ingredients, searchQuery]);
 
   // Alphabetically sorted and grouped ingredients by initial letter of common name
   const { groupedIngredients, availableLetters } = useMemo(() => {
@@ -220,10 +193,9 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
 
   const clearAllFilters = () => {
     setSearchQuery("");
-    setSelectedTag("ALL");
   };
 
-  const hasActiveFilters = searchQuery !== "" || selectedTag !== "ALL";
+  const hasActiveFilters = searchQuery.trim() !== "";
 
   return (
     <div className="w-full bg-white text-black min-h-screen">
@@ -285,38 +257,11 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
         </div>
       </section>
 
-      {/* ── 2. Filter Bar & Alphabetical Index ────────────────────────────── */}
+      {/* ── 2. Alphabetical Index Quick Jump Bar ─────────────────────────── */}
       <section className="sticky top-0 z-20 border-b border-[#e5e5e5] bg-white/95 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
-          {/* Benefit Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide py-1">
-            <button
-              type="button"
-              onClick={() => setSelectedTag("ALL")}
-              className={`flex-shrink-0 rounded-full px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider transition-colors ${selectedTag === "ALL"
-                ? "bg-black text-white"
-                : "border border-[#e0e0e0] bg-white text-[#555555] hover:border-black hover:text-black"
-                }`}
-            >
-              All Formulations ({ingredients.length})
-            </button>
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                type="button"
-                onClick={() => setSelectedTag(tag === selectedTag ? "ALL" : tag)}
-                className={`flex-shrink-0 rounded-full px-3.5 py-1.5 text-[11px] sm:text-xs font-medium uppercase tracking-wider transition-colors ${selectedTag === tag
-                  ? "bg-black text-white"
-                  : "border border-[#e0e0e0] bg-white text-[#666666] hover:border-black hover:text-black"
-                  }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-
+        <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 lg:px-8">
           {/* A-Z Quick Jump Bar (Centered, only existing letters, no "Index:" word) */}
-          <div className="relative mt-2.5 flex items-center justify-center border-t border-[#f0f0f0] pt-2.5">
+          <div className="relative flex items-center justify-center">
             <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-2">
               {availableLetters.map((letter) => {
                 const isActive = activeLetter === letter;
@@ -343,7 +288,7 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
                 onClick={clearAllFilters}
                 className="hidden md:inline-block absolute right-0 text-[11px] font-semibold uppercase tracking-wider text-[#777777] hover:text-black transition-colors"
               >
-                Reset Filters
+                Reset Search
               </button>
             )}
           </div>
@@ -355,7 +300,7 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
                 onClick={clearAllFilters}
                 className="text-[11px] font-semibold uppercase tracking-wider text-[#777777] hover:text-black transition-colors"
               >
-                Reset Filters
+                Reset Search
               </button>
             </div>
           )}
@@ -440,17 +385,6 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
                                   </>
                                 );
                               })()}
-                              {/* Tags */}
-                              <div className="mt-2 flex flex-wrap gap-1.5">
-                                {ing.tags?.map((t) => (
-                                  <span
-                                    key={t}
-                                    className="rounded-full bg-[#f4f4f4] px-2.5 py-0.5 text-[10px] font-semibold text-[#444444] uppercase tracking-wider"
-                                  >
-                                    {t.trim()}
-                                  </span>
-                                ))}
-                              </div>
                             </div>
                           </div>
 

@@ -4,57 +4,78 @@ import Link from "next/link";
 import { useState, useMemo } from "react";
 import { ProductCard } from "./ProductCard";
 import type { ShopifyProduct } from "../lib/shopify/types";
+import { getIngredientsForProduct, parseBotanicalName } from "../lib/productIngredients";
 
-// Common Ayurvedic ingredients dictionary to auto-tag / filter products
-const KNOWN_INGREDIENTS = [
-  "AMLA",
-  "ANAGAIN",
-  "BAKUCHIOL",
-  "BALA",
-  "BANANA PULP",
-  "BASIL LEAF EXTRACT",
-  "BETAINE",
-  "BHRINGRAJ",
-  "BRAHMI",
-  "COCONUT",
-  "HIBISCUS",
-  "JAPAPATTI",
-  "KASTURI MANJAL",
-  "KUMKUMADI",
-  "METHI",
-  "NEEM",
-  "ONION SEED",
-  "RATANJOT",
-  "ROSE",
-  "SAFFRON",
-  "SANDALWOOD",
-  "SHIKAKAI",
-  "TEA TREE",
-];
-
-// Common Ayurvedic concerns dictionary to auto-tag / filter products
-const KNOWN_CONCERNS = [
-  "DANDRUFF",
-  "HAIR FALL",
-  "DULL HAIR",
-  "HAIR THINNING",
-  "DRY HAIR",
-  "CHEMICALLY TREATED",
-  "FRIZZ CONTROL",
-  "SPLIT ENDS",
-  "GREYING",
-  "DAMAGE REPAIR",
-  "HYDRATION",
-  "PIGMENTATION",
-  "ANTI-AGING",
-  "GLOW & BRIGHTENING",
-];
 
 export interface CollectionCatalogProps {
   collectionTitle: string;
   collectionHandle?: string;
   collectionDescription?: string;
   products: ShopifyProduct[];
+}
+
+/**
+ * Extracts authentic ingredients for a product:
+ * 1. Checks Shopify metafields (custom.ingredient or custom.ingredients)
+ * 2. Falls back to curated botanical ingredients matched by product title
+ */
+function getProductIngredients(p: ShopifyProduct): string[] {
+  // 1. Check Shopify metafields
+  const mf = p.metafields?.find(
+    (m) => m && m.namespace === "custom" && (m.key === "ingredient" || m.key === "ingredients")
+  );
+  if (mf?.value) {
+    try {
+      const parsed = JSON.parse(mf.value);
+      if (Array.isArray(parsed)) {
+        return parsed.map((s) => String(s).trim().toUpperCase()).filter(Boolean);
+      }
+      if (typeof parsed === "string") {
+        return [parsed.trim().toUpperCase()];
+      }
+    } catch {
+      return mf.value
+        .split(",")
+        .map((s) => s.trim().toUpperCase())
+        .filter(Boolean);
+    }
+  }
+
+  // 2. Fall back to authentic botanical ingredients mapped to this product
+  const botanicalIngredients = getIngredientsForProduct(p.title);
+  if (botanicalIngredients && botanicalIngredients.length > 0) {
+    return botanicalIngredients.map((ing) => {
+      const { common } = parseBotanicalName(ing.word);
+      return common.toUpperCase();
+    });
+  }
+
+  return [];
+}
+
+/**
+ * Extracts authentic concerns for a product from custom.concern metafield
+ */
+function getProductConcerns(p: ShopifyProduct): string[] {
+  const mf = p.metafields?.find(
+    (m) => m && m.namespace === "custom" && m.key === "concern"
+  );
+  if (!mf?.value) return [];
+  try {
+    const parsed = JSON.parse(mf.value);
+    if (Array.isArray(parsed)) {
+      return parsed.map((s) => String(s).trim().toUpperCase()).filter(Boolean);
+    }
+    if (typeof parsed === "string") {
+      return [parsed.trim().toUpperCase()];
+    }
+  } catch {
+    return mf.value
+      .split(",")
+      .map((s) => s.trim().toUpperCase())
+      .filter(Boolean);
+  }
+  return [];
 }
 
 export function CollectionCatalog({
@@ -65,7 +86,6 @@ export function CollectionCatalog({
   const [selectedProductType, setSelectedProductType] = useState<string>("ALL");
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [selectedConcerns, setSelectedConcerns] = useState<string[]>([]);
-  const [selectedPriceRanges, setSelectedPriceRanges] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState<string>("bestseller");
   const [gridColumns, setGridColumns] = useState<2 | 3 | 4>(4);
 
@@ -77,7 +97,6 @@ export function CollectionCatalog({
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     ingredient: true,
     concern: true,
-    price: true,
   });
 
   const toggleSection = (section: string) => {
@@ -123,52 +142,27 @@ export function CollectionCatalog({
       ];
   }, [products]);
 
-  // ── 2. Extract available ingredients for filter sidebar ───────────────────
+  // ── 2. Extract available ingredients ──────────────────────────────────────
   const availableIngredients = useMemo(() => {
     const counts: { [key: string]: number } = {};
-
-    KNOWN_INGREDIENTS.forEach((ing) => {
-      let count = 0;
-      products.forEach((p) => {
-        const text = `${p.title} ${p.description} ${p.tags?.join(" ")}`.toUpperCase();
-        if (text.includes(ing)) {
-          count++;
-        }
+    products.forEach((p) => {
+      const items = getProductIngredients(p);
+      items.forEach((item) => {
+        counts[item] = (counts[item] || 0) + 1;
       });
-      if (count > 0) {
-        counts[ing] = count;
-      }
     });
-
-    // If counts are small, provide at least top relevant list
-    if (Object.keys(counts).length === 0) {
-      return KNOWN_INGREDIENTS.slice(0, 8).map((ing) => ({ name: ing, count: 1 }));
-    }
-
     return Object.entries(counts).map(([name, count]) => ({ name, count }));
   }, [products]);
 
-  // ── 3. Extract available concerns for filter sidebar ──────────────────────
+  // ── 3. Extract available concerns ─────────────────────────────────────────
   const availableConcerns = useMemo(() => {
     const counts: { [key: string]: number } = {};
-
-    KNOWN_CONCERNS.forEach((concern) => {
-      let count = 0;
-      products.forEach((p) => {
-        const text = `${p.title} ${p.description} ${p.tags?.join(" ")}`.toUpperCase();
-        if (text.includes(concern)) {
-          count++;
-        }
+    products.forEach((p) => {
+      const items = getProductConcerns(p);
+      items.forEach((item) => {
+        counts[item] = (counts[item] || 0) + 1;
       });
-      if (count > 0) {
-        counts[concern] = count;
-      }
     });
-
-    if (Object.keys(counts).length === 0) {
-      return KNOWN_CONCERNS.slice(0, 6).map((c) => ({ name: c, count: 1 }));
-    }
-
     return Object.entries(counts).map(([name, count]) => ({ name, count }));
   }, [products]);
 
@@ -185,24 +179,16 @@ export function CollectionCatalog({
     );
   };
 
-  const togglePriceRange = (range: string) => {
-    setSelectedPriceRanges((prev) =>
-      prev.includes(range) ? prev.filter((r) => r !== range) : [...prev, range]
-    );
-  };
-
   const clearAllFilters = () => {
     setSelectedProductType("ALL");
     setSelectedIngredients([]);
     setSelectedConcerns([]);
-    setSelectedPriceRanges([]);
   };
 
   const totalActiveFilters =
     (selectedProductType !== "ALL" ? 1 : 0) +
     selectedIngredients.length +
-    selectedConcerns.length +
-    selectedPriceRanges.length;
+    selectedConcerns.length;
 
   // ── Filter & Sort Execution ───────────────────────────────────────────────
   const filteredProducts = useMemo(() => {
@@ -216,33 +202,19 @@ export function CollectionCatalog({
       });
     }
 
-    // 2. Ingredients filter (OR inside category)
+    // 2. Ingredients filter
     if (selectedIngredients.length > 0) {
       result = result.filter((p) => {
-        const text = `${p.title} ${p.description} ${p.tags?.join(" ")}`.toUpperCase();
-        return selectedIngredients.some((ing) => text.includes(ing));
+        const items = getProductIngredients(p);
+        return selectedIngredients.some((ing) => items.includes(ing));
       });
     }
 
     // 3. Concerns filter
     if (selectedConcerns.length > 0) {
       result = result.filter((p) => {
-        const text = `${p.title} ${p.description} ${p.tags?.join(" ")}`.toUpperCase();
-        return selectedConcerns.some((c) => text.includes(c));
-      });
-    }
-
-    // 4. Price range filter
-    if (selectedPriceRanges.length > 0) {
-      result = result.filter((p) => {
-        const amount = parseFloat(p.priceRange?.minVariantPrice?.amount || "0");
-        return selectedPriceRanges.some((range) => {
-          if (range === "under-1000") return amount < 1000;
-          if (range === "1000-2000") return amount >= 1000 && amount <= 2000;
-          if (range === "2000-3000") return amount > 2000 && amount <= 3000;
-          if (range === "above-3000") return amount > 3000;
-          return true;
-        });
+        const items = getProductConcerns(p);
+        return selectedConcerns.some((c) => items.includes(c));
       });
     }
 
@@ -265,7 +237,6 @@ export function CollectionCatalog({
     selectedProductType,
     selectedIngredients,
     selectedConcerns,
-    selectedPriceRanges,
     sortBy,
   ]);
 
@@ -542,56 +513,6 @@ export function CollectionCatalog({
                 )}
               </div>
 
-              {/* 3. PRICE RANGE Accordion */}
-              <div className="border-b border-[#e5e5e5] pb-5">
-                <button
-                  type="button"
-                  onClick={() => toggleSection("price")}
-                  className="flex w-full items-center justify-between py-1 text-left text-xs font-bold uppercase tracking-wider text-black"
-                >
-                  <span>PRICE</span>
-                  <svg
-                    className={`h-3.5 w-3.5 transition-transform ${openSections.price ? "rotate-180" : ""}`}
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-
-                {openSections.price && (
-                  <div className="mt-3 space-y-2.5">
-                    {[
-                      { id: "under-1000", label: "Under ₹1,000" },
-                      { id: "1000-2000", label: "₹1,000 - ₹2,000" },
-                      { id: "2000-3000", label: "₹2,000 - ₹3,000" },
-                      { id: "above-3000", label: "Above ₹3,000" },
-                    ].map((p) => {
-                      const isChecked = selectedPriceRanges.includes(p.id);
-                      return (
-                        <label
-                          key={p.id}
-                          className="flex items-center gap-2.5 cursor-pointer text-xs text-[#333333] hover:text-black group"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={isChecked}
-                            onChange={() => togglePriceRange(p.id)}
-                            className="h-3.5 w-3.5 rounded-none border-gray-300 text-black focus:ring-0 cursor-pointer"
-                          />
-                          <span className={`font-medium ${isChecked ? "font-bold text-black" : ""}`}>
-                            {p.label}
-                          </span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
             </div>
           </aside>
 
@@ -738,33 +659,6 @@ export function CollectionCatalog({
                 </div>
               </div>
 
-              {/* Price */}
-              <div className="border-t border-gray-100 pt-4">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-black mb-2.5">
-                  Price
-                </h4>
-                <div className="space-y-2">
-                  {[
-                    { id: "under-1000", label: "Under ₹1,000" },
-                    { id: "1000-2000", label: "₹1,000 - ₹2,000" },
-                    { id: "2000-3000", label: "₹2,000 - ₹3,000" },
-                    { id: "above-3000", label: "Above ₹3,000" },
-                  ].map((p) => {
-                    const isChecked = selectedPriceRanges.includes(p.id);
-                    return (
-                      <label key={p.id} className="flex items-center gap-2 text-xs text-gray-800">
-                        <input
-                          type="checkbox"
-                          checked={isChecked}
-                          onChange={() => togglePriceRange(p.id)}
-                          className="h-4 w-4 rounded border-gray-300 text-black focus:ring-0"
-                        />
-                        <span>{p.label}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
             </div>
 
             {/* Drawer Footer */}
@@ -840,3 +734,4 @@ export function CollectionCatalog({
     </div>
   );
 }
+

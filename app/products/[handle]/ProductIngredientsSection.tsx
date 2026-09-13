@@ -116,7 +116,7 @@ export function ProductIngredientsSection({
                     const { common, latin } = parseBotanicalName(ing.word);
                     return (
                       <>
-                        <h3 className="font-display text-lg sm:text-xl font-normal text-black truncate tracking-wide uppercase">
+                        <h3 className="font-display text-lg sm:text-lg font-normal text-black truncate tracking-wide uppercase">
                           {common}
                         </h3>
                         {latin && (
@@ -127,17 +127,7 @@ export function ProductIngredientsSection({
                       </>
                     );
                   })()}
-                  {/* Tags */}
-                  <div className="mt-2 flex flex-wrap gap-1.5">
-                    {ing.tags?.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full bg-[#f4f4f4] px-2.5 py-0.5 text-[10px] font-semibold text-[#444444] uppercase tracking-wider"
-                      >
-                        {t.trim()}
-                      </span>
-                    ))}
-                  </div>
+
                 </div>
               </div>
 

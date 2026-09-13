@@ -77,7 +77,9 @@ const productFragment = `
       { namespace: "custom", key: "how_to_use" },
       { namespace: "custom", key: "faqs" },
       { namespace: "custom", key: "safety_information" },
-      { namespace: "custom", key: "additional_information" }
+      { namespace: "custom", key: "additional_information" },
+      { namespace: "custom", key: "concern" },
+      { namespace: "custom", key: "ingredient" }
     ]) {
       id
       namespace
