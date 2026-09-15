@@ -84,7 +84,7 @@ export function ProductIngredientsSection({
   }
 
   return (
-    <section className="mt-16 sm:mt-24 pt-12 sm:pt-16 px-4 sm:px-0">
+    <section className="mt-16 sm:mt-24 border-t border-[#e5e5e5] pt-12 sm:pt-16 px-4 sm:px-0">
       <div className="mb-8 sm:mb-10 text-left">
         <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-[#666666]">
           What&apos;s Inside
@@ -140,7 +140,7 @@ export function ProductIngredientsSection({
             </div>
 
             {/* Footer: Learn More Modal Button */}
-            <div className="mt-6 pt-4">
+            <div className="mt-6 border-t border-[#f0f0f0] pt-4">
               <button
                 type="button"
                 onClick={() => setActiveModalIngredient(ing)}
@@ -254,7 +254,7 @@ export function ProductIngredientsSection({
               </div>
 
               {/* ── Right Column: Formulated In / Interactive Products (5 cols on md+) ── */}
-              <div className="md:col-span-5 pt-4 sm:pt-5 md:pt-0 md:pl-6 lg:pl-8 flex flex-col">
+              <div className="md:col-span-5 border-t border-[#eeeeee] md:border-t-0 md:border-l md:border-[#f0f0f0] pt-4 sm:pt-5 md:pt-0 md:pl-6 lg:pl-8 flex flex-col">
                 <div className="mb-3">
                   <div className="flex items-center gap-2">
                     <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black">

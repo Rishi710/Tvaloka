@@ -193,7 +193,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
              manage its own full-bleed band + padding, matching the home page) ── */}
       <BestSellers
         excludeProductId={product.id}
-        className="mt-16 sm:mt-24"
+        className="mt-16 border-t border-[#e5e5e5] sm:mt-24"
       />
     </main>
   );

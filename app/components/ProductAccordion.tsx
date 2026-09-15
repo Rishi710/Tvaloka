@@ -330,11 +330,11 @@ export function ProductAccordion({
   }
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 border-t border-[#e5e5e5]">
       {sections.map((section) => {
         const isOpen = openSectionId === section.id;
         return (
-          <div key={section.id}>
+          <div key={section.id} className="border-b border-[#e5e5e5]">
             <button
               type="button"
               onClick={() => toggleSection(section.id)}
