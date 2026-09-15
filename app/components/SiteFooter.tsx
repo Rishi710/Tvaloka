@@ -8,7 +8,7 @@ import {
 } from "./icons";
 
 const shopLinks = [
-  { label: "Facial Care", href: "/face" },
+  { label: "Face Care", href: "/face" },
   { label: "Bath & Body Care", href: "/bath-body" },
   { label: "Hair Care", href: "/hair" },
   // { label: "Men's Care", href: "/men" },
@@ -20,11 +20,11 @@ const shopLinks = [
 const aboutLinks = [
   { label: "Our Philosophy", href: "/philosophy" },
   { label: "Social Responsibility", href: "/social-responsibility" },
-  { label: "Media & Press", href: "/press" },
+  { label: "Shipping Policy", href: "/shipping-policy" },
+  { label: "Return Policy", href: "/return-policy" },
   { label: "Policies", href: "/policies" },
   { label: "Terms", href: "/terms" },
   { label: "FAQs", href: "/faqs" },
-  { label: "Wellness Circle FAQs", href: "/circle/faqs" },
   // { label: "Stores", href: "/stores" },
   // { label: "Careers", href: "/careers", badge: "We're hiring" },
 ];
