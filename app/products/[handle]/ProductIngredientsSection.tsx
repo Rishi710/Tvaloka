@@ -84,7 +84,7 @@ export function ProductIngredientsSection({
   }
 
   return (
-    <section className="mt-16 sm:mt-24 border-t border-[#e5e5e5] pt-12 sm:pt-16 px-4 sm:px-0">
+    <section className="mt-16 sm:mt-24 pt-12 sm:pt-16 px-4 sm:px-0">
       <div className="mb-8 sm:mb-10 text-left">
         <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-[#666666]">
           What&apos;s Inside
@@ -94,12 +94,14 @@ export function ProductIngredientsSection({
         </h2>
       </div>
 
-      {/* Exact Same Cards Grid as /ingredients */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+      {/* Mobile: smooth horizontal scroll-snap rail. sm and up: same grid as
+          /ingredients (unchanged — laptop view already reads well). */}
+      <div className="scrollbar-hide -mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 sm:snap-none lg:grid-cols-3 xl:grid-cols-3">
         {ingredients.map((ing) => (
           <div
             key={ing.word}
-            className="group flex flex-col justify-between rounded-xl border border-[#eeeeee] bg-white p-6 shadow-sm transition-all duration-300 hover:border-black/30 hover:shadow-md"
+            data-ingredient-card
+            className="group flex w-[82%] shrink-0 snap-start flex-col justify-between rounded-xl border border-[#eeeeee] bg-white p-6 shadow-sm transition-all duration-300 hover:border-black/30 hover:shadow-md sm:w-auto sm:shrink"
           >
             <div>
               {/* Image & Header */}
@@ -138,7 +140,7 @@ export function ProductIngredientsSection({
             </div>
 
             {/* Footer: Learn More Modal Button */}
-            <div className="mt-6 border-t border-[#f0f0f0] pt-4">
+            <div className="mt-6 pt-4">
               <button
                 type="button"
                 onClick={() => setActiveModalIngredient(ing)}
@@ -252,7 +254,7 @@ export function ProductIngredientsSection({
               </div>
 
               {/* ── Right Column: Formulated In / Interactive Products (5 cols on md+) ── */}
-              <div className="md:col-span-5 border-t border-[#eeeeee] md:border-t-0 md:border-l md:border-[#f0f0f0] pt-4 sm:pt-5 md:pt-0 md:pl-6 lg:pl-8 flex flex-col">
+              <div className="md:col-span-5 pt-4 sm:pt-5 md:pt-0 md:pl-6 lg:pl-8 flex flex-col">
                 <div className="mb-3">
                   <div className="flex items-center gap-2">
                     <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black">
