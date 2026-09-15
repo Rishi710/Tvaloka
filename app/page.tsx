@@ -1,5 +1,5 @@
 import { HeroSlider } from "./components/HeroSlider";
-import { FeaturedProducts } from "./components/FeaturedProducts";
+import { BestSellers } from "./components/BestSellers";
 import { RitualSpotlight } from "./components/RitualSpotlight";
 import { TrustedTales } from "./components/TrustedTales";
 import { LatestReads } from "./components/LatestReads";
@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
       <HeroSlider />
-      <FeaturedProducts />
       <RitualSpotlight />
+      <BestSellers />
       <TrustedTales />
       <LatestReads />
     </main>

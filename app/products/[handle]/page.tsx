@@ -7,6 +7,7 @@ import ProductGallery from "./ProductGallery";
 import { ProductAccordion } from "../../components/ProductAccordion";
 import { ProductActions } from "./ProductActions";
 import { ProductIngredientsSection } from "./ProductIngredientsSection";
+import { BestSellers } from "../../components/BestSellers";
 import { getIngredientsForProduct } from "../../lib/productIngredients";
 import type { ShopifyProduct } from "../../lib/shopify/types";
 
@@ -132,7 +133,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               ? product.collections[0]
               : null) ? (
               <Link
-                href={`/collections/${product.collections![0].handle}`}
+                href={`/${product.collections![0].handle}`}
                 className="text-xs font-semibold tracking-widest text-tertiary uppercase hover:text-primary transition-colors"
               >
                 {product.collections![0].title}
@@ -187,6 +188,13 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           products={allProducts}
         />
       </div>
+
+      {/* ── Best Sellers (outside the max-w-7xl/px wrapper above so it can
+             manage its own full-bleed band + padding, matching the home page) ── */}
+      <BestSellers
+        excludeProductId={product.id}
+        className="mt-16 border-t border-[#e5e5e5] sm:mt-24"
+      />
     </main>
   );
 }

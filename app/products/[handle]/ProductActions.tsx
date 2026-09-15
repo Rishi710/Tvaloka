@@ -60,6 +60,10 @@ export function ProductActions({ product }: ProductActionsProps) {
   const isAvailable =
     product.availableForSale && (selectedVariant?.availableForSale ?? true);
 
+  // custom.size — a plain label (e.g. "200 ML"), not a set of options to pick
+  // between, so it's a static value display rather than another picker.
+  const sizeValue = product.metafields?.find((m) => m.key === "size")?.value;
+
   const handleAddToCart = () => {
     if (!isAvailable || !selectedVariant) return;
     setAdding(true);
@@ -98,34 +102,47 @@ export function ProductActions({ product }: ProductActionsProps) {
         </div>
       )}
 
-      {/* Quantity Stepper (Just above Add to Cart button) */}
-      <div>
-        <label className="block text-xs font-semibold uppercase tracking-wider text-primary mb-2">
-          Quantity
-        </label>
-        <div className="inline-flex items-center rounded border border-[#dddddd] bg-white">
-          <button
-            type="button"
-            onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-            disabled={quantity <= 1 || !isAvailable}
-            className="flex h-10 w-10 items-center justify-center text-primary transition-colors hover:bg-[#f5f5f5] disabled:opacity-30 disabled:cursor-not-allowed focus-visible:outline-none"
-            aria-label="Decrease quantity"
-          >
-            <MinusIcon className="h-3.5 w-3.5" />
-          </button>
-          <span className="w-12 text-center text-sm font-semibold text-primary select-none">
-            {quantity}
-          </span>
-          <button
-            type="button"
-            onClick={() => setQuantity((q) => q + 1)}
-            disabled={!isAvailable}
-            className="flex h-10 w-10 items-center justify-center text-primary transition-colors hover:bg-[#f5f5f5] disabled:opacity-30 disabled:cursor-not-allowed focus-visible:outline-none"
-            aria-label="Increase quantity"
-          >
-            <PlusIcon className="h-3.5 w-3.5" />
-          </button>
+      {/* Quantity Stepper + Size (custom.size metafield), side by side */}
+      <div className="flex flex-wrap items-start gap-6">
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-primary mb-2">
+            Quantity
+          </label>
+          <div className="inline-flex items-center rounded border border-[#dddddd] bg-white">
+            <button
+              type="button"
+              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+              disabled={quantity <= 1 || !isAvailable}
+              className="flex h-10 w-10 items-center justify-center text-primary transition-colors hover:bg-[#f5f5f5] disabled:opacity-30 disabled:cursor-not-allowed focus-visible:outline-none"
+              aria-label="Decrease quantity"
+            >
+              <MinusIcon className="h-3.5 w-3.5" />
+            </button>
+            <span className="w-12 text-center text-sm font-semibold text-primary select-none">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              onClick={() => setQuantity((q) => q + 1)}
+              disabled={!isAvailable}
+              className="flex h-10 w-10 items-center justify-center text-primary transition-colors hover:bg-[#f5f5f5] disabled:opacity-30 disabled:cursor-not-allowed focus-visible:outline-none"
+              aria-label="Increase quantity"
+            >
+              <PlusIcon className="h-3.5 w-3.5" />
+            </button>
+          </div>
         </div>
+
+        {sizeValue && (
+          <div>
+            <label className="block text-xs font-semibold uppercase tracking-wider text-primary mb-2">
+              Size
+            </label>
+            <div className="flex h-10 items-center rounded border border-[#dddddd] bg-white px-4 text-sm font-semibold text-primary">
+              {sizeValue}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Add to Cart Action Button */}

@@ -85,8 +85,8 @@ function FooterColumn({
 export function SiteFooter() {
   return (
     <footer className="bg-surface-muted">
-      <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-7)]">
-        <div className="grid grid-cols-2 gap-x-[var(--space-4)] gap-y-[var(--space-7)] sm:gap-x-[var(--space-6)] lg:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)]">
+        <div className="grid grid-cols-2 gap-x-[var(--space-4)] gap-y-[var(--space-6)] sm:gap-x-[var(--space-6)] lg:grid-cols-4 lg:gap-y-[var(--space-7)]">
           <FooterColumn title="Shop" links={shopLinks} />
           <FooterColumn title="About" links={aboutLinks} />
           <FooterColumn title="Quick Links" links={quickLinks} />

@@ -26,7 +26,7 @@ const defaultSlides: Slide[] = [
     copy: "Cold-pressed Ayurvedic oils and serums, crafted for daily ritual.",
     ctaLabel: "Shop Face & Body",
     href: "/face-care",
-    bgClassName: "bg-surface-base",
+    bgClassName: "bg-[radial-gradient(circle_at_30%_20%,_#1a1a1a,_#000000_60%)]",
     image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_5610.png?v=1788871512",
     alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
   },
@@ -168,7 +168,7 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
       role="region"
       aria-roledescription="carousel"
       aria-label="Featured collections"
-      className="relative overflow-hidden bg-surface-base"
+      className="relative overflow-hidden bg-action-onlight-bg"
       onMouseEnter={() => setIsInteracting(true)}
       onMouseLeave={() => setIsInteracting(false)}
       onFocus={() => setIsInteracting(true)}
@@ -233,7 +233,7 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
       <button
         type="button"
         onClick={goPrev}
-        className={`absolute top-1/2 left-[var(--space-4)] hidden sm:flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-xs)] bg-surface-base/40 text-ondark hover:bg-surface-base/70 ${focusRing}`}
+        className={`absolute top-1/2 left-[var(--space-4)] hidden sm:flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-xs)] bg-action-onlight-bg/40 text-action-onlight-text hover:bg-action-onlight-bg/70 ${focusRing}`}
         aria-label="Previous slide"
       >
         <ChevronLeftIcon className="h-6 w-6" />
@@ -241,7 +241,7 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
       <button
         type="button"
         onClick={goNext}
-        className={`absolute top-1/2 right-[var(--space-4)] hidden sm:flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-xs)] bg-surface-base/40 text-ondark hover:bg-surface-base/70 ${focusRing}`}
+        className={`absolute top-1/2 right-[var(--space-4)] hidden sm:flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-[var(--radius-xs)] bg-action-onlight-bg/40 text-action-onlight-text hover:bg-action-onlight-bg/70 ${focusRing}`}
         aria-label="Next slide"
       >
         <ChevronRightIcon className="h-6 w-6" />

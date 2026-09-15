@@ -58,7 +58,7 @@ export default function ContactPage() {
           aria-hidden="true"
           className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,.82),rgba(0,0,0,.5)_55%,rgba(0,0,0,.18))]"
         />
-        <div className="relative mx-auto max-w-7xl w-full px-[var(--space-4)] py-[var(--space-7)]">
+        <div className="relative mx-auto max-w-7xl w-full px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)]">
           <p className="text-xs font-semibold tracking-[0.3em] text-ondark uppercase">
             We are here to help
           </p>
@@ -74,7 +74,7 @@ export default function ContactPage() {
 
 
       <section className="bg-surface-muted">
-        <div className="mx-auto grid max-w-7xl gap-[var(--space-7)] px-[var(--space-4)] py-[var(--space-7)] lg:grid-cols-2">
+        <div className="mx-auto grid max-w-7xl gap-[var(--space-6)] px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)] lg:py-[var(--space-7)]">
           <div>
             <h2 className="font-display text-md text-primary">Get in touch</h2>
             <p className="mt-[var(--space-3)] max-w-md text-sm text-tertiary">

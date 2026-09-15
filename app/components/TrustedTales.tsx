@@ -132,7 +132,7 @@ export function TrustedTales() {
 
   return (
     <section className="bg-surface-muted">
-      <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-7)]">
+      <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)]">
         <h2 className="font-display text-lg text-primary sm:text-xl">Trusted Tales</h2>
         <p className="mt-[var(--space-2)] max-w-2xl text-sm text-tertiary">
           Experience Ayurveda, share your story. Be part of the{" "}
@@ -186,7 +186,7 @@ export function TrustedTales() {
                 <div className="mt-[var(--space-3)] flex gap-[var(--space-2)]">
                   <span
                     aria-hidden="true"
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-base text-[10px] font-semibold text-ondark"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-action-onlight-bg text-[10px] font-semibold text-action-onlight-text"
                   >
                     {story.productName.charAt(0)}
                   </span>
@@ -211,7 +211,7 @@ export function TrustedTales() {
             onClick={() => scrollByCard(-1)}
             disabled={!canScrollPrev}
             aria-label="Scroll to previous stories"
-            className={`absolute top-1/2 left-[calc(var(--space-2)*-1)] hidden h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-surface-base text-ondark shadow-md disabled:pointer-events-none disabled:opacity-30 sm:flex ${focusRingOnLight}`}
+            className={`absolute top-1/2 left-[calc(var(--space-2)*-1)] hidden h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-action-onlight-bg text-action-onlight-text shadow-md disabled:pointer-events-none disabled:opacity-30 sm:flex ${focusRingOnLight}`}
           >
             <ChevronLeftIcon className="h-5 w-5" />
           </button>
@@ -220,7 +220,7 @@ export function TrustedTales() {
             onClick={() => scrollByCard(1)}
             disabled={!canScrollNext}
             aria-label="Scroll to more stories"
-            className={`absolute top-1/2 right-[calc(var(--space-2)*-1)] hidden h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-surface-base text-ondark shadow-md disabled:pointer-events-none disabled:opacity-30 sm:flex ${focusRingOnLight}`}
+            className={`absolute top-1/2 right-[calc(var(--space-2)*-1)] hidden h-11 w-11 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full bg-action-onlight-bg text-action-onlight-text shadow-md disabled:pointer-events-none disabled:opacity-30 sm:flex ${focusRingOnLight}`}
           >
             <ChevronRightIcon className="h-5 w-5" />
           </button>

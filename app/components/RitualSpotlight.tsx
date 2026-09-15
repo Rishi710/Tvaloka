@@ -40,7 +40,7 @@ export function RitualSpotlight() {
 
   return (
     <section className="bg-surface-muted">
-      <div className="mx-auto grid max-w-7xl items-center gap-[var(--space-6)] px-[var(--space-4)] py-[var(--space-7)] md:grid-cols-2 md:gap-[var(--space-7)]">
+      <div className="mx-auto grid max-w-7xl items-center gap-[var(--space-6)] px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] md:grid-cols-2 md:gap-[var(--space-7)] lg:py-[var(--space-7)]">
         <div>
           <h2 className="font-display text-lg text-primary sm:text-xl">Bhringraj Hair Ritual</h2>
           <p className="mt-[var(--space-4)] max-w-md text-sm text-tertiary">
@@ -94,7 +94,7 @@ export function RitualSpotlight() {
             <button
               type="button"
               onClick={toggleMute}
-              className={`flex h-9 w-9 items-center justify-center rounded-[var(--radius-xs)] bg-surface-base/60 text-ondark hover:bg-surface-base/80 ${focusRingOnDark}`}
+              className={`flex h-9 w-9 items-center justify-center rounded-[var(--radius-xs)] bg-action-onlight-bg/60 text-action-onlight-text hover:bg-action-onlight-bg/80 ${focusRingOnDark}`}
               aria-label={isMuted ? "Unmute video" : "Mute video"}
             >
               {isMuted ? <MuteIcon className="h-4 w-4" /> : <VolumeIcon className="h-4 w-4" />}
@@ -102,7 +102,7 @@ export function RitualSpotlight() {
             <button
               type="button"
               onClick={goFullscreen}
-              className={`flex h-9 w-9 items-center justify-center rounded-[var(--radius-xs)] bg-surface-base/60 text-ondark hover:bg-surface-base/80 ${focusRingOnDark}`}
+              className={`flex h-9 w-9 items-center justify-center rounded-[var(--radius-xs)] bg-action-onlight-bg/60 text-action-onlight-text hover:bg-action-onlight-bg/80 ${focusRingOnDark}`}
               aria-label="View fullscreen"
             >
               <ExpandIcon className="h-4 w-4" />

@@ -243,7 +243,7 @@ export default function AboutUsPage() {
                 controls
                 playsInline
                 preload="metadata"
-                className="aspect-video w-full rounded-[var(--radius-xs)] bg-surface-base object-cover"
+                className="aspect-video w-full rounded-[var(--radius-xs)] bg-action-onlight-bg object-cover"
               />
             ) : (
               <>

@@ -36,7 +36,7 @@ export default async function BlogsPage() {
           aria-hidden="true"
           className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,.4),rgba(0,0,0,.5)_55%,rgba(0,0,0,.5)]"
         />
-        <div className="relative mx-auto max-w-7xl w-full px-[var(--space-4)] py-[var(--space-7)] text-center sm:text-left">
+        <div className="relative mx-auto max-w-7xl w-full px-[var(--space-4)] py-[var(--space-5)] text-center sm:py-[var(--space-6)] sm:text-left lg:py-[var(--space-7)]">
           <p className="text-xs font-semibold tracking-[0.3em] text-ondark uppercase">
             TVALOKA JOURNAL
           </p>
