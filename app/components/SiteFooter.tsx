@@ -8,13 +8,15 @@ import {
 } from "./icons";
 
 const shopLinks = [
-  { label: "Face Care", href: "/face" },
-  { label: "Bath & Body Care", href: "/bath-body" },
-  { label: "Hair Care", href: "/hair" },
+  { label: "Best Seller", href: "/best-sellers" },
+  { label: "New Launch", href: "/new-launches" },
+  { label: "Face Care", href: "/face-care" },
+  { label: "Bath & Body Care", href: "/bath-body-care" },
+  { label: "Hair Care", href: "/hair-care" },
   // { label: "Men's Care", href: "/men" },
   { label: "Baby Care", href: "/baby-care" },
-  { label: "Wellness", href: "/wellness" },
-  { label: "Gifting", href: "/gifting" },
+  { label: "Wellness", href: "/wellness-care" },
+  // { label: "Gifting", href: "/gifting" },
 ];
 
 const aboutLinks = [
