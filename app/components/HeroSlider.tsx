@@ -17,6 +17,8 @@ export type Slide = {
   alt: string;
   /** Which part of the photo to keep when it is cropped to the banner box. */
   objectPositionClassName?: string;
+  /** Optional dedicated portrait crop shown below `sm`, in place of `image`. */
+  mobileImage?: string;
 };
 
 const defaultSlides: Slide[] = [
@@ -29,6 +31,8 @@ const defaultSlides: Slide[] = [
     bgClassName: "bg-[radial-gradient(circle_at_30%_20%,_#1a1a1a,_#000000_60%)]",
     image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_5610.png?v=1788871512",
     alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
+    mobileImage:
+      "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Tvaloka_Phone_V_Banner_jpg.webp?v=1789495868",
   },
   {
     eyebrow: "New In",
@@ -177,7 +181,7 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
       onTouchEnd={onTouchEnd}
       onKeyDown={onKeyDown}
     >
-      <div className="relative h-[440px] sm:h-[500px] lg:h-[580px]">
+      <div className="relative h-[520px] sm:h-[500px] lg:h-[580px]">
         {activeSlides.map((slide, slideIndex) => {
           const isActive = slideIndex === index;
           return (
@@ -191,14 +195,35 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
               className={`absolute inset-0 flex items-center transition-opacity duration-[var(--motion-fast)] ease-out ${slide.bgClassName
                 } ${isActive ? "opacity-100" : "pointer-events-none opacity-0"}`}
             >
-              <Image
-                src={slide.image}
-                alt={slide.alt}
-                fill
-                sizes="100vw"
-                priority={slideIndex === 0}
-                className={`object-cover ${slide.objectPositionClassName ?? ""}`}
-              />
+              {slide.mobileImage ? (
+                <>
+                  <Image
+                    src={slide.mobileImage}
+                    alt={slide.alt}
+                    fill
+                    sizes="100vw"
+                    priority={slideIndex === 0}
+                    className="object-cover sm:hidden"
+                  />
+                  <Image
+                    src={slide.image}
+                    alt={slide.alt}
+                    fill
+                    sizes="100vw"
+                    priority={slideIndex === 0}
+                    className={`hidden object-cover sm:block ${slide.objectPositionClassName ?? ""}`}
+                  />
+                </>
+              ) : (
+                <Image
+                  src={slide.image}
+                  alt={slide.alt}
+                  fill
+                  sizes="100vw"
+                  priority={slideIndex === 0}
+                  className={`object-cover ${slide.objectPositionClassName ?? ""}`}
+                />
+              )}
               <div aria-hidden="true" className={`absolute inset-0 ${scrim}`} />
 
               <div className="relative mx-auto w-full max-w-7xl px-6 sm:px-14 lg:px-16">
