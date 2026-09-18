@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CartIcon, CloseIcon, MenuIcon, SearchIcon } from "./icons";
 import { useCart } from "./CartContext";
+import { SmartSearch } from "./SmartSearch";
 
 export interface NavItem {
   label: string;
@@ -42,7 +43,6 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
 
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const searchToggleRef = useRef<HTMLButtonElement>(null);
   const drawerTitleId = useId();
 
@@ -88,10 +88,6 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
     };
   }, [isMenuOpen]);
 
-  useEffect(() => {
-    if (isSearchOpen) searchInputRef.current?.focus();
-  }, [isSearchOpen]);
-
   function closeSearch() {
     setIsSearchOpen(false);
     searchToggleRef.current?.focus();
@@ -100,56 +96,19 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
   return (
     <header className="bg-surface-muted">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-[var(--space-4)] px-[var(--space-4)] py-[var(--space-3)]">
-        {/* Left utility */}
+        {/* Left utility — search trigger */}
         <div className="flex flex-1 items-center gap-[var(--space-4)]">
-          {isSearchOpen ? (
-            <form
-              role="search"
-              className="flex items-center gap-[var(--space-2)]"
-              onSubmit={(event) => event.preventDefault()}
-            >
-              <SearchIcon className="h-5 w-5 shrink-0 text-primary" />
-              <label htmlFor="site-search" className="sr-only">
-                Search products
-              </label>
-              <input
-                id="site-search"
-                ref={searchInputRef}
-                type="search"
-                placeholder="Search products"
-                className={`w-40 bg-transparent py-[var(--space-1)] text-sm text-primary placeholder:text-tertiary focus-visible:border-b-2 focus-visible:border-black focus-visible:outline-none sm:w-56`}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") closeSearch();
-                }}
-              />
-              <button
-                type="button"
-                ref={searchToggleRef}
-                onClick={closeSearch}
-                className={`p-[var(--space-1)] text-primary ${focusRing}`}
-                aria-label="Close search"
-              >
-                <CloseIcon className="h-5 w-5" />
-              </button>
-            </form>
-          ) : (
-            <button
-              type="button"
-              ref={searchToggleRef}
-              onClick={() => setIsSearchOpen(true)}
-              className={`flex h-11 w-11 items-center justify-center text-primary ${focusRing}`}
-              aria-label="Search products"
-              aria-expanded={isSearchOpen}
-            >
-              <SearchIcon className="h-5 w-5" />
-            </button>
-          )}
-          {/* <Link
-            href="/stores"
-            className={`hidden text-xs font-semibold tracking-wide text-primary underline-offset-4 hover:underline sm:inline ${focusRing}`}
+          <button
+            type="button"
+            ref={searchToggleRef}
+            onClick={() => setIsSearchOpen(true)}
+            className={`flex h-11 w-11 items-center justify-center text-primary ${focusRing}`}
+            aria-label="Search products"
+            aria-expanded={isSearchOpen}
+            aria-haspopup="dialog"
           >
-            Stores
-          </Link> */}
+            <SearchIcon className="h-5 w-5" />
+          </button>
         </div>
 
         {/* Wordmark */}
@@ -167,18 +126,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
 
         {/* Right utility */}
         <div className="flex flex-1 items-center justify-end gap-[var(--space-4)]">
-          <Link
-            href="/account"
-            className={`hidden text-xs font-semibold tracking-wide text-primary underline-offset-4 hover:underline md:inline ${focusRing}`}
-          >
-            Account
-          </Link>
-          <Link
-            href="/circle"
-            className={`hidden text-xs font-semibold tracking-wide text-primary underline-offset-4 hover:underline md:inline ${focusRing}`}
-          >
-            Wellness Circle
-          </Link>
+
           <button
             type="button"
             onClick={openCart}
@@ -219,7 +167,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
                 <Link
                   href={category.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`inline-block px-[var(--space-4)] py-[var(--space-3)] text-xs font-semibold tracking-wide whitespace-nowrap focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-black ${isActive
+                  className={`inline-block px-[var(--space-4)] py-[var(--space-3)] text-xs font-normal uppercase tracking-wide whitespace-nowrap focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-black ${isActive
                     ? "bg-action-onlight-bg text-action-onlight-text"
                     : "text-primary hover:bg-black/[.04]"
                     }`}
@@ -281,25 +229,13 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
                 })}
               </ul>
             </nav>
-            <div className="flex flex-col gap-[var(--space-3)] px-[var(--space-4)] py-[var(--space-4)]">
-              <Link
-                href="/account"
-                onClick={() => setIsMenuOpen(false)}
-                className={`text-sm font-semibold text-primary ${focusRing}`}
-              >
-                Account
-              </Link>
-              <Link
-                href="/circle"
-                onClick={() => setIsMenuOpen(false)}
-                className={`text-sm font-semibold text-primary ${focusRing}`}
-              >
-                Wellness Circle
-              </Link>
-            </div>
+
           </div>
         </div>
       ) : null}
+
+      {/* Smart search overlay */}
+      {isSearchOpen && <SmartSearch onClose={closeSearch} />}
     </header>
   );
 }
