@@ -1,7 +1,4 @@
-import Link from "next/link";
-import { getCollectionProducts } from "../lib/shopify/queries/collection";
-import type { ShopifyProduct } from "../lib/shopify/types";
-import { BestSellersRail } from "./BestSellersRail";
+import { CollectionShowcase } from "./CollectionShowcase";
 
 // The store's real "Best Sellers" collection (verified handle: best-sellers).
 const BEST_SELLERS_COLLECTION_HANDLE = "best-sellers";
@@ -12,51 +9,14 @@ interface BestSellersProps {
   className?: string;
 }
 
-export async function BestSellers({ excludeProductId, className = "" }: BestSellersProps) {
-  let products: ShopifyProduct[] = [];
-  try {
-    products = await getCollectionProducts({
-      collectionHandle: BEST_SELLERS_COLLECTION_HANDLE,
-      first: 24,
-    });
-  } catch (error) {
-    console.error("Failed to load best sellers from Shopify:", error);
-  }
-
-  if (excludeProductId) {
-    products = products.filter((p) => p.id !== excludeProductId);
-  }
-
-  if (!products || products.length === 0) {
-    return null; // Don't render if the collection is empty or the fetch failed.
-  }
-
+export function BestSellers({ excludeProductId, className }: BestSellersProps) {
   return (
-    <section
-      className={`bg-white py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)] ${className}`}
-    >
-      <div className="mx-auto max-w-7xl px-[var(--space-4)]">
-        <div className="flex items-end justify-between pb-[var(--space-4)]">
-          <div>
-            <p className="text-xs font-semibold tracking-[0.25em] text-secondary uppercase">
-              Customer Favourites
-            </p>
-            <h2 className="font-display mt-1 text-lg text-primary sm:text-xl">
-              Best Sellers
-            </h2>
-          </div>
-          <Link
-            href={`/${BEST_SELLERS_COLLECTION_HANDLE}`}
-            className="text-sm font-medium text-black"
-          >
-            View All <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-
-        <div className="mt-[var(--space-6)]">
-          <BestSellersRail products={products} />
-        </div>
-      </div>
-    </section>
+    <CollectionShowcase
+      collectionHandle={BEST_SELLERS_COLLECTION_HANDLE}
+      eyebrow="Customer Favourites"
+      title="Best Sellers"
+      excludeProductId={excludeProductId}
+      className={className}
+    />
   );
 }

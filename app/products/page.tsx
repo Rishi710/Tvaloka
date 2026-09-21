@@ -3,14 +3,19 @@ import { getProducts } from "../lib/shopify/queries/product";
 import { ShopifyProduct } from "../lib/shopify/types";
 import { CollectionCatalog } from "../components/CollectionCatalog";
 
-export const revalidate = 60; // ISR: revalidate every 60 seconds
-
 export const metadata: Metadata = {
   title: "All Formulations | Tvaloka Ayurvedic Luxury",
   description: "Explore our complete range of authentic, handcrafted Ayurvedic luxury formulations.",
 };
 
-export default async function ProductsPage() {
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { concern } = await searchParams;
+  const selectedConcern = (Array.isArray(concern) ? concern[0] : concern)?.trim() ?? "";
+
   let products: ShopifyProduct[] = [];
   try {
     products = await getProducts({ first: 100 });
@@ -37,9 +42,11 @@ export default async function ProductsPage() {
 
       {/* ── Interactive Catalog ───────────────────────────────────────────── */}
       <CollectionCatalog
+        key={selectedConcern}
         collectionTitle="All Products"
         collectionHandle="all"
         products={products}
+        initialConcerns={selectedConcern ? [selectedConcern.toUpperCase()] : []}
       />
     </main>
   );

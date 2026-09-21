@@ -75,6 +75,15 @@ body {
   font-family: var(--font-open-sans), Arial, Helvetica, sans-serif;
 }
 
+/* The browser's own clear (x) button on type="search" inputs duplicates the
+   custom clear/close controls, so hide it everywhere. */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
 /* For touch/pointer-swipeable strips (e.g. the horizontal scroller in
    TrustedTales) where scroll-snap + on-screen prev/next controls are
    the intended affordance, not the native scrollbar. */

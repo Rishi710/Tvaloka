@@ -12,6 +12,8 @@ export interface CollectionCatalogProps {
   collectionHandle?: string;
   collectionDescription?: string;
   products: ShopifyProduct[];
+  /** Concern filters to start with (uppercase, as the catalog stores them). */
+  initialConcerns?: string[];
 }
 
 /**
@@ -81,11 +83,12 @@ function getProductConcerns(p: ShopifyProduct): string[] {
 export function CollectionCatalog({
   collectionTitle,
   products,
+  initialConcerns = [],
 }: CollectionCatalogProps) {
   // ── States ───────────────────────────────────────────────────────────────
   const [selectedProductType, setSelectedProductType] = useState<string>("ALL");
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
-  const [selectedConcerns, setSelectedConcerns] = useState<string[]>([]);
+  const [selectedConcerns, setSelectedConcerns] = useState<string[]>(initialConcerns);
   const [sortBy, setSortBy] = useState<string>("bestseller");
   const [gridColumns, setGridColumns] = useState<2 | 3 | 4>(4);
 
@@ -241,7 +244,7 @@ export function CollectionCatalog({
   ]);
 
   return (
-    <div className="w-full bg-white text-black min-h-screen">
+    <div className="w-full bg-white text-black min-h-screen pb-20">
       {/* ─────────────────────────────────────────────────────────────────── */}
       {/* 1. Subcategory / Product Type Pill Carousel (Image 2)             */}
       {/* ─────────────────────────────────────────────────────────────────── */}

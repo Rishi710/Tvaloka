@@ -132,7 +132,7 @@ export function TrustedTales() {
 
   return (
     <section className="bg-surface-muted">
-      <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)]">
+      <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-2)] sm:py-[var(--space-6)] lg:py-[var(--space-6)]">
         <h2 className="font-display text-lg text-primary sm:text-xl">Trusted Tales</h2>
         <p className="mt-[var(--space-2)] max-w-2xl text-sm text-tertiary">
           Experience Ayurveda, share your story. Be part of the{" "}
