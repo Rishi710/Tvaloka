@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BackToTopButton } from "./BackToTopButton";
+import { SubscribeForm } from "./SubscribeForm";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -15,13 +16,12 @@ const shopLinks = [
   { label: "Hair Care", href: "/hair-care" },
   // { label: "Men's Care", href: "/men" },
   { label: "Baby Care", href: "/baby-care" },
-  { label: "Wellness", href: "/wellness-care" },
   // { label: "Gifting", href: "/gifting" },
 ];
 
 const aboutLinks = [
-  { label: "Our Philosophy", href: "/philosophy" },
-  { label: "Social Responsibility", href: "/social-responsibility" },
+  { label: "Our Philosophy", href: "/about-us" },
+  // { label: "Social Responsibility", href: "/about-us" },
   { label: "Shipping Policy", href: "/shipping-policy" },
   { label: "Return Policy", href: "/return-policy" },
   { label: "Policies", href: "/policies" },
@@ -32,13 +32,14 @@ const aboutLinks = [
 ];
 
 const quickLinks = [
+  { label: "Wellness", href: "/wellness-care" },
   { label: "My Account", href: "/account" },
   // { label: "Wellness Circle Sign In", href: "/circle/sign-in" },
   { label: "Current Offers", href: "/" },
-  { label: "Customised Skincare", href: "/customised-skincare" },
+  // { label: "Customised Skincare", href: "/customised-skincare" },
   { label: "Blog", href: "/blog" },
   { label: "My Order(s)", href: "/account/orders" },
-  { label: "Track My Order", href: "/track-order" },
+  // { label: "Track My Order", href: "/track-order" },
   { label: "Our Ingredients", href: "/ingredients" },
 ];
 
@@ -87,6 +88,45 @@ function FooterColumn({
 export function SiteFooter() {
   return (
     <footer className="bg-surface-muted">
+      <section
+        aria-labelledby="footer-subscribe-heading"
+        className="bg-action-onlight-bg"
+      >
+        <div className="mx-auto grid max-w-7xl items-center gap-[var(--space-5)] px-[var(--space-4)] py-[var(--space-6)] sm:gap-[var(--space-6)] sm:py-[var(--space-6)] lg:grid-cols-[1.1fr_1fr] lg:gap-[var(--space-6)] lg:py-[var(--space-7)] xl:gap-[var(--space-7)]">
+          <div>
+            <p className="text-xs font-semibold tracking-[0.3em] text-ondark-secondary uppercase">
+              Newsletter
+            </p>
+            <h2
+              id="footer-subscribe-heading"
+              className="font-display mt-[var(--space-2)] text-lg text-ondark sm:text-xl"
+            >
+              Subscribe to Tvaloka
+            </h2>
+            <p className="mt-[var(--space-3)] max-w-md text-sm text-ondark-secondary">
+              Ayurvedic rituals, new launches and early access to offers, delivered to your inbox.
+            </p>
+            <ul className="mt-[var(--space-4)] flex flex-wrap gap-x-[var(--space-5)] gap-y-[var(--space-2)] text-xs text-ondark">
+              {["Ayurvedic rituals", "New launches", "Early access"].map((benefit) => (
+                <li key={benefit} className="flex items-center gap-[var(--space-1)]">
+                  <svg viewBox="0 0 20 20" fill="none" className="h-4 w-4" aria-hidden="true">
+                    <path
+                      d="M4.5 10.5l3.5 3.5 7.5-8"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {benefit}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <SubscribeForm />
+        </div>
+      </section>
+
       <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)]">
         <div className="grid grid-cols-2 gap-x-[var(--space-4)] gap-y-[var(--space-6)] sm:gap-x-[var(--space-6)] lg:grid-cols-4 lg:gap-y-[var(--space-7)]">
           <FooterColumn title="Shop" links={shopLinks} />

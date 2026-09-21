@@ -200,7 +200,7 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
   return (
     <div className="w-full bg-white text-black min-h-screen">
       {/* ── 1. Hero Section with Responsive Background Image ─────────────── */}
-      <section className="relative flex min-h-[380px] sm:min-h-[440px] lg:min-h-[500px] items-center justify-center overflow-hidden bg-[#111111] py-14 sm:py-20 lg:py-24">
+      <section className="relative flex min-h-[400px] sm:min-h-[440px] lg:min-h-[500px] items-center justify-center overflow-hidden bg-[#111111] py-14 sm:py-20 lg:py-24">
         {/* Background Image */}
         <Image
           src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Ingredient_jpg.jpg?v=1788647916"
@@ -208,7 +208,7 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-right"
         />
 
         {/* Scrim Overlay for Contrast & Readability across all devices */}
@@ -218,16 +218,16 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
         />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <p className="text-[11px] sm:text-xs font-semibold tracking-[0.35em] text-white/90 uppercase">
+          {/* <p className="text-[11px] sm:text-xs font-semibold tracking-[0.35em] text-white/90 uppercase">
             Pure Botanical Glossary
-          </p>
+          </p> */}
           <h1 className="font-display mt-3 text-3xl font-normal text-white sm:text-5xl lg:text-6xl tracking-wide">
             Our Sacred Ingredients
           </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-xs sm:text-sm leading-relaxed text-white/85">
+          {/* <p className="mx-auto mt-3 max-w-2xl text-xs sm:text-sm leading-relaxed text-white/85">
             Every Tvaloka formulation is handcrafted with potent Ayurvedic botanicals, cold-pressed oils,
             and sacred herbs preserved in their purest state for cellular vitality.
-          </p>
+          </p> */}
 
           {/* Search Bar */}
           <div className="relative mx-auto mt-8 max-w-xl">

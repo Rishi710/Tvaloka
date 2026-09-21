@@ -20,8 +20,8 @@ export default async function BlogsPage() {
 
   return (
     <main className="flex-1 bg-white">
-      {/* Hero banner — MediaFrame fills behind overlaid copy */}
-      <section className="relative flex min-h-[44vw] items-center lg:min-h-[36vw]">
+      {/* Hero banner — same treatment as About Us: copy sets the height, image fills behind it */}
+      <section className="relative flex min-h-[58vw] items-end justify-center lg:min-h-[38vw]">
         <MediaFrame
           src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_5311_JPG.jpg?v=1788000214"
           alt="Ayurvedic botanicals arranged on cream cloth"
@@ -31,21 +31,20 @@ export default async function BlogsPage() {
           fill
           priority
         />
-        {/* Scrim for legibility */}
+        {/* Left-anchored scrim — the photo is a bright cream flat-lay */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,.4),rgba(0,0,0,.5)_55%,rgba(0,0,0,.5)]"
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,.8),rgba(0,0,0,.52)_55%,rgba(0,0,0,.18))]"
         />
-        <div className="relative mx-auto max-w-7xl w-full px-[var(--space-4)] py-[var(--space-5)] text-center sm:py-[var(--space-6)] sm:text-left lg:py-[var(--space-7)]">
-          <p className="text-xs font-semibold tracking-[0.3em] text-ondark uppercase">
-            TVALOKA JOURNAL
-          </p>
-          <h1 className="font-display mt-[var(--space-3)] text-lg text-ondark sm:text-xl">
+        <div className="relative mx-auto w-full max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)]">
+          <p className="text-xs font-semibold tracking-[0.3em] text-ondark uppercase">Journal</p>
+          <span aria-hidden="true" className="mt-[var(--space-2)] block h-px w-6 bg-ondark" />
+          <h1 className="font-display mt-[var(--space-4)] max-w-2xl text-[20px] text-ondark sm:text-xl">
             Articles &amp; Journal
           </h1>
-          <p className="mt-[var(--space-4)] max-w-xl text-sm text-ondark/80">
+          {/* <p className="mt-[var(--space-3)] max-w-xl text-sm text-ondark">
             Discover timeless Ayurvedic rituals, pure ingredients, and science-backed holistic care.
-          </p>
+          </p> */}
         </div>
       </section>
 
