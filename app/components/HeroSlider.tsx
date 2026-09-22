@@ -240,7 +240,7 @@ export function HeroSlider({ slides = defaultSlides }: HeroSliderProps) {
                   <Link
                     href={slide.href}
                     tabIndex={isActive ? 0 : -1}
-                    className={`mt-[var(--space-6)] inline-block rounded-[var(--radius-xs)] bg-action-ondark-bg px-[var(--space-5)] py-[var(--space-3)] text-sm font-semibold text-action-ondark-text transition-colors duration-[var(--motion-instant)] hover:bg-action-ondark-bg-hover active:bg-action-ondark-bg-active ${focusRing}`}
+                    className={`mt-[var(--space-6)] uppercase inline-block rounded-[var(--radius-xs)] bg-action-ondark-bg px-[var(--space-5)] py-[var(--space-3)] text-sm font-semibold text-action-ondark-text transition-colors duration-[var(--motion-instant)] hover:bg-action-ondark-bg-hover active:bg-action-ondark-bg-active ${focusRing}`}
                   >
                     {slide.ctaLabel}
                   </Link>

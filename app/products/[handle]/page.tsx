@@ -7,6 +7,7 @@ import ProductGallery from "./ProductGallery";
 import { ProductAccordion } from "../../components/ProductAccordion";
 import { ProductActions } from "./ProductActions";
 import { ProductIngredientsSection } from "./ProductIngredientsSection";
+import { ReviewsSection } from "./ReviewsSection";
 import { BestSellers } from "../../components/BestSellers";
 import { getIngredientsForProduct } from "../../lib/productIngredients";
 import type { ShopifyProduct } from "../../lib/shopify/types";
@@ -186,6 +187,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <ProductIngredientsSection
           ingredients={productIngredients}
           products={allProducts}
+        />
+
+        {/* ── Judge.me Customer Reviews & Write-a-Review ── */}
+        <ReviewsSection
+          productId={product.id}
+          productTitle={product.title}
         />
       </div>
 

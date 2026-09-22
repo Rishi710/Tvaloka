@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProducts } from "../lib/shopify/queries/product";
 import { getConcerns } from "../lib/shopify/concerns";
-import { CONCERN_IMAGES } from "../lib/concernImages";
+import { CONCERN_IMAGES, getConcernImage } from "../lib/concernImages";
 import type { ShopifyProduct } from "../lib/shopify/types";
 import { ScrollRail } from "./ScrollRail";
 
@@ -32,7 +32,7 @@ export async function ConcernSection({ className = "" }: { className?: string })
         <div className="mt-[var(--space-6)]">
           <ScrollRail label="Shop by concern" arrowTopClassName="top-1/2">
             {concerns.map(({ name }) => {
-              const image = CONCERN_IMAGES[name.toLowerCase()];
+              const image = getConcernImage(name) ?? CONCERN_IMAGES[name.toLowerCase()];
               return (
                 <Link
                   key={name}
