@@ -60,22 +60,33 @@ const cartFragment = `
   }
 `;
 
-export async function createCart(): Promise<ShopifyCart | null> {
+export async function createCart(
+  lines?: Array<{ merchandiseId: string; quantity: number }>
+): Promise<ShopifyCart | null> {
   const res = await shopifyFetch<{
-    cartCreate: { cart: unknown };
+    cartCreate: { cart: unknown; userErrors: { field: string[]; message: string }[] };
   }>({
     query: `
-      mutation createCart {
-        cartCreate {
+      mutation createCart($input: CartInput) {
+        cartCreate(input: $input) {
           cart {
             ...cartFields
+          }
+          userErrors {
+            field
+            message
           }
         }
       }
       ${cartFragment}
     `,
+    variables: { input: lines && lines.length > 0 ? { lines } : undefined },
     cache: "no-store",
   });
+
+  if (res.cartCreate.userErrors.length > 0) {
+    throw new Error(res.cartCreate.userErrors[0].message);
+  }
 
   return reshapeCart(res.cartCreate.cart);
 }

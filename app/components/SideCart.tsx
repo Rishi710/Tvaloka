@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "./CartContext";
 import { CloseIcon } from "./icons";
+import { createCart } from "../lib/shopify/queries/cart";
 
 // ---------------------------------------------------------------------------
 // Minus / Plus icons (inline — no extra import needed)
@@ -52,6 +53,28 @@ export function SideCart() {
 
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  async function handleCheckout() {
+    setCheckoutError(null);
+    setIsCheckingOut(true);
+    try {
+      const lines = items.map((item) => ({
+        merchandiseId: item.variantId,
+        quantity: item.quantity,
+      }));
+      const cart = await createCart(lines);
+      if (!cart?.checkoutUrl) {
+        throw new Error("No checkout URL returned");
+      }
+      window.location.href = cart.checkoutUrl;
+    } catch (error) {
+      console.error("Failed to start Shopify checkout:", error);
+      setCheckoutError("We couldn't start checkout just now. Please try again.");
+      setIsCheckingOut(false);
+    }
+  }
 
   // Focus trap + Escape key
   useEffect(() => {
@@ -278,14 +301,20 @@ export function SideCart() {
               Taxes &amp; shipping calculated at checkout.
             </p>
 
-            {/* Checkout CTA */}
-            <Link
-              href="/cart"
-              onClick={closeCart}
-              className="flex w-full items-center justify-center rounded-[5px] bg-black px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#1a1a1a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            {/* Checkout CTA — creates a real Shopify cart and hands off to Shopify's own checkout */}
+            <button
+              type="button"
+              onClick={handleCheckout}
+              disabled={isCheckingOut}
+              className="flex w-full items-center justify-center rounded-[5px] bg-black px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#1a1a1a] disabled:opacity-60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
             >
-              Proceed to Checkout
-            </Link>
+              {isCheckingOut ? "Redirecting to Checkout…" : "Proceed to Checkout"}
+            </button>
+            {checkoutError && (
+              <p role="alert" className="text-center text-xs font-semibold text-error">
+                {checkoutError}
+              </p>
+            )}
 
             {/* Continue shopping */}
             <button
