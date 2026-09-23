@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ShopifyProduct } from "../../lib/shopify/types";
 import { useCart } from "../../components/CartContext";
+import { CartIcon } from "../../components/icons";
 
 function MinusIcon({ className }: { className?: string }) {
   return (
@@ -151,9 +152,21 @@ export function ProductActions({ product }: ProductActionsProps) {
           type="button"
           disabled={!isAvailable || adding}
           onClick={handleAddToCart}
-          className="w-full rounded-[var(--radius-xs)] bg-action-onlight-bg py-4 text-sm font-semibold tracking-wider text-action-onlight-text uppercase transition-colors hover:bg-action-onlight-bg-hover disabled:bg-surface-muted disabled:text-tertiary disabled:cursor-not-allowed cursor-pointer"
+          className="flex w-full items-center justify-center gap-2.5 rounded-[var(--radius-xs)] bg-action-onlight-bg py-4 text-sm font-semibold tracking-wider text-action-onlight-text uppercase transition-colors hover:bg-action-onlight-bg-hover disabled:bg-surface-muted disabled:text-tertiary disabled:cursor-not-allowed cursor-pointer"
         >
-          {adding ? "Adding..." : isAvailable ? "Add to Cart" : "Sold Out"}
+          {adding ? (
+            <>
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent shrink-0" />
+              <span>Adding...</span>
+            </>
+          ) : isAvailable ? (
+            <>
+              <CartIcon className="h-4 w-4 shrink-0" />
+              <span>Add to Cart</span>
+            </>
+          ) : (
+            <span>Sold Out</span>
+          )}
         </button>
       </div>
     </div>

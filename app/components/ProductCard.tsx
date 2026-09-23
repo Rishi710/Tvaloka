@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { ShopifyProduct } from "../lib/shopify/types";
 import { useCart } from "./CartContext";
+import { CartIcon } from "./icons";
 
 // ---------------------------------------------------------------------------
 // StarRating sub-component
@@ -412,9 +413,19 @@ export function ProductCard({
             type="button"
             onClick={(e) => handleAddVariantToBag(variants[0]?.id || "", e)}
             disabled={addingToBag}
-            className="flex w-full min-h-[38px] sm:min-h-[40px] items-center justify-center rounded-[var(--radius-xs)] border border-black bg-white px-3 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-black transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
+            className="flex w-full min-h-[38px] sm:min-h-[40px] items-center justify-center gap-2 rounded-[var(--radius-xs)] border border-black bg-white px-3 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-black transition-colors hover:bg-black hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
           >
-            {addingToBag ? "Adding…" : "Add to Cart"}
+            {addingToBag ? (
+              <>
+                <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent shrink-0" />
+                <span>Adding…</span>
+              </>
+            ) : (
+              <>
+                <CartIcon className="h-3.5 w-3.5 shrink-0" />
+                <span>Add to Cart</span>
+              </>
+            )}
           </button>
         )}
       </div>
