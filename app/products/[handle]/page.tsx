@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductByHandle, getProducts } from "../../lib/shopify/queries/product";
 import { ShareButton } from "../../components/ShareButton";
+import { ProductRating } from "../../components/ProductRating";
 import ProductGallery from "./ProductGallery";
 import { ProductAccordion } from "../../components/ProductAccordion";
 import { ProductActions } from "./ProductActions";
@@ -161,6 +162,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
             <h1 className="font-display mt-2 text-2xl font-normal text-primary sm:text-3xl">
               {product.title}
             </h1>
+
+            <ProductRating productId={product.id} className="mt-2" size="md" />
 
             <div className="mt-4 flex items-center justify-between gap-4">
               <div className="flex items-baseline gap-3">

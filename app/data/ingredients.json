@@ -48,7 +48,8 @@
             "Navya Baby Massage Oil Almond & Sandalwood Oil",
             "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil",
             "Komal baby Shampoo Aloe Vera, Coconut Oil, Licorice & Raspberry Seed",
-            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil",
+          "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -67,7 +68,8 @@
             "Lavanya Baby Body Lotion Saffron & Shea butter",
             "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
             "Navya Baby Massage Oil Almond & Sandalwood Oil",
-            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil",
+          "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -285,7 +287,8 @@
             "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
             "Navya Baby Massage Oil Almond & Sandalwood Oil",
             "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil",
-            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil",
+            "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -303,7 +306,8 @@
             "Sugandha Body Lotion Vanilla & Shea Butter",
             "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
             "Lavanya Baby Body Lotion Saffron & Shea butter",
-            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter"
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
+            "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -318,7 +322,8 @@
         "subtitle": "Adds a warm, comforting botanical aroma while complementing nourishing daily care for soft, smooth, healthy-looking skin.",
         "work": "Vanilla contributes a warm natural aroma and a comforting sensory experience to nourishing body care routines.",
         "foundIn": [
-            "Sugandha Body Lotion Vanilla & Shea Butter"
+            "Sugandha Body Lotion Vanilla & Shea Butter",
+            "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -403,7 +408,8 @@
         "subtitle": "Helps soothe and comfort the skin while adding a delicate natural floral aroma to gentle botanical skincare and wellness rituals.",
         "work": "Rose Oil helps provide a soothing and comforting feel while adding a naturally elegant floral aroma to daily skincare and self-care routines.",
         "foundIn": [
-            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter"
+            "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
+            "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -484,7 +490,8 @@
             "Castor Cold Pressed Oil for Hair & Skin 100% Pure",
             "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
             "Sparsh Diaper Rash Cream Castor Oil & Shea Butter",
-            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil"
+            "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil",
+            "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -650,7 +657,8 @@
         "subtitle": "A traditional Ayurvedic botanical valued for its warming character and comforting role in gentle abdominal massage rituals.",
         "work": "Ajwain provides a warming botanical character that complements gentle massage and traditional Ayurvedic wellness routines.",
         "foundIn": [
-            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil"
+            "Vedikaa Baby Tummy Roll-On Sesame & Peppermint Oil",
+          "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -740,7 +748,8 @@
         "subtitle": "A traditional Ayurvedic botanical rich in antioxidants, complementing skincare routines focused on nourishment and natural radiance.",
         "work": "Turmeric provides antioxidant-rich botanical care that complements nourishing and restorative skincare rituals.",
         "foundIn": [
-            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
+            "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi",
+          "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -785,7 +794,8 @@
         "subtitle": "Provides antioxidant support while helping maintain skin softness, moisture, and a healthy-looking protective barrier.",
         "work": "Vitamin E provides antioxidant support while complementing moisturizing skincare routines focused on softness and moisture retention.",
         "foundIn": [
-            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E"
+            "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+          "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
         ]
     },
     {
@@ -804,5 +814,22 @@
             "Lavanya Baby Body Lotion Saffron & Shea butter",
             "Sandhya Night Cream Ashwagandha, Kumkumadi Tailam & Mulethi"
         ]
-    }
+    },
+  {
+  "word": "Soy Wax",
+  "image": "",
+  "tags": [
+    "Skin Protection",
+    "Moisturising",
+    "Balm Base",
+    "Skin Care",
+    "Ayurvedic Care"
+  ],
+  "about": "Soy Wax is a plant-based wax used in skincare formulations to give balms a smooth, protective texture. It helps create a soft barrier on the skin while supporting the balm's nourishing and moisturising feel.",
+  "subtitle": "Helps create a smooth, protective balm that supports soft, moisturised skin.",
+  "work": "Soy Wax helps give the Healing Balm its structure and smooth consistency while forming a light protective layer on the skin. This helps the balm stay comfortable and easy to apply.",
+  "foundIn": [
+    "Healing Balm Shea Butter, Badam, Castor and Vitamin E"
+  ]
+}
 ]

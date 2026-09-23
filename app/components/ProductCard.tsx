@@ -6,51 +6,7 @@ import { useState } from "react";
 import type { ShopifyProduct } from "../lib/shopify/types";
 import { useCart } from "./CartContext";
 import { CartIcon } from "./icons";
-
-// ---------------------------------------------------------------------------
-// StarRating sub-component
-// ---------------------------------------------------------------------------
-
-/** Renders 5 stars (filled / empty) with an optional review count. */
-function StarRating({
-  rating = 5,
-  reviewCount,
-}: {
-  rating?: number;
-  reviewCount?: number;
-}) {
-  return (
-    <div className="flex items-center gap-1">
-      <div
-        className="flex items-center gap-0.5"
-        aria-label={`Rated ${rating} out of 5 stars`}
-      >
-        {Array.from({ length: 5 }, (_, i) => {
-          const filled = i + 1 <= Math.floor(rating);
-          return (
-            <svg
-              key={i}
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-              focusable="false"
-              className="size-3 text-[#707070]"
-            >
-              <polygon
-                points="10,2 12.35,7.5 18.5,8.1 14,12.1 15.4,18 10,15 4.6,18 6,12.1 1.5,8.1 7.65,7.5"
-                fill={filled ? "currentColor" : "none"}
-                stroke="currentColor"
-                strokeWidth={filled ? "0" : "1.2"}
-              />
-            </svg>
-          );
-        })}
-      </div>
-      {reviewCount !== undefined && (
-        <span className="text-[11px] text-[#707070]">({reviewCount})</span>
-      )}
-    </div>
-  );
-}
+import { ProductRating, StarRating } from "./ProductRating";
 
 // ---------------------------------------------------------------------------
 // ProductCard props
@@ -150,6 +106,20 @@ export function ProductCard({
       }).format(parseFloat(price.amount))
       : null);
 
+  // Shopify's "Compare at price" on the default variant — only shown when
+  // it's genuinely higher than the selling price, never a fabricated discount.
+  const compareAtPrice = product.variants?.[0]?.compareAtPrice;
+  const showCompareAtPrice =
+    price && compareAtPrice && parseFloat(compareAtPrice.amount) > parseFloat(price.amount);
+  const displayCompareAtPrice = showCompareAtPrice
+    ? new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: currencyCode ?? compareAtPrice.currencyCode ?? "INR",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(parseFloat(compareAtPrice.amount))
+    : null;
+
   // ── Clean description or benefit ──────────────────────────────────────────
   const cleanDescription =
     benefitText ??
@@ -161,7 +131,11 @@ export function ProductCard({
   const variants = product.variants || [];
   const hasMultipleVariants = variants.length > 1;
 
-  let derivedSize = sizeLabel;
+  // custom.size — the same metafield shown as a plain label on the PDP
+  // (e.g. "200 ML"), preferred over any variant-derived guess.
+  const sizeMetafieldValue = product.metafields?.find((m) => m.key === "size")?.value;
+
+  let derivedSize = sizeLabel ?? sizeMetafieldValue;
   if (!derivedSize) {
     if (hasMultipleVariants) {
       derivedSize = `${variants.length} sizes available`;
@@ -174,11 +148,9 @@ export function ProductCard({
     }
   }
 
-  // Generate a deterministic pseudo rating if none passed for demonstration
-  const displayRating = rating ?? 5;
-  const displayReviews =
-    reviewCount ??
-    (product.title.length * 17) % 350 + 50; // realistic review count
+  // Real reviews only — no rating shown when a product has none yet, and no
+  // caller-supplied override, so ProductRating fetches it from Judge.me.
+  const hasRatingOverride = rating !== undefined && reviewCount !== undefined && reviewCount > 0;
 
   const pdpHref = `/products/${product.handle}`;
   const isSoldOut = !product.availableForSale;
@@ -354,24 +326,33 @@ export function ProductCard({
             </p>
           )}
 
-          {/* Available Sizes descriptor */}
-          {derivedSize && (
-            <p className="text-[11px] text-[#707070] font-normal">
-              {derivedSize}
-            </p>
+          {/* Rating — real reviews only, shown above the price */}
+          {hasRatingOverride ? (
+            <div className="mt-0.5">
+              <StarRating rating={rating!} reviewCount={reviewCount!} />
+            </div>
+          ) : (
+            <ProductRating productId={product.id} className="mt-0.5" />
           )}
 
-          {/* Price */}
-          {displayPrice && (
-            <p className="mt-0.5 text-[13px] sm:text-[14px] font-normal text-black">
-              {displayPrice}
+          {/* Price (left) + Size (right), same line */}
+          {(displayPrice || derivedSize) && (
+            <p className="mt-0.5 flex items-baseline justify-between gap-2 text-[14px] sm:text-[16px] font-normal text-black">
+              <span className="flex items-baseline gap-1.5">
+                {displayPrice}
+                {displayCompareAtPrice && (
+                  <span className="text-[12px] text-[#888888] line-through">
+                    {displayCompareAtPrice}
+                  </span>
+                )}
+              </span>
+              {derivedSize && (
+                <span className="text-[14px] text-black font-normal">
+                  {derivedSize}
+                </span>
+              )}
             </p>
           )}
-
-          {/* Stars & Reviews below Price */}
-          <div className="mt-0.5">
-            <StarRating rating={displayRating} reviewCount={displayReviews} />
-          </div>
         </div>
       </div>
 

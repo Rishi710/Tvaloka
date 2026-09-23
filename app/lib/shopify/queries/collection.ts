@@ -170,7 +170,8 @@ export async function getCollectionProducts({
                 }
                 metafields(identifiers: [
                   { namespace: "custom", key: "concern" },
-                  { namespace: "custom", key: "ingredient" }
+                  { namespace: "custom", key: "ingredient" },
+                  { namespace: "custom", key: "size" }
                 ]) {
                   id
                   namespace
@@ -288,7 +289,8 @@ export async function getCollectionWithProducts({
                 }
                 metafields(identifiers: [
                   { namespace: "custom", key: "concern" },
-                  { namespace: "custom", key: "ingredient" }
+                  { namespace: "custom", key: "ingredient" },
+                  { namespace: "custom", key: "size" }
                 ]) {
                   id
                   namespace
