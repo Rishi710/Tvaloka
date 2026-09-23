@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProducts } from "../lib/shopify/queries/product";
 import { getConcerns } from "../lib/shopify/concerns";
-import { CONCERN_IMAGES, getConcernImage } from "../lib/concernImages";
+import { getConcernImage, getConcernOrder } from "../lib/concernImages";
 import type { ShopifyProduct } from "../lib/shopify/types";
 import { ScrollRail } from "./ScrollRail";
 
@@ -14,9 +14,16 @@ export async function ConcernSection({ className = "" }: { className?: string })
     console.error("Failed to load concerns from Shopify:", error);
   }
 
-  const concerns = getConcerns(products);
+  // Only concerns we have a real image for — no plain/placeholder cards —
+  // ordered to match the sequence of images in concernImages.ts.
+  const availableConcerns = new Map(
+    getConcerns(products).map((c) => [c.name.toLowerCase(), c]),
+  );
+  const concerns = getConcernOrder()
+    .map((name) => availableConcerns.get(name))
+    .filter((c): c is NonNullable<typeof c> => !!c);
   if (concerns.length === 0) {
-    return null; // Nothing to show if no product has a concern or the fetch failed.
+    return null;
   }
 
   return (
@@ -32,22 +39,20 @@ export async function ConcernSection({ className = "" }: { className?: string })
         <div className="mt-[var(--space-6)]">
           <ScrollRail label="Shop by concern" arrowTopClassName="top-1/2">
             {concerns.map(({ name }) => {
-              const image = getConcernImage(name) ?? CONCERN_IMAGES[name.toLowerCase()];
+              const image = getConcernImage(name);
               return (
                 <Link
                   key={name}
                   href={`/products?concern=${encodeURIComponent(name)}`}
                   className="group relative block aspect-[4/5] overflow-hidden rounded-[var(--radius-xs)] bg-[radial-gradient(circle_at_30%_25%,_#262626,_#000000_65%)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                 >
-                  {image ? (
-                    <Image
-                      src={image}
-                      alt=""
-                      fill
-                      sizes="(min-width: 1024px) 19vw, (min-width: 768px) 23vw, (min-width: 640px) 31vw, 46vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : null}
+                  <Image
+                    src={image!}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 19vw, (min-width: 768px) 23vw, (min-width: 640px) 31vw, 46vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                   <span
                     aria-hidden="true"
                     className="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,.72),rgba(0,0,0,0)_55%)]"

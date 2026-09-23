@@ -85,6 +85,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     }).format(parseFloat(price.amount))
     : null;
 
+  // Shopify's "Compare at price" on the default variant — only shown when it's
+  // genuinely higher than the selling price, never as a fabricated discount.
+  const compareAtPrice = product.variants?.[0]?.compareAtPrice;
+  const showCompareAtPrice =
+    price && compareAtPrice && parseFloat(compareAtPrice.amount) > parseFloat(price.amount);
+  const formattedCompareAtPrice = showCompareAtPrice
+    ? new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: compareAtPrice.currencyCode || "INR",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(parseFloat(compareAtPrice.amount))
+    : null;
+
   const productIngredients = getIngredientsForProduct(product.title);
 
   return (
@@ -153,10 +167,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 <span className="text-2xl font-semibold text-primary">
                   {formattedPrice}
                 </span>
-                <span className="text-xs text-tertiary">Inclusive of all taxes</span>
+                {formattedCompareAtPrice && (
+                  <span className="text-sm text-tertiary line-through">
+                    {formattedCompareAtPrice}
+                  </span>
+                )}
               </div>
               <ShareButton title={product.title} />
             </div>
+            <p className="mt-1 text-xs text-tertiary">Inclusive of all taxes</p>
 
             {product.description && (
               <div className="mt-6">

@@ -95,7 +95,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
 
   return (
     <header className="bg-surface-muted">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-[var(--space-4)] px-[var(--space-4)] py-[var(--space-3)]">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-[var(--space-4)] px-[var(--space-4)] py-[var(--space-2)]">
         {/* Left utility — search trigger */}
         <div className="flex flex-1 items-center gap-[var(--space-4)]">
           <button
@@ -116,12 +116,12 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
           href="/"
           className={`flex flex-1 flex-col items-center text-center ${focusRing}`}
         >
-          <span className="font-display text-sm tracking-wide whitespace-nowrap text-primary sm:text-lg">
+          <span className="font-display text-sm tracking-wide whitespace-nowrap text-primary sm:text-[22px]">
             Tvaloka Wellness
           </span>
-          {/* <span className="text-[10px] font-semibold tracking-[0.3em] whitespace-nowrap text-tertiary uppercase">
-            Pure Ayurvedic Luxury
-          </span> */}
+          <span className="text-[10px] font-semibold tracking-[0.3em] whitespace-nowrap text-tertiary uppercase">
+            Authentic Ayurveda
+          </span>
         </Link>
 
         {/* Right utility */}
@@ -167,7 +167,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
                 <Link
                   href={category.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`inline-block px-[var(--space-4)] py-[var(--space-3)] text-xs font-normal uppercase tracking-wide whitespace-nowrap focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-black ${isActive
+                  className={`inline-block px-[var(--space-4)] py-[var(--space-1)] text-xs font-normal uppercase tracking-wide whitespace-nowrap focus-visible:outline focus-visible:-outline-offset-2 focus-visible:outline-2 focus-visible:outline-black ${isActive
                     ? "bg-action-onlight-bg text-action-onlight-text"
                     : "text-primary hover:bg-black/[.04]"
                     }`}

@@ -64,7 +64,7 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Baby Care",
     href: "/baby-care",
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Baby.webp?v=1787821515",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6173.webp?v=1790165117",
     alt: "Gentle Ayurvedic mother and baby care products crafted with natural botanicals",
     objectPositionClassName: "object-right",
   }

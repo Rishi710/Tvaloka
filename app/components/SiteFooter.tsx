@@ -10,7 +10,6 @@ import {
 
 const shopLinks = [
   { label: "Best Seller", href: "/best-sellers" },
-  { label: "New Launch", href: "/new-launches" },
   { label: "Face Care", href: "/face-care" },
   { label: "Bath & Body Care", href: "/bath-body-care" },
   { label: "Hair Care", href: "/hair-care" },
@@ -26,21 +25,22 @@ const aboutLinks = [
   { label: "Return Policy", href: "/return-policy" },
   { label: "Policies", href: "/policies" },
   { label: "Terms", href: "/terms" },
-  { label: "FAQs", href: "/faqs" },
   // { label: "Stores", href: "/stores" },
   // { label: "Careers", href: "/careers", badge: "We're hiring" },
 ];
 
 const quickLinks = [
-  { label: "Wellness", href: "/wellness-care" },
-  { label: "My Account", href: "/account" },
+  { label: "New Launch", href: "/new-launches" },
+  { label: "Wellness Care", href: "/wellness-care" },
+  // { label: "My Account", href: "/account" },
   // { label: "Wellness Circle Sign In", href: "/circle/sign-in" },
-  { label: "Current Offers", href: "/" },
+  // { label: "Current Offers", href: "/" },
   // { label: "Customised Skincare", href: "/customised-skincare" },
-  { label: "Blog", href: "/blog" },
-  { label: "My Order(s)", href: "/account/orders" },
-  // { label: "Track My Order", href: "/track-order" },
   { label: "Our Ingredients", href: "/ingredients" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQs", href: "/faqs" },
+  // { label: "My Order(s)", href: "/account/orders" },
+  // { label: "Track My Order", href: "/track-order" },
 ];
 
 const socialLinks = [
@@ -168,9 +168,9 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div>
+       <div>
         <div className="mx-auto flex max-w-7xl flex-col gap-[var(--space-5)] px-[var(--space-4)] py-[var(--space-5)] sm:flex-row sm:items-center sm:justify-between">
-          <div>
+          {/* <div>
             <p className="text-xs font-semibold tracking-wide text-tertiary uppercase">
               Payment Methods
             </p>
@@ -184,9 +184,9 @@ export function SiteFooter() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
           <p className="text-xs text-tertiary">© {new Date().getFullYear()} Tvaloka Wellness</p>
-        </div>
+        </div> 
       </div>
 
       <BackToTopButton />
