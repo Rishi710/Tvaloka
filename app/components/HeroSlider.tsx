@@ -29,10 +29,11 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Face & Body",
     href: "/face-care",
     bgClassName: "bg-[radial-gradient(circle_at_30%_20%,_#1a1a1a,_#000000_60%)]",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_5610.png?v=1788871512",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Banner.webp?v=1790339991",
     alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
     mobileImage:
-      "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Tvaloka_Phone_V_Banner_jpg.webp?v=1789495868",
+ "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6306.webp?v=1790341446",
+    // objectPositionClassName: "object-[80%_center]"
   },
   {
     eyebrow: "New In",
@@ -44,7 +45,7 @@ const defaultSlides: Slide[] = [
     image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Hero_bath_body_jpg.jpg?v=1788857854",
     alt: "A woman resting beside a lotus flower, roses, saffron and Ayurvedic botanicals arranged on a banana leaf",
     // Subject sits left, where the copy goes — favour the right of the frame.
-    objectPositionClassName: "object-right",
+    objectPositionClassName: "object-[90%_center]",
   },
   {
     eyebrow: "Travel Ready",
@@ -55,7 +56,8 @@ const defaultSlides: Slide[] = [
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
     image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Hero_New_Launch_2.webp?v=1787821514",
     alt: "Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms",
-    objectPositionClassName: "object-right",
+    // mobileImage:"https://cdn.shopify.com/s/files/1/1005/3045/4892/files/New_Launch_MV.webp?v=1790338322"
+    objectPositionClassName: "object-[82%_center]",
   },
   {
     eyebrow: "Pure & Gentle",
@@ -66,7 +68,7 @@ const defaultSlides: Slide[] = [
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
     image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6173.webp?v=1790165117",
     alt: "Gentle Ayurvedic mother and baby care products crafted with natural botanicals",
-    objectPositionClassName: "object-right",
+    objectPositionClassName: "object-center",
   }
 ];
 

@@ -80,6 +80,44 @@ function TagIcon({ className }: { className?: string }) {
   );
 }
 
+function InfoModal({
+  title,
+  onClose,
+  children,
+}: {
+  title: string;
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-3 sm:p-5 md:p-6"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-md rounded-2xl bg-white p-6 text-left shadow-2xl sm:p-7"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="absolute right-3 top-3 z-30 flex h-8 w-8 items-center justify-center rounded-full bg-black/[0.05] text-[#666666] transition-colors hover:bg-black/[0.1] hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+        >
+          <CloseIcon className="h-4 w-4" />
+        </button>
+
+        <h3 className="font-display text-md text-primary">{title}</h3>
+
+        <ul className="mt-4 space-y-4 text-sm leading-relaxed text-tertiary">{children}</ul>
+      </div>
+    </div>
+  );
+}
+
 interface ProductActionsProps {
   product: ShopifyProduct;
 }
@@ -90,18 +128,18 @@ export function ProductActions({ product }: ProductActionsProps) {
   const [selectedVariantId, setSelectedVariantId] = useState<string>(
     product.variants?.[0]?.id || ""
   );
-  const [isWhatsNewOpen, setIsWhatsNewOpen] = useState(false);
+  const [openPanel, setOpenPanel] = useState<"offers" | "whatsNew" | null>(null);
 
   const { addItem } = useCart();
 
   useEffect(() => {
-    if (!isWhatsNewOpen) return;
+    if (!openPanel) return;
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") setIsWhatsNewOpen(false);
+      if (event.key === "Escape") setOpenPanel(null);
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [isWhatsNewOpen]);
+  }, [openPanel]);
 
   const selectedVariant =
     product.variants?.find((v) => v.id === selectedVariantId) ||
@@ -198,6 +236,9 @@ export function ProductActions({ product }: ProductActionsProps) {
         {/* Assurance pills — same height and row as Quantity/Size, not a separate block */}
         <button
           type="button"
+          onClick={() => setOpenPanel("offers")}
+          aria-haspopup="dialog"
+          aria-expanded={openPanel === "offers"}
           className="flex h-10 items-center gap-2 rounded bg-[#F7E5B5] px-4 text-xs font-bold uppercase tracking-wide text-primary transition-colors hover:bg-[#f2d998]"
         >
           <GiftIcon className="h-4 w-4 shrink-0" />
@@ -205,9 +246,9 @@ export function ProductActions({ product }: ProductActionsProps) {
         </button>
         <button
           type="button"
-          onClick={() => setIsWhatsNewOpen(true)}
+          onClick={() => setOpenPanel("whatsNew")}
           aria-haspopup="dialog"
-          aria-expanded={isWhatsNewOpen}
+          aria-expanded={openPanel === "whatsNew"}
           className="flex h-10 items-center gap-2 rounded bg-[#F7E5B5] px-4 text-xs font-bold uppercase tracking-wide text-primary transition-colors hover:bg-[#f2d998]"
         >
           <TagIcon className="h-4 w-4 shrink-0" />
@@ -215,64 +256,53 @@ export function ProductActions({ product }: ProductActionsProps) {
         </button>
       </div>
 
+      {/* Available Offers modal */}
+      {openPanel === "offers" && (
+        <InfoModal title="Available Offers" onClose={() => setOpenPanel(null)}>
+          <li>
+            <strong className="font-bold text-primary">10% off</strong> on your first purchase.
+          </li>
+          <li>
+            <strong className="font-bold text-primary">Free shipping</strong>{" "}
+            on prepaid orders above &#8377;500.
+          </li>
+        </InfoModal>
+      )}
+
       {/* What's New modal */}
-      {isWhatsNewOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="What's new"
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-3 sm:p-5 md:p-6"
-          onClick={() => setIsWhatsNewOpen(false)}
-        >
-          <div
-            className="relative w-full max-w-md rounded-2xl bg-white p-6 text-left shadow-2xl sm:p-7"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setIsWhatsNewOpen(false)}
-              aria-label="Close"
-              className="absolute right-3 top-3 z-30 flex h-8 w-8 items-center justify-center rounded-full bg-black/[0.05] text-[#666666] transition-colors hover:bg-black/[0.1] hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
+      {openPanel === "whatsNew" && (
+        <InfoModal title="What&rsquo;s New" onClose={() => setOpenPanel(null)}>
+          <li>
+            Discover our new{" "}
+            <Link
+              href="/baby-care"
+              onClick={() => setOpenPanel(null)}
+              className="font-bold text-primary underline underline-offset-2 hover:text-black"
             >
-              <CloseIcon className="h-4 w-4" />
-            </button>
-
-            <h3 className="font-display text-md text-primary">What&rsquo;s New</h3>
-
-            <ul className="mt-4 space-y-4 text-sm leading-relaxed text-tertiary">
-              <li>
-                Discover our new{" "}
-                <Link
-                  href="/baby-care"
-                  onClick={() => setIsWhatsNewOpen(false)}
-                  className="font-bold text-primary underline underline-offset-2 hover:text-black"
-                >
-                  Bachpan
-                </Link>{" "}
-                range specially crafted for your young ones&rsquo; delicate skin.
-              </li>
-              <li>
-                Experience our intense moisturization expert{" "}
-                <Link
-                  href="/products/jojoba-cold-pressed-oil-for-hair-skin-100-pure"
-                  onClick={() => setIsWhatsNewOpen(false)}
-                  className="font-bold text-primary underline underline-offset-2 hover:text-black"
-                >
-                  Jojoba
-                </Link>{" "}
-                and{" "}
-                <Link
-                  href="/products/argan-cold-pressed-oil-for-hair-skin-100-pure"
-                  onClick={() => setIsWhatsNewOpen(false)}
-                  className="font-bold text-primary underline underline-offset-2 hover:text-black"
-                >
-                  Argan
-                </Link>{" "}
-                oil for velvety soft skin.
-              </li>
-            </ul>
-          </div>
-        </div>
+              Bachpan
+            </Link>{" "}
+            range specially crafted for your young ones&rsquo; delicate skin.
+          </li>
+          <li>
+            Experience our intense moisturization expert{" "}
+            <Link
+              href="/products/jojoba-cold-pressed-oil-for-hair-skin-100-pure"
+              onClick={() => setOpenPanel(null)}
+              className="font-bold text-primary underline underline-offset-2 hover:text-black"
+            >
+              Jojoba
+            </Link>{" "}
+            and{" "}
+            <Link
+              href="/products/argan-cold-pressed-oil-for-hair-skin-100-pure"
+              onClick={() => setOpenPanel(null)}
+              className="font-bold text-primary underline underline-offset-2 hover:text-black"
+            >
+              Argan
+            </Link>{" "}
+            oil for velvety soft skin.
+          </li>
+        </InfoModal>
       )}
 
       {/* Add to Cart Action Button */}

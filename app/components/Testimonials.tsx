@@ -55,19 +55,18 @@ export function Testimonials({ className = "" }: { className?: string }) {
   return (
     <section className={`bg-[#FBF5E6] py-10 lg:py-[var(--space-7)] ${className}`}>
       <div className="mx-auto max-w-7xl px-[var(--space-4)]">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="pb-[var(--space-4)]">
           <p className="text-xs font-semibold tracking-[0.25em] text-tertiary uppercase">
             Testimonials
           </p>
           <h2 className="font-display mt-1 text-lg text-primary sm:text-xl">
             Loved by Our Community
           </h2>
-          <span aria-hidden="true" className="mx-auto mt-[var(--space-3)] block h-px w-10 bg-[#D9B45A]" />
         </div>
 
         <ul
           aria-label="Customer testimonials"
-          className="scrollbar-hide -mx-[var(--space-4)] mt-[var(--space-6)] flex snap-x snap-mandatory gap-[var(--space-4)] overflow-x-auto px-[var(--space-4)] pb-[var(--space-2)] md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-4"
+          className="scrollbar-hide -mx-[var(--space-4)] mt-[var(--space-4)] flex snap-x snap-mandatory gap-[var(--space-4)] overflow-x-auto px-[var(--space-4)] pb-[var(--space-2)] md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-4"
         >
           {testimonials.map((t) => (
             <li

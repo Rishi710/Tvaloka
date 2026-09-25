@@ -122,10 +122,10 @@ export default function AboutUsPage() {
       <section className="bg-surface-muted">
         <div className={`${sectionClass} grid items-center gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
           <MediaFrame
-            src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-08-31_at_11.59.12.webp?v=1788262273"
+            src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-09-24_at_16.23.03.webp?v=1790342843"
             alt="Ground spices and herbs in terracotta bowls arranged in the shape of a tree on dark wood"
             label="Philosophy image"
-            aspectClassName="aspect-[2/2]"
+            aspectClassName="aspect-[5/4]"
           />
           <div>
             <Eyebrow>Our Philosophy</Eyebrow>
@@ -202,10 +202,10 @@ export default function AboutUsPage() {
       <section className="bg-surface-muted">
         <div className={`${sectionClass} grid items-center gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
           <MediaFrame
-            src="/Image/img-2.jpg"
+            src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-09-24_at_16.23.14.webp?v=1790342843"
             alt="Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms"
             label="Manufacturing image"
-            aspectClassName="aspect-[4/3]"
+            aspectClassName="aspect-[5/4]"
           />
           <div>
             <Eyebrow>Our Manufacturing Excellence</Eyebrow>

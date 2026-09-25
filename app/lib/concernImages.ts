@@ -21,7 +21,7 @@ export const CONCERN_IMAGES: Record<string, string> = {
   // "skin soothing": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Skin_Soothing.webp?v=1790081167",
 
   // Title-case aliases
-  "Dry Skin": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Dry_Skin.jpg?v=1790081054",
+  // "Dry Skin": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Dry_Skin.jpg?v=1790081054",
   "Dry Hair": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Dry_Hair.webp?v=1790081167",
   // "Scalp Care": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Scalp_Care.webp?v=1790081167",
   "Dandruff": "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Dandruff.webp?v=1790081167",

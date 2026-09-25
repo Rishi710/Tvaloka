@@ -3,8 +3,9 @@ import { BestSellers } from "./components/BestSellers";
 import { CollectionShowcase } from "./components/CollectionShowcase";
 import { ConcernSection } from "./components/ConcernSection";
 import { RitualSpotlight } from "./components/RitualSpotlight";
-import { TrustedTales } from "./components/TrustedTales";
+import { TrustedTalesSection } from "./components/TrustedTalesSection";
 import { Testimonials } from "./components/Testimonials";
+import { TvalokaCode } from "./components/TvalokaCode";
 import { LatestReads } from "./components/LatestReads";
 
 // Stacked rails share one rhythm: the previous section's bottom padding already
@@ -17,7 +18,7 @@ export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
       <HeroSlider />
-      <RitualSpotlight />
+      {/* <RitualSpotlight /> */}
       <BestSellers />
       <CollectionShowcase
         collectionHandle="new-launches"
@@ -25,14 +26,15 @@ export default function Home() {
         title="New Launches"
         className={stackedClass}
       />
+      <ConcernSection className={stackedClass} />
       <CollectionShowcase
         collectionHandle="baby-care"
         eyebrow="Pure & Gentle"
         title="Baby Care"
         className={stackedClass}
       />
-      <ConcernSection className={stackedClass} />
-      <TrustedTales />
+      <TrustedTalesSection />
+      <TvalokaCode />
       <Testimonials />
       <CollectionShowcase
         collectionHandle="wellness-care"
