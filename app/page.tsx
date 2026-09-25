@@ -4,6 +4,7 @@ import { CollectionShowcase } from "./components/CollectionShowcase";
 import { ConcernSection } from "./components/ConcernSection";
 import { RitualSpotlight } from "./components/RitualSpotlight";
 import { TrustedTales } from "./components/TrustedTales";
+import { Testimonials } from "./components/Testimonials";
 import { LatestReads } from "./components/LatestReads";
 
 // Stacked rails share one rhythm: the previous section's bottom padding already
@@ -32,6 +33,7 @@ export default function Home() {
       />
       <ConcernSection className={stackedClass} />
       <TrustedTales />
+      <Testimonials />
       <CollectionShowcase
         collectionHandle="wellness-care"
         eyebrow="Daily Rituals"

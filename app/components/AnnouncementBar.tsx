@@ -4,8 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "./icons";
 
 const messages = [
-  "We deliver across India & internationally.",
-  "Complimentary shipping on orders above ₹1,999.",
+  "We deliver Pan India.",
+  "Complimentary shipping on Prepaid orders above ₹500/-",
   "Handcrafted in small batches using traditional Ayurvedic recipes.",
 ];
 
