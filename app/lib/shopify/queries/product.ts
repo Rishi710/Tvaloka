@@ -161,7 +161,7 @@ export async function getProductRecommendations(productId: string): Promise<Shop
       ${productFragment}
     `,
     variables: { productId },
-    next: { revalidate: 3600 },
+    next: { revalidate: 3600, tags: ["products"] },
   });
 
   return reshapeProducts(res.productRecommendations || []);

@@ -186,7 +186,7 @@ export async function getCollectionProducts({
       }
     `,
     variables: { handle: collectionHandle, first },
-    next: { revalidate: 3600, tags: [`collection-${collectionHandle}`] },
+    next: { revalidate: 3600, tags: [`collection-${collectionHandle}`, "collection-products"] },
   });
 
   if (!res.collection) return [];
@@ -305,7 +305,7 @@ export async function getCollectionWithProducts({
       }
     `,
     variables: { handle: collectionHandle, first },
-    next: { revalidate: 3600, tags: [`collection-${collectionHandle}`] },
+    next: { revalidate: 3600, tags: [`collection-${collectionHandle}`, "collection-products"] },
   });
 
   if (!res.collection) {
