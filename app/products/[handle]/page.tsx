@@ -13,7 +13,7 @@ import { BestSellers } from "../../components/BestSellers";
 import { getIngredientsForProduct } from "../../lib/productIngredients";
 import type { ShopifyProduct } from "../../lib/shopify/types";
 
-export const revalidate = 60; // ISR: revalidate every 60 seconds
+export const revalidate = 3600; // ISR: refresh at most once an hour (each refresh counts toward Vercel ISR writes)
 export const dynamicParams = true; // Allow dynamic generation of un-prerendered products
 
 interface ProductPageProps {

@@ -118,7 +118,7 @@ export async function getProducts({
       ${productFragment}
     `,
     variables: { query, reverse, sortKey, first },
-    next: { revalidate: 60, tags: ["products"] },
+    next: { revalidate: 3600, tags: ["products"] },
   });
 
   return reshapeProducts(removeEdgesAndNodes(res.products));
@@ -142,7 +142,7 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
       ${productFragment}
     `,
     variables: { handle: decodedHandle },
-    next: { revalidate: 60, tags: [`product-${decodedHandle}`] },
+    next: { revalidate: 3600, tags: [`product-${decodedHandle}`] },
   });
 
   return reshapeProduct(res.product || res.productByHandle);
@@ -161,7 +161,7 @@ export async function getProductRecommendations(productId: string): Promise<Shop
       ${productFragment}
     `,
     variables: { productId },
-    next: { revalidate: 60 },
+    next: { revalidate: 3600 },
   });
 
   return reshapeProducts(res.productRecommendations || []);

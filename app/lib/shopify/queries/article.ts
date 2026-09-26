@@ -55,7 +55,7 @@ export async function getArticles({
       ${articleFragment}
     `,
     variables: { first, query, reverse, sortKey },
-    next: { revalidate: 60, tags: ["articles"] },
+    next: { revalidate: 3600, tags: ["articles"] },
   });
 
   return reshapeArticles(removeEdgesAndNodes(res.articles));
@@ -82,7 +82,7 @@ export async function getArticleByHandle(handle: string): Promise<ShopifyArticle
       }
       ${articleFragment}
     `,
-    next: { revalidate: 60, tags: [`article-${handle}`] },
+    next: { revalidate: 3600, tags: [`article-${handle}`] },
   });
 
   const all = reshapeArticles(removeEdgesAndNodes(res.articles));

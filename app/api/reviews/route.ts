@@ -117,10 +117,15 @@ export async function GET(request: NextRequest) {
     // Remove temporary hiding style if raw HTML is used
     const cleanHtml = rawWidget.replace(/<style class=['"]jdgm-temp-hiding-style['"]>[\s\S]*?<\/style>/gi, "");
 
-    return Response.json({
-      html: cleanHtml,
-      ...parsed,
-    });
+    // Ratings are read by every product card on every visit; let the CDN answer
+    // repeats instead of running this function each time.
+    return Response.json(
+      {
+        html: cleanHtml,
+        ...parsed,
+      },
+      { headers: { "Cache-Control": "public, s-maxage=600, stale-while-revalidate=3600" } },
+    );
   } catch (err) {
     console.error("[/api/reviews GET] Fetch failed:", err);
     return Response.json({ error: "Failed to fetch reviews" }, { status: 502 });

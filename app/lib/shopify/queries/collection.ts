@@ -49,7 +49,7 @@ export async function getNavCollections(first = 20): Promise<ShopifyCollection[]
       }
     `,
     variables: { first },
-    next: { revalidate: 300, tags: ["collections"] },
+    next: { revalidate: 3600, tags: ["collections"] },
   });
 
   return removeEdgesAndNodes(res.collections);
@@ -93,7 +93,7 @@ export async function getCollections(first = 20): Promise<ShopifyCollection[]> {
       }
     `,
     variables: { first },
-    next: { revalidate: 300, tags: ["collections"] },
+    next: { revalidate: 3600, tags: ["collections"] },
   });
 
   return removeEdgesAndNodes(res.collections);
@@ -186,7 +186,7 @@ export async function getCollectionProducts({
       }
     `,
     variables: { handle: collectionHandle, first },
-    next: { revalidate: 60, tags: [`collection-${collectionHandle}`] },
+    next: { revalidate: 3600, tags: [`collection-${collectionHandle}`] },
   });
 
   if (!res.collection) return [];
@@ -305,7 +305,7 @@ export async function getCollectionWithProducts({
       }
     `,
     variables: { handle: collectionHandle, first },
-    next: { revalidate: 60, tags: [`collection-${collectionHandle}`] },
+    next: { revalidate: 3600, tags: [`collection-${collectionHandle}`] },
   });
 
   if (!res.collection) {
