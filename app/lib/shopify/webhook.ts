@@ -27,16 +27,29 @@ export function tagsForWebhook(topic: string, payload: { handle?: unknown }): st
   const handle = typeof payload.handle === "string" && payload.handle ? payload.handle : null;
 
   switch (topic) {
+    // A create/delete changes which products exist, so every shared listing
+    // (home rails, /products, ingredients, search, concern section) needs to
+    // catch up — those all share the broad "products" / "collection-products"
+    // tags today, so this is intentionally wide.
     case "products/create":
-    case "products/update":
     case "products/delete":
-        
       return ["products", "collection-products", ...(handle ? [`product-${handle}`] : [])];
 
+    // An update just changes that product's own fields (price, description,
+    // images, …) — only its own page needs to be fresh immediately. The
+    // shared listing pages catch up on their normal hourly refresh instead of
+    // regenerating sitewide on every single edit.
+    case "products/update":
+      return handle ? [`product-${handle}`] : [];
+
     case "collections/create":
-    case "collections/update":
     case "collections/delete":
       return ["collections", "collection-products", ...(handle ? [`collection-${handle}`] : [])];
+
+    // Same reasoning as products/update: a rename/description edit only
+    // needs that one collection page refreshed immediately.
+    case "collections/update":
+      return handle ? [`collection-${handle}`] : ["collections"];
 
     case "articles/create":
     case "articles/update":

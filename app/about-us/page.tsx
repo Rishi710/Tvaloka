@@ -190,7 +190,7 @@ export default function AboutUsPage() {
             </h2>
             <p className="mt-[var(--space-5)] text-sm text-ondark">
               Our spiritual home and manufacturing base sits in the Himalayan foothills of
-              Uttarakhand — a sublime terrain of delicate alpine flora, snow-fed rivers and
+              Uttarakhand a sublime terrain of delicate alpine flora, snow-fed rivers and
               mountain peaks that form a natural barrier against the world&rsquo;s impurities.
             </p>
             {/* <KnowMoreLink href="/origin" label="Know more" onDark /> */}
