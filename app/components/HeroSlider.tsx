@@ -54,10 +54,10 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Hair Care",
     href: "/hair-care",
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Hero_New_Launch_2.webp?v=1787821514",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/wellness_2.webp?v=1790577777",
     alt: "Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms",
-    // mobileImage:"https://cdn.shopify.com/s/files/1/1005/3045/4892/files/New_Launch_MV.webp?v=1790338322"
-    objectPositionClassName: "object-[82%_center]",
+    mobileImage:"https://cdn.shopify.com/s/files/1/1005/3045/4892/files/wellness.webp?v=1790577777"
+    // objectPositionClassName: "object-[82%_center]",
   },
   {
     eyebrow: "Pure & Gentle",

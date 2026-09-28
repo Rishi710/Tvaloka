@@ -37,7 +37,7 @@ const quickLinks = [
   // { label: "Current Offers", href: "/" },
   // { label: "Customised Skincare", href: "/customised-skincare" },
   { label: "Our Ingredients", href: "/ingredients" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "/blogs" },
   { label: "FAQs", href: "/faqs" },
   // { label: "My Order(s)", href: "/account/orders" },
   // { label: "Track My Order", href: "/track-order" },
