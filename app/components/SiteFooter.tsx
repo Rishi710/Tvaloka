@@ -4,8 +4,8 @@ import { SubscribeForm } from "./SubscribeForm";
 import {
   FacebookIcon,
   InstagramIcon,
-  LinkedinIcon,
-  YoutubeIcon,
+  // LinkedinIcon,
+  // YoutubeIcon,
 } from "./icons";
 
 const shopLinks = [
@@ -46,9 +46,9 @@ const quickLinks = [
 const socialLinks = [
   { label: "Instagram", href: "https://instagram.com/tvalokawellness", Icon: InstagramIcon },
   { label: "Facebook", href: "https://facebook.com/tvalokawellness", Icon: FacebookIcon },
-  { label: "YouTube", href: "https://youtube.com/@tvalokawellness", Icon: YoutubeIcon },
+  // { label: "YouTube", href: "https://youtube.com/@tvalokawellness", Icon: YoutubeIcon },
   // { label: "X (Twitter)", href: "https://x.com/tvalokawellness", Icon: XIcon },
-  { label: "LinkedIn", href: "https://linkedin.com/company/tvalokawellness", Icon: LinkedinIcon },
+  // { label: "LinkedIn", href: "https://linkedin.com/company/tvalokawellness", Icon: LinkedinIcon },
 ];
 
 const paymentMethods = ["Visa", "Mastercard", "Amex", "RuPay", "PayPal", "Net Banking", "COD"];

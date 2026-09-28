@@ -59,7 +59,7 @@ export function AnnouncementBar() {
       ref={barRef}
       role="region"
       aria-label="Store announcements"
-      className="bg-black text-ondark"
+      className="bg-[#73290a] text-ondark"
       onMouseEnter={() => setIsInteracting(true)}
       onMouseLeave={() => setIsInteracting(false)}
       onFocus={() => setIsInteracting(true)}

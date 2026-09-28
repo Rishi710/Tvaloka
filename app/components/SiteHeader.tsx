@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CartIcon, CloseIcon, MenuIcon, SearchIcon } from "./icons";
@@ -111,8 +112,24 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
           </button>
         </div>
 
-        {/* Wordmark */}
+        {/* Logo */}
+        
         <Link
+          href="/"
+          className={`flex flex-1 items-center justify-center ${focusRing}`}
+        >
+          <Image
+            src="/Image/logo-cropped.png"
+            alt="Tvaloka Wellness — Authentic Ayurveda"
+            width={2911}
+            height={622}
+            priority
+            className="h-9 w-auto sm:h-12"
+          />
+        </Link>
+        {/* <Link
+        {/* Logo */}
+        {/* <Link
           href="/"
           className={`flex flex-1 flex-col items-center text-center ${focusRing}`}
         >
@@ -122,7 +139,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
           <span className="text-[10px] font-semibold tracking-[0.3em] whitespace-nowrap text-tertiary uppercase">
             Authentic Ayurveda
           </span>
-        </Link>
+        </Link>  */}
 
         {/* Right utility */}
         <div className="flex flex-1 items-center justify-end gap-[var(--space-4)]">
