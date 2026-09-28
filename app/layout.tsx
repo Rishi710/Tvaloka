@@ -26,6 +26,21 @@ export const metadata: Metadata = {
   description: "Tvaloka",
 };
 
+/**
+ * Order the collection tabs appear in the header nav, by Shopify collection
+ * handle. Reorder this list to reorder the tabs. Any collection not listed
+ * here still shows, appended after these in whatever order Shopify returns.
+ */
+const NAV_COLLECTION_ORDER = [
+  "best-sellers",
+  "new-launches",
+  "face-care",
+  "bath-body-care",
+  "baby-care",
+  "hair-care",
+  "wellness-care",
+];
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -40,7 +55,17 @@ export default async function RootLayout({
       .map((c) => ({
         label: c.title,
         href: `/${c.handle}`,
-      }));
+        handle: c.handle,
+      }))
+      .sort((a, b) => {
+        const rankA = NAV_COLLECTION_ORDER.indexOf(a.handle);
+        const rankB = NAV_COLLECTION_ORDER.indexOf(b.handle);
+        if (rankA === -1 && rankB === -1) return 0; // keep Shopify's order between unlisted ones
+        if (rankA === -1) return 1;
+        if (rankB === -1) return -1;
+        return rankA - rankB;
+      })
+      .map(({ label, href }) => ({ label, href }));
   } catch (error) {
     console.error("[RootLayout] Failed to fetch nav collections:", error);
     // navItems stays empty — SiteHeader renders only pinned static items
