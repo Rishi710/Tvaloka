@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 // huge dead-zone gaps between short blocks. Step it in from space.5 (20px)
 // through space.6 (30px) before reaching the full desktop value at lg.
 const sectionClass =
-  "mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)]";
+  "mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-6)]";
 
 /** Brand film. A direct video file URL; empty renders the placeholder frame. */
 const BRAND_FILM_URL = PLACEHOLDER_VIDEO_URL;
@@ -111,7 +111,7 @@ export default function AboutUsPage() {
           </div>
           <p className="max-w-2xl text-sm text-tertiary lg:pt-[var(--space-6)]">
             Tvaloka Wellness is an authentic, traditional skincare brand rooted in the ancient
-            science of Ayurveda. We formulate with a modern sensibility — pairing time-tested
+            science of Ayurveda. We formulate with a modern sensibility pairing time-tested
             recipes with contemporary standards of efficacy, sensorial experience and pleasure of
             use, so that a daily ritual feels as considered as it is effective.
           </p>
@@ -296,7 +296,7 @@ export default function AboutUsPage() {
       <section className="bg-surface-muted">
         <div className={`${sectionClass} grid items-center gap-[var(--space-6)] lg:grid-cols-2 lg:gap-[var(--space-7)]`}>
           <MediaFrame
-            src="/Image/img-2.jpg"
+            src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/1.jpg_2.webp?v=1790606023"
             alt="Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms"
             label="Manufacturing image"
             aspectClassName="aspect-[4/3]"
