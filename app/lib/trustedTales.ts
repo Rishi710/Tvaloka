@@ -26,8 +26,8 @@ export const TRUSTED_TALES: TrustedTaleEntry[] = [
     videoSrc: "https://cdn.shopify.com/videos/c/o/v/1325f802c6c44162b7d25dcbca11f33f.mp4",
   },
   {
-    handle: "tila-taila-cold-pressed-sesame-oil-for-hair-skin",
-    videoSrc: PLACEHOLDER_VIDEO_URL,
+    handle: "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
+    videoSrc: "https://cdn.shopify.com/videos/c/o/v/8c9fd4b9497e4d199e5953430000844c.mp4",
   },
   {
     handle: "tea-tree-essential-oil-for-hair-skin-100-pure",

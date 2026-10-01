@@ -33,7 +33,7 @@ export default async function ProductsPage({
       {/* ── Banner ────────────────────────────────────────────────────────── */}
       <section className="relative flex min-h-[175px] items-end justify-center overflow-hidden bg-[#111111] sm:min-h-[320px] lg:min-h-[480px]">
         <Image
-          src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6173.webp?v=1790165117"
+          src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6522.webp?v=1790809164"
           alt="Ayurvedic botanicals and formulations"
           fill
           priority

@@ -34,8 +34,8 @@ export const metadata: Metadata = {
 const NAV_COLLECTION_ORDER = [
   "best-sellers",
   "new-launches",
-  "face-care",
   "bath-body-care",
+  "face-care",
   "baby-care",
   "hair-care",
   "wellness-care",

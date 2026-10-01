@@ -2,11 +2,11 @@ import { HeroSlider } from "./components/HeroSlider";
 import { BestSellers } from "./components/BestSellers";
 import { CollectionShowcase } from "./components/CollectionShowcase";
 import { ConcernSection } from "./components/ConcernSection";
-import { RitualSpotlight } from "./components/RitualSpotlight";
 import { TrustedTalesSection } from "./components/TrustedTalesSection";
 import { Testimonials } from "./components/Testimonials";
 import { TvalokaCode } from "./components/TvalokaCode";
 import { LatestReads } from "./components/LatestReads";
+import { HomePopup } from "./components/HomePopup";
 
 // Stacked rails share one rhythm: the previous section's bottom padding already
 // provides most of the gap, so the top padding steps in from small to the full
@@ -17,6 +17,7 @@ const stackedClass =
 export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
+      <HomePopup />
       <HeroSlider />
       {/* <RitualSpotlight /> */}
       <BestSellers />

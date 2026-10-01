@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MediaFrame } from "../components/MediaFrame";
-import { PlayIcon } from "../components/icons";
-import { PLACEHOLDER_VIDEO_URL } from "../lib/videos";
 
 export const metadata: Metadata = {
   title: "About Us | Tvaloka Wellness",
@@ -17,8 +15,9 @@ export const metadata: Metadata = {
 const sectionClass =
   "mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-6)]";
 
-/** Brand film. A direct video file URL; empty renders the placeholder frame. */
-const BRAND_FILM_URL = PLACEHOLDER_VIDEO_URL;
+/** Brand image URL for the 'Who we are' section. */
+const BRAND_IMAGE_URL =
+  "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Sanjeevni_Testimonial.webp?v=1790324611";
 
 /**
  * Left-anchored scrim, for overlaid copy that sits on the left. Slightly
@@ -234,31 +233,13 @@ export default function AboutUsPage() {
           </div>
 
           <div className="relative mt-[var(--space-6)]">
-            {BRAND_FILM_URL ? (
-              // Native controls: keyboard-operable and screen-reader labelled
-              // for free, which a custom overlay would have to re-implement.
-              <video
-                src={BRAND_FILM_URL}
-                aria-label="Tvaloka Wellness brand film"
-                controls
-                playsInline
-                preload="metadata"
-                className="aspect-video w-full rounded-[var(--radius-xs)] bg-action-onlight-bg object-cover"
-              />
-            ) : (
-              <>
-                <MediaFrame
-                  label="Brand film — set BRAND_FILM_URL"
-                  aspectClassName="aspect-video"
-                  sizes="100vw"
-                />
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-surface-muted text-surface-base">
-                    <PlayIcon className="ml-0.5 h-6 w-6" />
-                  </span>
-                </div>
-              </>
-            )}
+            <MediaFrame
+              src={BRAND_IMAGE_URL}
+              alt="Tvaloka Wellness brand story - Discover Luxurious Ayurveda"
+              label="Brand image"
+              aspectClassName="aspect-video"
+              sizes="100vw"
+            />
           </div>
         </div>
       </section>

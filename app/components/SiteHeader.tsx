@@ -113,8 +113,8 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
         </div>
 
         {/* Logo */}
-        
-        <Link
+
+        {/* <Link
           href="/"
           className={`flex flex-1 items-center justify-center ${focusRing}`}
         >
@@ -126,10 +126,10 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
             priority
             className="h-9 w-auto sm:h-12"
           />
-        </Link>
+        </Link> */}
         {/* <Link
         {/* Logo */}
-        {/* <Link
+        <Link
           href="/"
           className={`flex flex-1 flex-col items-center text-center ${focusRing}`}
         >
@@ -139,7 +139,7 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
           <span className="text-[10px] font-semibold tracking-[0.3em] whitespace-nowrap text-tertiary uppercase">
             Authentic Ayurveda
           </span>
-        </Link>  */}
+        </Link>
 
         {/* Right utility */}
         <div className="flex flex-1 items-center justify-end gap-[var(--space-4)]">
