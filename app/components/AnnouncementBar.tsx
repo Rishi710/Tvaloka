@@ -6,7 +6,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "./icons";
 const messages = [
   "We deliver Pan India.",
   "10% off your first purchase using code FIRST10",
-  "Complimentary shipping on Prepaid orders above ₹500/-",
+  "Complimentary shipping on Prepaid orders above ₹499/-",
   "Handcrafted in small batches using traditional Ayurvedic recipes.",
 ];
 

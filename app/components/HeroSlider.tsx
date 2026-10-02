@@ -29,10 +29,9 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Face & Body",
     href: "/face-care",
     bgClassName: "bg-[radial-gradient(circle_at_30%_20%,_#1a1a1a,_#000000_60%)]",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Banner.webp?v=1790339991",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/HP.png?v=1790942500",
     alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
-    mobileImage:
- "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6306.webp?v=1790341446",
+    mobileImage: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6306.webp?v=1790341446",
     // objectPositionClassName: "object-[80%_center]"
   },
   {
@@ -56,7 +55,7 @@ const defaultSlides: Slide[] = [
     bgClassName: "bg-[radial-gradient(circle_at_80%_70%,_#1a1a1a,_#000000_60%)]",
     image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/wellness_2.webp?v=1790577777",
     alt: "Three dropper bottles of facial oil and serum on linen, surrounded by rosemary and blossoms",
-    mobileImage:"https://cdn.shopify.com/s/files/1/1005/3045/4892/files/wellness.webp?v=1790577777"
+    mobileImage: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/wellness.webp?v=1790577777"
     // objectPositionClassName: "object-[82%_center]",
   },
   {

@@ -27,7 +27,7 @@ export const TRUSTED_TALES: TrustedTaleEntry[] = [
   },
   {
     handle: "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
-    videoSrc: "https://cdn.shopify.com/videos/c/o/v/8c9fd4b9497e4d199e5953430000844c.mp4",
+    videoSrc: PLACEHOLDER_VIDEO_URL,
   },
   {
     handle: "tea-tree-essential-oil-for-hair-skin-100-pure",

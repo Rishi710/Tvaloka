@@ -31,7 +31,7 @@ export default async function ProductsPage({
   return (
     <main className="flex-1 bg-white">
       {/* ── Banner ────────────────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[175px] items-end justify-center overflow-hidden bg-[#111111] sm:min-h-[320px] lg:min-h-[480px]">
+      <section className="relative flex min-h-[175px] items-end justify-center overflow-hidden bg-[#111111] sm:min-h-[320px] lg:min-h-[540px]">
         <Image
           src="https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6522.webp?v=1790809164"
           alt="Ayurvedic botanicals and formulations"
@@ -45,9 +45,9 @@ export default async function ProductsPage({
           className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent sm:from-black/60 sm:via-black/20"
         />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-12 pb-5 text-left sm:px-6 sm:pt-20 sm:pb-12 lg:px-8 lg:pb-16">
-          <p className="text-[11px] font-bold tracking-[0.35em] text-white/90 uppercase">
+          {/* <p className="text-[11px] font-bold tracking-[0.35em] text-white/90 uppercase">
             Ayurvedic Wellness & Beauty
-          </p>
+          </p> */}
           <h1 className="font-display mt-2 text-2xl font-normal text-white sm:text-4xl lg:text-5xl tracking-wide">
             All Formulations
           </h1>
