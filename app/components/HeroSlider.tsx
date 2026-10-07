@@ -29,7 +29,7 @@ const defaultSlides: Slide[] = [
     ctaLabel: "Shop Face & Body",
     href: "/face-care",
     bgClassName: "bg-[radial-gradient(circle_at_30%_20%,_#1a1a1a,_#000000_60%)]",
-    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/HP.png?v=1790942500",
+    image: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/Ayurvedic_Skincare_in_Golden_Sunlight.png?v=1791375029",
     alt: "Ayurvedic botanicals rose, saffron, vanilla, amla, aloe and neem laid out on cream cloth",
     mobileImage: "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/IMG_6306.webp?v=1790341446",
     // objectPositionClassName: "object-[80%_center]"

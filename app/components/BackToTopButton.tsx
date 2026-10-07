@@ -28,7 +28,7 @@ export function BackToTopButton() {
       onClick={scrollToTop}
       aria-label="Back to top"
       tabIndex={isVisible ? 0 : -1}
-      className={`fixed bottom-[var(--space-5)] left-[var(--space-5)] z-40 flex h-11 w-11 items-center justify-center rounded-full bg-action-onlight-bg text-action-onlight-text shadow-md transition-opacity duration-[var(--motion-instant)] hover:bg-action-onlight-bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
+      className={`fixed bottom-[var(--space-5)] right-[var(--space-5)] z-40 flex h-11 w-11 items-center justify-center rounded-full bg-action-onlight-bg text-action-onlight-text shadow-md transition-opacity duration-[var(--motion-instant)] hover:bg-action-onlight-bg-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
         isVisible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >

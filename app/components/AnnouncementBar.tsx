@@ -5,7 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "./icons";
 
 const messages = [
   "We deliver Pan India.",
-  "10% off your first purchase using code FIRST10",
+  "10% off on your first purchase using code FIRST10",
   "Complimentary shipping on Prepaid orders above ₹499/-",
   "Handcrafted in small batches using traditional Ayurvedic recipes.",
 ];
@@ -80,7 +80,7 @@ export function AnnouncementBar() {
             <p
               key={message}
               aria-hidden={messageIndex !== index}
-              className={`absolute inset-0 text-xs font-medium tracking-wide transition-opacity duration-[var(--motion-fast)] ease-out ${messageIndex === index ? "opacity-100" : "pointer-events-none opacity-0"
+              className={`absolute inset-0 text-xs font-medium uppercase tracking-wide transition-opacity duration-[var(--motion-fast)] ease-out ${messageIndex === index ? "opacity-100" : "pointer-events-none opacity-0"
                 }`}
             >
               {message}

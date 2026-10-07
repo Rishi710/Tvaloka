@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ShopifyProduct } from "../../lib/shopify/types";
 import { useCart } from "../../components/CartContext";
-import { CartIcon, CloseIcon } from "../../components/icons";
+import { CartIcon, CheckIcon, CloseIcon, CopyIcon } from "../../components/icons";
 
 function MinusIcon({ className }: { className?: string }) {
   return (
@@ -110,10 +110,69 @@ function InfoModal({
           <CloseIcon className="h-4 w-4" />
         </button>
 
-        <h3 className="font-display text-md text-primary">{title}</h3>
+        <h3 className="font-display text-md uppercase tracking-wider text-primary">{title}</h3>
 
         <ul className="mt-4 space-y-4 text-sm leading-relaxed text-tertiary">{children}</ul>
       </div>
+    </div>
+  );
+}
+
+function OfferCouponCode({ code = "FIRST10" }: { code?: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+    } catch {
+      // Fallback for older browsers
+      const el = document.createElement("textarea");
+      el.value = code;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="mt-2.5">
+      <div className="group flex items-center justify-between gap-2 rounded-lg border border-dashed border-[#F7E5B5]/80 bg-[#F7E5B5]/20 px-3 py-2 transition-all duration-150 hover:border-[#F7E5B5]/70 hover:bg-[#F7E5B5]/40">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-[11px] font-medium text-tertiary">Use code:</span>
+          <span
+            className="font-mono text-xs sm:text-sm font-bold tracking-[0.18em] text-black select-text cursor-text"
+            style={{ userSelect: "text" }}
+          >
+            {code}
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={handleCopy}
+          aria-label={`Copy code ${code}`}
+          className="flex items-center gap-1.5 rounded-md bg-[#F7E5B5]/80 px-2.5 py-1 text-xs font-semibold text-black transition-all duration-150 hover:bg-[#F7E5B5]/25 active:scale-95 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F7E5B5]"
+        >
+          {copied ? (
+            <>
+              <CheckIcon className="h-3.5 w-3.5" />
+              <span>Copied!</span>
+            </>
+          ) : (
+            <>
+              <CopyIcon className="h-3.5 w-3.5" />
+              <span>Copy</span>
+            </>
+          )}
+        </button>
+      </div>
+      {copied && (
+        <p className="mt-1 text-[11px] font-medium text-[#73290a]">
+          Copied to clipboard!
+        </p>
+      )}
     </div>
   );
 }
@@ -179,8 +238,8 @@ export function ProductActions({ product }: ProductActionsProps) {
                   type="button"
                   onClick={() => setSelectedVariantId(variant.id)}
                   className={`rounded border px-3.5 py-2 text-xs font-semibold uppercase tracking-wider transition-colors ${isSelected
-                      ? "border-black bg-black text-white"
-                      : "border-[#dddddd] bg-white text-primary hover:border-black"
+                    ? "border-black bg-black text-white"
+                    : "border-[#dddddd] bg-white text-primary hover:border-black"
                     }`}
                 >
                   {variant.title}
@@ -260,9 +319,12 @@ export function ProductActions({ product }: ProductActionsProps) {
       {openPanel === "offers" && (
         <InfoModal title="Available Offers" onClose={() => setOpenPanel(null)}>
           <li>
-            <strong className="font-bold text-primary">10% off</strong> on your first purchase.
+            <div>
+              <strong className="font-bold text-primary">10% off</strong> on your first purchase.
+            </div>
+            <OfferCouponCode code="FIRST10" />
           </li>
-          <li>
+          <li className="pt-1">
             <strong className="font-bold text-primary">Free shipping</strong>{" "}
             on prepaid orders above &#8377;500.
           </li>

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CloseIcon } from "./icons";
+import { CheckIcon, CloseIcon, CopyIcon } from "./icons";
 
 // Session storage key to avoid repeatedly annoying users after they close the popup
 const POPUP_STORAGE_KEY = "tvaloka_home_popup_dismissed";
@@ -38,7 +38,7 @@ type HomePopupProps = {
 
 export function HomePopup({
   eyebrow = "WELCOME!!",
-  title = "10% off your first purchase",
+  title = "10% off on your first purchase",
   code = "FIRST10",
   subtext,
   ctaText = "SHOP NOW",
@@ -47,11 +47,28 @@ export function HomePopup({
   imageSrc = DEFAULT_POPUP_IMAGE,
   altText = "Special welcome offer - Tvaloka Wellness",
   delayMs = 5000,
-  persistInSession = true,
+  persistInSession = false,
 }: HomePopupProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isRendered, setIsRendered] = useState(false);
+  const [copied, setCopied] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const handleCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+    } catch {
+      // Fallback for older browsers
+      const el = document.createElement("textarea");
+      el.value = code;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, [code]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -163,16 +180,48 @@ export function HomePopup({
               {title}
             </h2>
 
-            {/* Description / Code */}
-            <p className="mt-1 sm:mt-2.5 max-w-[170px] sm:max-w-xs text-[10px] sm:text-xs text-tertiary leading-tight sm:leading-relaxed">
-              {subtext ?? (
-                <>
-                  Simply enter code{" "}
-                  <strong className="font-bold text-primary tracking-wider">{code}</strong>
-                  <br className="hidden sm:inline" /> at checkout*
-                </>
-              )}
-            </p>
+            {/* Description / Subtext */}
+            {subtext ? (
+              <p className="mt-1 sm:mt-2.5 max-w-[170px] sm:max-w-xs text-[10px] sm:text-xs text-tertiary leading-tight sm:leading-relaxed">
+                {subtext}
+              </p>
+            ) : (
+              <>
+                <p className="mt-1 sm:mt-2 text-[9px] sm:text-[11px] text-tertiary leading-tight">
+                  Use code at checkout*
+                </p>
+
+                {/* Copyable code block — text is selectable (Ctrl+C works) */}
+                <div className="group mt-2 sm:mt-3 flex items-center gap-1.5 sm:gap-2 rounded-lg border border-dashed border-[#73290a]/40 bg-[#73290a]/5 px-2.5 py-1.5 sm:px-4 sm:py-2 transition-all duration-150 hover:border-[#73290a]/70 hover:bg-[#73290a]/10">
+                  {/* Selectable code text */}
+                  <span
+                    className="font-mono text-[11px] sm:text-sm md:text-base font-bold tracking-[0.18em] sm:tracking-[0.22em] text-[#73290a] cursor-text"
+                    style={{ userSelect: "text" }}
+                  >
+                    {code}
+                  </span>
+                  {/* Copy icon button */}
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    aria-label={`Copy code ${code}`}
+                    className="ml-auto flex h-5 w-5 sm:h-6 sm:w-6 shrink-0 items-center justify-center rounded-md bg-[#73290a]/10 text-[#73290a] transition-all duration-150 hover:bg-[#73290a]/30 active:scale-90 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#73290a]"
+                  >
+                    {copied ? (
+                      <CheckIcon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                    ) : (
+                      <CopyIcon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                    )}
+                  </button>
+                </div>
+
+                {copied && (
+                  <p className="mt-1 text-[9px] sm:text-[10px] font-medium text-black">
+                    Copied!
+                  </p>
+                )}
+              </>
+            )}
 
             {/* Shop Now CTA Button */}
             <Link

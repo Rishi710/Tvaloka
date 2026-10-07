@@ -127,7 +127,7 @@ export function SiteFooter() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-[var(--space-4)] py-[var(--space-5)] sm:py-[var(--space-6)] lg:py-[var(--space-7)]">
+      <div className="mx-auto max-w-7xl px-[var(--space-4)] pt-[var(--space-5)] sm:pt-[var(--space-6)] lg:pt-[var(--space-7)]">
         <div className="grid grid-cols-2 gap-x-[var(--space-4)] gap-y-[var(--space-6)] sm:gap-x-[var(--space-6)] lg:grid-cols-4 lg:gap-y-[var(--space-7)]">
           <FooterColumn title="Shop" links={shopLinks} />
           <FooterColumn title="About" links={aboutLinks} />
@@ -166,27 +166,38 @@ export function SiteFooter() {
             </ul>
           </div>
         </div>
+
       </div>
 
-       <div>
-        <div className="mx-auto flex max-w-7xl flex-col gap-[var(--space-5)] px-[var(--space-4)] py-[var(--space-5)] sm:flex-row sm:items-center sm:justify-between">
-          {/* <div>
-            <p className="text-xs font-semibold tracking-wide text-tertiary uppercase">
-              Payment Methods
-            </p>
-            <ul className="mt-[var(--space-3)] flex flex-wrap gap-[var(--space-2)]">
-              {paymentMethods.map((method) => (
-                <li
-                  key={method}
-                  className="rounded-[var(--radius-xs)] bg-black/[.04] px-[var(--space-2)] py-[var(--space-1)] text-[11px] font-semibold text-primary"
-                >
-                  {method}
-                </li>
-              ))}
-            </ul>
-          </div> */}
-          <p className="text-xs text-tertiary">© {new Date().getFullYear()} Tvaloka Wellness</p>
-        </div> 
+      {/* Sliding marquee wordmark */}
+      <div className="overflow-hidden bg-surface-muted py-3 sm:py-4 select-none" aria-hidden="true">
+        <style>{`
+          @keyframes marquee-rtl {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee-rtl 40s linear infinite;
+          }
+        `}</style>
+        <div className="marquee-track">
+          {/* Duplicate the text so the loop is seamless */}
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span
+              key={i}
+              className="font-display font-black text-[clamp(8rem,8vw,4rem)] leading-none text-gray-400 whitespace-nowrap px-10"
+            >
+              Tvaloka Wellness
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Copyright row — below the marquee */}
+      <div className="mx-auto flex max-w-7xl items-center px-[var(--space-4)] py-[var(--space-3)] border-t border-black/[0.06]">
+        <p className="text-xs text-tertiary">© {new Date().getFullYear()} Tvaloka Wellness</p>
       </div>
 
       <BackToTopButton />

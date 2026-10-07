@@ -7,6 +7,7 @@ import { Testimonials } from "./components/Testimonials";
 import { TvalokaCode } from "./components/TvalokaCode";
 import { LatestReads } from "./components/LatestReads";
 import { HomePopup } from "./components/HomePopup";
+import { RitualSpotlight } from "./components/RitualSpotlight";
 
 // Stacked rails share one rhythm: the previous section's bottom padding already
 // provides most of the gap, so the top padding steps in from small to the full
@@ -19,7 +20,7 @@ export default function Home() {
     <main className="flex flex-1 flex-col">
       <HomePopup />
       <HeroSlider />
-      {/* <RitualSpotlight /> */}
+      <RitualSpotlight />
       <BestSellers />
       <CollectionShowcase
         collectionHandle="new-launches"
