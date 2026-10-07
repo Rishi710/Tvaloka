@@ -21,7 +21,7 @@ export function RitualSpotlight() {
             Because timeless wisdom still has a place in modern life. Ayurveda brings us back to nature, balance, and intentional care nourishing your skin, hair, and body rather than chasing overnight transformation.
           </p>
           <Link
-            href="/hair"
+            href="/products"
             className={`mt-[var(--space-6)] inline-flex items-center gap-[var(--space-2)] rounded-[var(--radius-xs)] bg-action-onlight-bg px-[var(--space-5)] py-[var(--space-3)] text-sm font-semibold text-action-onlight-text transition-colors duration-[var(--motion-instant)] hover:bg-action-onlight-bg-hover active:bg-action-onlight-bg-active ${focusRingOnDark}`}
           >
             Explore Now
