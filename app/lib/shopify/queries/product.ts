@@ -1,5 +1,6 @@
 import { shopifyFetch, removeEdgesAndNodes, reshapeProduct, reshapeProducts } from "../index";
 import { ShopifyProduct, ShopifySizeOption } from "../types";
+import { REVALIDATE_LISTS, REVALIDATE_PRODUCT } from "../cache";
 
 // custom.size_option is a list of product references: each size is its own
 // product, and every product in the group lists the whole group (itself included).
@@ -140,16 +141,94 @@ const productFragment = `
   }
 `;
 
+/**
+ * Product *list* fragment. The full productFields fragment is ~9 KB per product
+ * (10 gallery images, HTML description, five long-form metafields), which made
+ * a 31-product list 288 KB. Cached copies are billed in 8 KB blocks and the
+ * list is also embedded in the pages that use it, so lists use only what
+ * cards, filters, search and lookups actually read. The product page itself
+ * still loads the full fragment through getProductByHandle.
+ */
+const productListFragment = `
+  fragment productListFields on Product {
+    id
+    handle
+    title
+    description
+    availableForSale
+    vendor
+    productType
+    tags
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    featuredImage {
+      url
+      altText
+      width
+      height
+    }
+    variants(first: 25) {
+      edges {
+        node {
+          id
+          title
+          availableForSale
+          price {
+            amount
+            currencyCode
+          }
+          compareAtPrice {
+            amount
+            currencyCode
+          }
+          selectedOptions {
+            name
+            value
+          }
+          image {
+            url
+            altText
+          }
+        }
+      }
+    }
+    metafields(identifiers: [
+      { namespace: "custom", key: "concern" },
+      { namespace: "custom", key: "ingredient" },
+      { namespace: "custom", key: "size" }
+    ]) {
+      namespace
+      key
+      value
+      type
+    }
+  }
+`;
+
 export async function getProducts({
   query,
   reverse,
   sortKey,
   first = 20,
+  tags = ["products"],
+  revalidate = REVALIDATE_LISTS,
 }: {
   query?: string;
   reverse?: boolean;
   sortKey?: string;
   first?: number;
+  /** Cache tags. Lookup-only lists use their own so product edits don't refresh them. */
+  tags?: string[];
+  /** Seconds before a timed refresh. Webhooks refresh real changes sooner. */
+  revalidate?: number;
 } = {}): Promise<ShopifyProduct[]> {
   const res = await shopifyFetch<{
     products: { edges: Array<{ node: unknown }> };
@@ -159,18 +238,22 @@ export async function getProducts({
         products(query: $query, reverse: $reverse, sortKey: $sortKey, first: $first) {
           edges {
             node {
-              ...productFields
+              ...productListFields
             }
           }
         }
       }
-      ${productFragment}
+      ${productListFragment}
     `,
     variables: { query, reverse, sortKey, first },
-    next: { revalidate: 3600, tags: ["products"] },
+    next: { revalidate, tags },
   });
 
-  return reshapeProducts(removeEdgesAndNodes(res.products));
+  // List items carry no HTML description or gallery; keep the typed shape whole.
+  return reshapeProducts(removeEdgesAndNodes(res.products)).map((p) => ({
+    ...p,
+    descriptionHtml: p.descriptionHtml ?? "",
+  }));
 }
 
 export async function getProductByHandle(handle: string): Promise<ShopifyProduct | null> {
@@ -193,7 +276,7 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
       ${productFragment}
     `,
     variables: { handle: decodedHandle },
-    next: { revalidate: 3600, tags: [`product-${decodedHandle}`] },
+    next: { revalidate: REVALIDATE_PRODUCT, tags: [`product-${decodedHandle}`] },
   });
 
   const raw = (res.product || res.productByHandle) as
@@ -218,7 +301,7 @@ export async function getProductRecommendations(productId: string): Promise<Shop
       ${productFragment}
     `,
     variables: { productId },
-    next: { revalidate: 3600, tags: ["products"] },
+    next: { revalidate: REVALIDATE_LISTS, tags: ["products"] },
   });
 
   return reshapeProducts(res.productRecommendations || []);

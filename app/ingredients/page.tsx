@@ -4,7 +4,7 @@ import { IngredientsView, Ingredient } from "./IngredientsView";
 import { getProducts } from "../lib/shopify/queries/product";
 import { ShopifyProduct } from "../lib/shopify/types";
 
-export const revalidate = 3600;
+export const revalidate = 21600; // 6 h, literal as Next requires.
 
 export const metadata: Metadata = {
   title: "Our Sacred Ingredients | Tvaloka Ayurvedic Luxury",

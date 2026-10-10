@@ -11,30 +11,38 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ products: [], collections: [], tags: [] });
   }
 
-  // Shopify Storefront query DSL — searches title, tag, product_type, vendor.
-  // It cannot see metafield values, so "concern" terms (e.g. "Dry Hair") need
-  // a separate pass below against the custom.concern metafield.
-  const shopifyQuery = `title:*${q}* OR tag:*${q}* OR product_type:*${q}* OR vendor:*${q}*`;
   const ql = q.toLowerCase();
 
-  const [titleMatches, allProducts, allCollections] = await Promise.all([
-    getProducts({ query: shopifyQuery, first: 8 }).catch(() => []),
+  // Search runs over the catalogue list that is already cached and shared with
+  // the rest of the site. Asking Shopify per keyword instead created a new
+  // cache entry for every distinct search term, each one billed as an ISR write.
+  const [allProducts, allCollections] = await Promise.all([
     getProducts({ first: 100 }).catch(() => []),
     getNavCollections(30).catch(() => []),
   ]);
 
-  const concernMatches = allProducts.filter((p) => {
-    const mf = p.metafields?.find((m) => m && m.namespace === "custom" && m.key === "concern");
-    return !!mf?.value && mf.value.toLowerCase().includes(ql);
-  });
+  const concernText = (p: (typeof allProducts)[number]) =>
+    p.metafields?.find((m) => m && m.namespace === "custom" && m.key === "concern")?.value ?? "";
 
-  // Merge title/tag matches with concern-metafield matches, deduped, title matches first.
+  // Every word typed must appear somewhere in the title, type, vendor, tags or
+  // concerns, so "hair oil" and "oil hair" both find hair oils.
+  const words = ql.split(/\s+/).filter(Boolean);
+  const matches = (text: string) => words.every((w) => text.includes(w));
+
+  const directMatches = allProducts.filter((p) =>
+    matches([p.title, p.productType, p.vendor, ...p.tags].join(" ").toLowerCase())
+  );
+  const concernMatches = allProducts.filter((p) => matches(concernText(p).toLowerCase()));
+
+  // Title/tag matches first, then concern matches, deduped.
   const seen = new Set<string>();
-  const products = [...titleMatches, ...concernMatches].filter((p) => {
-    if (seen.has(p.id)) return false;
-    seen.add(p.id);
-    return true;
-  }).slice(0, 8);
+  const products = [...directMatches, ...concernMatches]
+    .filter((p) => {
+      if (seen.has(p.id)) return false;
+      seen.add(p.id);
+      return true;
+    })
+    .slice(0, 8);
 
   // Filter collections by title
   const collections = allCollections

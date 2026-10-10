@@ -12,8 +12,21 @@ import { ReviewsSection } from "./ReviewsSection";
 import { BestSellers } from "../../components/BestSellers";
 import { getIngredientsForProduct } from "../../lib/productIngredients";
 import type { ShopifyProduct } from "../../lib/shopify/types";
+import { REVALIDATE_PRODUCT } from "../../lib/shopify/cache";
 
-export const revalidate = 3600; // ISR: refresh at most once an hour (each refresh counts toward Vercel ISR writes)
+// Name/image/price lookup for the ingredient cards. Its own tag means editing one
+// product doesn't refresh every product page; only create/delete does. 250 is
+// Shopify's page maximum and a different size from other lists keeps it separate.
+const PRODUCT_LOOKUP = {
+  first: 250,
+  tags: ["product-lookup"],
+  revalidate: REVALIDATE_PRODUCT,
+};
+
+// Must be a literal. Product webhooks refresh edits at once, so this is only a
+// safety net; 86400 s = 24 h. Every fetch on this page must be at least this long
+// too, because Next uses the shortest window of all of them.
+export const revalidate = 86400;
 export const dynamicParams = true; // Allow dynamic generation of un-prerendered products
 
 interface ProductPageProps {
@@ -50,7 +63,7 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   try {
-    const products = await getProducts({ first: 50 });
+    const products = await getProducts(PRODUCT_LOOKUP);
     return products.map((p) => ({
       handle: p.handle,
     }));
@@ -67,7 +80,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   let allProducts: ShopifyProduct[] = [];
   try {
     product = await getProductByHandle(decodedHandle);
-    allProducts = await getProducts({ first: 50 });
+    allProducts = await getProducts(PRODUCT_LOOKUP);
   } catch (error) {
     console.error(`[ProductDetailPage] Error fetching product "${decodedHandle}":`, error);
   }
@@ -222,6 +235,10 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
              manage its own full-bleed band + padding, matching the home page) ── */}
       <BestSellers
         excludeProductId={product.id}
+        // Own page size = own cache entry, so this long window doesn't depend on
+        // (or shorten) the home page's rail. The current product is filtered out.
+        pageSize={25}
+        revalidate={REVALIDATE_PRODUCT}
         className="mt-16 border-t border-[#e5e5e5] sm:mt-24"
       />
     </main>

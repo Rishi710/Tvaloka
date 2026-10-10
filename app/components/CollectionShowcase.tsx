@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getCollectionProducts } from "../lib/shopify/queries/collection";
 import type { ShopifyProduct } from "../lib/shopify/types";
 import { BestSellersRail } from "./BestSellersRail";
+import { REVALIDATE_LISTS } from "../lib/shopify/cache";
 
 interface CollectionShowcaseProps {
   /** Shopify collection handle, also used for the "View All" link. */
@@ -11,6 +12,10 @@ interface CollectionShowcaseProps {
   /** Pass the current PDP's product id so it doesn't also show up in its own rail. */
   excludeProductId?: string;
   className?: string;
+  /** How many products to fetch. A different size gets its own cache entry. */
+  pageSize?: number;
+  /** Seconds before a timed refresh. */
+  revalidate?: number;
 }
 
 export async function CollectionShowcase({
@@ -19,10 +24,12 @@ export async function CollectionShowcase({
   title,
   excludeProductId,
   className = "",
+  pageSize = 24,
+  revalidate = REVALIDATE_LISTS,
 }: CollectionShowcaseProps) {
   let products: ShopifyProduct[] = [];
   try {
-    products = await getCollectionProducts({ collectionHandle, first: 24 });
+    products = await getCollectionProducts({ collectionHandle, first: pageSize, revalidate });
   } catch (error) {
     console.error(`Failed to load "${collectionHandle}" collection from Shopify:`, error);
   }

@@ -1,5 +1,6 @@
 import { shopifyFetch, removeEdgesAndNodes, reshapeProducts } from "../index";
 import { ShopifyCollection, ShopifyProduct } from "../types";
+import { REVALIDATE_LISTS, REVALIDATE_NAV } from "../cache";
 
 /**
  * Lightweight collection fetch used by the nav bar and hero slider.
@@ -49,7 +50,7 @@ export async function getNavCollections(first = 20): Promise<ShopifyCollection[]
       }
     `,
     variables: { first },
-    next: { revalidate: 3600, tags: ["collections"] },
+    next: { revalidate: REVALIDATE_NAV, tags: ["collections"] },
   });
 
   return removeEdgesAndNodes(res.collections);
@@ -93,7 +94,7 @@ export async function getCollections(first = 20): Promise<ShopifyCollection[]> {
       }
     `,
     variables: { first },
-    next: { revalidate: 3600, tags: ["collections"] },
+    next: { revalidate: REVALIDATE_NAV, tags: ["collections"] },
   });
 
   return removeEdgesAndNodes(res.collections);
@@ -102,9 +103,12 @@ export async function getCollections(first = 20): Promise<ShopifyCollection[]> {
 export async function getCollectionProducts({
   collectionHandle,
   first = 20,
+  revalidate = REVALIDATE_LISTS,
 }: {
   collectionHandle: string;
   first?: number;
+  /** Seconds before a timed refresh. Webhooks refresh real changes sooner. */
+  revalidate?: number;
 }): Promise<ShopifyProduct[]> {
   const res = await shopifyFetch<{
     collection: {
@@ -186,7 +190,7 @@ export async function getCollectionProducts({
       }
     `,
     variables: { handle: collectionHandle, first },
-    next: { revalidate: 3600, tags: [`collection-${collectionHandle}`, "collection-products"] },
+    next: { revalidate, tags: [`collection-${collectionHandle}`, "collection-products"] },
   });
 
   if (!res.collection) return [];
@@ -305,7 +309,7 @@ export async function getCollectionWithProducts({
       }
     `,
     variables: { handle: collectionHandle, first },
-    next: { revalidate: 3600, tags: [`collection-${collectionHandle}`, "collection-products"] },
+    next: { revalidate: REVALIDATE_LISTS, tags: [`collection-${collectionHandle}`, "collection-products"] },
   });
 
   if (!res.collection) {

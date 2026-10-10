@@ -7,9 +7,11 @@ interface BestSellersProps {
   /** Pass the current PDP's product id so it doesn't also show up in its own rail. */
   excludeProductId?: string;
   className?: string;
+  pageSize?: number;
+  revalidate?: number;
 }
 
-export function BestSellers({ excludeProductId, className }: BestSellersProps) {
+export function BestSellers({ excludeProductId, className, pageSize, revalidate }: BestSellersProps) {
   return (
     <CollectionShowcase
       collectionHandle={BEST_SELLERS_COLLECTION_HANDLE}
@@ -17,6 +19,8 @@ export function BestSellers({ excludeProductId, className }: BestSellersProps) {
       title="Best Sellers"
       excludeProductId={excludeProductId}
       className={className}
+      pageSize={pageSize}
+      revalidate={revalidate}
     />
   );
 }

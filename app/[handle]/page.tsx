@@ -5,7 +5,7 @@ import { getCollectionWithProducts, getNavCollections } from "../lib/shopify/que
 import type { ShopifyProduct } from "../lib/shopify/types";
 import { CollectionCatalog } from "../components/CollectionCatalog";
 
-export const revalidate = 3600; // ISR: refresh at most once an hour (each refresh counts toward Vercel ISR writes)
+export const revalidate = 21600; // 6 h, literal as Next requires. Collection edits refresh via webhook.
 
 interface CollectionPageProps {
   params: Promise<{

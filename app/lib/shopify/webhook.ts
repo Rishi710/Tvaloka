@@ -33,11 +33,16 @@ export function tagsForWebhook(topic: string, payload: { handle?: unknown }): st
     // tags today, so this is intentionally wide.
     case "products/create":
     case "products/delete":
-      return ["products", "collection-products", ...(handle ? [`product-${handle}`] : [])];
+      return [
+        "products",
+        "collection-products",
+        "product-lookup",
+        ...(handle ? [`product-${handle}`] : []),
+      ];
 
     // An update just changes that product's own fields (price, description,
     // images, …) — only its own page needs to be fresh immediately. The
-    // shared listing pages catch up on their normal hourly refresh instead of
+    // shared listing pages catch up on their normal timed refresh instead of
     // regenerating sitewide on every single edit.
     case "products/update":
       return handle ? [`product-${handle}`] : [];

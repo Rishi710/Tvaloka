@@ -1,5 +1,6 @@
 import { shopifyFetch, removeEdgesAndNodes, reshapeArticles } from "../index";
 import { ShopifyArticle } from "../types";
+import { REVALIDATE_ARTICLES } from "../cache";
 
 const articleFragment = `
   fragment articleFields on Article {
@@ -55,7 +56,7 @@ export async function getArticles({
       ${articleFragment}
     `,
     variables: { first, query, reverse, sortKey },
-    next: { revalidate: 3600, tags: ["articles"] },
+    next: { revalidate: REVALIDATE_ARTICLES, tags: ["articles"] },
   });
 
   return reshapeArticles(removeEdgesAndNodes(res.articles));
@@ -82,7 +83,7 @@ export async function getArticleByHandle(handle: string): Promise<ShopifyArticle
       }
       ${articleFragment}
     `,
-    next: { revalidate: 3600, tags: [`article-${handle}`] },
+    next: { revalidate: REVALIDATE_ARTICLES, tags: [`article-${handle}`] },
   });
 
   const all = reshapeArticles(removeEdgesAndNodes(res.articles));
