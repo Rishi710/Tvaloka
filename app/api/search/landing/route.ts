@@ -10,15 +10,26 @@ interface PopularProduct {
   handle: string;
   title: string;
   price: string;
+  /** Shopify "compare at" price, only when it is genuinely higher than `price`. */
+  compareAtPrice: string | null;
+  /** custom.size metafield, e.g. "200ml". */
+  size: string | null;
   image: string | null;
   imageAlt: string;
 }
 
 function toPopularProduct(p: ShopifyProduct): PopularProduct {
+  const price = Number(p.priceRange.minVariantPrice.amount);
+  const compareAt = Number(p.variants?.[0]?.compareAtPrice?.amount);
   return {
     handle: p.handle,
     title: p.title,
     price: Math.round(Number(p.priceRange.minVariantPrice.amount)).toLocaleString("en-IN"),
+    compareAtPrice:
+      Number.isFinite(compareAt) && compareAt > price
+        ? Math.round(compareAt).toLocaleString("en-IN")
+        : null,
+    size: p.metafields?.find((m) => m.key === "size")?.value?.trim() || null,
     image: p.featuredImage?.url ?? null,
     imageAlt: p.featuredImage?.altText || p.title,
   };

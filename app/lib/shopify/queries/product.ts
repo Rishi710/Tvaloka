@@ -1,5 +1,54 @@
 import { shopifyFetch, removeEdgesAndNodes, reshapeProduct, reshapeProducts } from "../index";
-import { ShopifyProduct } from "../types";
+import { ShopifyProduct, ShopifySizeOption } from "../types";
+
+// custom.size_option is a list of product references: each size is its own
+// product, and every product in the group lists the whole group (itself included).
+const sizeOptionsSelection = `
+  sizeOptions: metafield(namespace: "custom", key: "size_option") {
+    references(first: 10) {
+      nodes {
+        ... on Product {
+          id
+          handle
+          title
+          availableForSale
+          size: metafield(namespace: "custom", key: "size") {
+            value
+          }
+        }
+      }
+    }
+  }
+`;
+
+type RawSizeOptions = {
+  references?: {
+    nodes?: Array<{
+      id?: string;
+      handle?: string;
+      title?: string;
+      availableForSale?: boolean;
+      size?: { value?: string } | null;
+    } | null>;
+  } | null;
+} | null;
+
+function normalizeSizeOptions(raw: RawSizeOptions | undefined): ShopifySizeOption[] {
+  const nodes = raw?.references?.nodes ?? [];
+  return nodes.flatMap((node) =>
+    node?.id && node.handle
+      ? [
+          {
+            id: node.id,
+            handle: node.handle,
+            title: node.title ?? node.handle,
+            size: node.size?.value?.trim() || null,
+            availableForSale: node.availableForSale ?? true,
+          },
+        ]
+      : [],
+  );
+}
 
 const productFragment = `
   fragment productFields on Product {
@@ -134,9 +183,11 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
       query getProductByHandle($handle: String!) {
         product(handle: $handle) {
           ...productFields
+          ${sizeOptionsSelection}
         }
         productByHandle(handle: $handle) {
           ...productFields
+          ${sizeOptionsSelection}
         }
       }
       ${productFragment}
@@ -145,7 +196,13 @@ export async function getProductByHandle(handle: string): Promise<ShopifyProduct
     next: { revalidate: 3600, tags: [`product-${decodedHandle}`] },
   });
 
-  return reshapeProduct(res.product || res.productByHandle);
+  const raw = (res.product || res.productByHandle) as
+    | ({ sizeOptions?: RawSizeOptions } & Record<string, unknown>)
+    | null
+    | undefined;
+  const product = reshapeProduct(raw);
+  if (product) product.sizeOptions = normalizeSizeOptions(raw?.sizeOptions);
+  return product;
 }
 
 export async function getProductRecommendations(productId: string): Promise<ShopifyProduct[]> {

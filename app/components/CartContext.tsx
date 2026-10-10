@@ -29,6 +29,10 @@ export interface CartItem {
   priceAmount: number;
   currencyCode: string;
   quantity: number;
+  /** Struck-through "compare at" price, only when higher than the price. Absent on older saved carts. */
+  formattedCompareAtPrice?: string | null;
+  /** custom.size label, e.g. "200ml". Absent on older saved carts. */
+  sizeLabel?: string | null;
 }
 
 interface CartState {
@@ -59,7 +63,13 @@ function cartReducer(state: CartState, action: CartAction): CartState {
         return {
           items: state.items.map((i) =>
             i.variantId === action.payload.variantId
-              ? { ...i, quantity: i.quantity + addQty }
+              ? {
+                  ...i,
+                  // Re-adding refreshes details on lines saved before these existed.
+                  formattedCompareAtPrice: action.payload.formattedCompareAtPrice,
+                  sizeLabel: action.payload.sizeLabel,
+                  quantity: i.quantity + addQty,
+                }
               : i
           ),
         };
@@ -182,6 +192,20 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       const variantTitle =
         variant.title === "Default Title" ? "" : variant.title;
 
+      // Only a genuine discount: compare-at must be higher than the price.
+      const compareAtAmount = parseFloat(variant.compareAtPrice?.amount ?? "");
+      const formattedCompareAtPrice =
+        Number.isFinite(compareAtAmount) && compareAtAmount > priceAmount
+          ? new Intl.NumberFormat("en-IN", {
+              style: "currency",
+              currency: variant.compareAtPrice?.currencyCode ?? currency,
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }).format(compareAtAmount)
+          : null;
+      const sizeLabel =
+        product.metafields?.find((m) => m.key === "size")?.value?.trim() || null;
+
       const item: CartItem = {
         variantId,
         productId: product.id,
@@ -197,6 +221,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         priceAmount,
         currencyCode: currency,
         quantity: Math.max(1, quantity),
+        formattedCompareAtPrice,
+        sizeLabel,
       };
 
       dispatch({ type: "ADD_ITEM", payload: item });

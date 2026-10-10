@@ -232,6 +232,11 @@ export function SideCart() {
                           {item.variantTitle}
                         </p>
                       )}
+                      {item.sizeLabel && (
+                        <p className="mt-0.5 text-[11px] text-[#888888]">
+                          {item.sizeLabel}
+                        </p>
+                      )}
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -267,8 +272,15 @@ export function SideCart() {
 
                       {/* Price + Remove */}
                       <div className="flex items-center gap-3">
-                        <span className="text-[13px] font-semibold text-black">
-                          {item.formattedPrice}
+                        <span className="flex items-baseline gap-1.5">
+                          {item.formattedCompareAtPrice && (
+                            <span className="text-[11px] text-[#888888] line-through">
+                              {item.formattedCompareAtPrice}
+                            </span>
+                          )}
+                          <span className="text-[13px] font-semibold text-black">
+                            {item.formattedPrice}
+                          </span>
                         </span>
                         <button
                           type="button"

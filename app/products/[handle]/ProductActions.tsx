@@ -212,6 +212,31 @@ export function ProductActions({ product }: ProductActionsProps) {
   // between, so it's a static value display rather than another picker.
   const sizeValue = product.metafields?.find((m) => m.key === "size")?.value;
 
+  // custom.size_option — the same product in other sizes. Each size is its own
+  // product, so switching sizes means going to that sibling's page. This
+  // product is always shown in the group, even if the field forgot to list it.
+  const sizeChoices = (() => {
+    const options = product.sizeOptions ?? [];
+    if (options.length < 2) return [];
+    const group = options.some((o) => o.handle === product.handle)
+      ? options
+      : [
+          {
+            id: product.id,
+            handle: product.handle,
+            title: product.title,
+            size: sizeValue?.trim() || null,
+            availableForSale: product.availableForSale,
+          },
+          ...options,
+        ];
+    return group.map((option) => ({
+      ...option,
+      label: option.size || option.title,
+      isCurrent: option.handle === product.handle,
+    }));
+  })();
+
   const handleAddToCart = () => {
     if (!isAvailable || !selectedVariant) return;
     setAdding(true);
@@ -281,7 +306,37 @@ export function ProductActions({ product }: ProductActionsProps) {
           </div>
         </div>
 
-        {sizeValue && (
+        {sizeChoices.length > 0 ? (
+          <div>
+            <span
+              id="size-option-label"
+              className="block text-xs font-semibold uppercase tracking-wider text-primary mb-2"
+            >
+              Size
+            </span>
+            <ul aria-labelledby="size-option-label" className="flex flex-wrap gap-2">
+              {sizeChoices.map((option) => (
+                <li key={option.id}>
+                  <Link
+                    href={`/products/${option.handle}`}
+                    scroll={false}
+                    aria-current={option.isCurrent ? "true" : undefined}
+                    aria-label={
+                      option.availableForSale ? option.label : `${option.label}, sold out`
+                    }
+                    className={`flex h-10 items-center rounded border px-4 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black ${
+                      option.isCurrent
+                        ? "border-black bg-black text-white"
+                        : "border-[#dddddd] bg-white text-primary hover:border-black"
+                    } ${option.availableForSale ? "" : "opacity-50 line-through"}`}
+                  >
+                    {option.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : sizeValue ? (
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-primary mb-2">
               Size
@@ -290,7 +345,7 @@ export function ProductActions({ product }: ProductActionsProps) {
               {sizeValue}
             </div>
           </div>
-        )}
+        ) : null}
 
         {/* Assurance pills — same height and row as Quantity/Size, not a separate block */}
         <button

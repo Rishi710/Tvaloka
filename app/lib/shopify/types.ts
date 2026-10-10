@@ -35,6 +35,16 @@ export interface ShopifyMetafield {
   type: string;
 }
 
+/** A sibling product offered in a different size (from the custom.size_option metafield). */
+export interface ShopifySizeOption {
+  id: string;
+  handle: string;
+  title: string;
+  /** Short size label from the sibling's custom.size metafield, e.g. "200ml". */
+  size: string | null;
+  availableForSale: boolean;
+}
+
 export interface ShopifyProduct {
   id: string;
   handle: string;
@@ -54,6 +64,8 @@ export interface ShopifyProduct {
   productType: string;
   collections?: { handle: string; title: string }[];
   metafields?: ShopifyMetafield[];
+  /** Same product in other sizes, including this one. Only set on the product page query. */
+  sizeOptions?: ShopifySizeOption[];
 }
 
 export interface ShopifyCollection {

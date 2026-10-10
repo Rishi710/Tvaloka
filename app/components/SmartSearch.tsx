@@ -25,6 +25,8 @@ interface PopularProduct {
   handle: string;
   title: string;
   price: string;
+  compareAtPrice: string | null;
+  size: string | null;
   image: string | null;
   imageAlt: string;
 }
@@ -64,12 +66,16 @@ export function SmartSearch({
   const listboxRef = useRef<HTMLUListElement>(null);
 
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SearchResults | null>(null);
+  const [fetched, setFetched] = useState<SearchResults | null>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isPending, startTransition] = useTransition();
   const [landing, setLanding] = useState<LandingData | null>(null);
 
   const debouncedQuery = useDebounce(query, 300);
+
+  // What is shown is derived rather than reset: when the box is cleared or
+  // too short, the last response simply stops being displayed.
+  const results = query.length >= 2 && debouncedQuery.length >= 2 ? fetched : null;
 
   // Fetch landing content (bestseller chips' backing data, concerns, popular
   // products) once per mount — independent of the debounced search query.
@@ -107,25 +113,27 @@ export function SmartSearch({
     };
   }, [onClose]);
 
-  // Fetch results
+  // Fetch results. A response that arrives after the query has moved on is
+  // dropped so it can't overwrite newer results.
   useEffect(() => {
-    if (debouncedQuery.length < 2) {
-      setResults(null);
-      setActiveIndex(-1);
-      return;
-    }
+    if (debouncedQuery.length < 2) return;
+    let cancelled = false;
     startTransition(async () => {
       try {
         const res = await fetch(
           `/api/search?q=${encodeURIComponent(debouncedQuery)}`
         );
         const data: SearchResults = await res.json();
-        setResults(data);
+        if (cancelled) return;
+        setFetched(data);
         setActiveIndex(-1);
       } catch {
         // silently fail
       }
     });
+    return () => {
+      cancelled = true;
+    };
   }, [debouncedQuery]);
 
   // Build flat navigable items list for keyboard nav
@@ -221,7 +229,10 @@ export function SmartSearch({
             autoComplete="off"
             spellCheck={false}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setActiveIndex(-1);
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Search products, concerns, categories…"
             aria-autocomplete="list"
@@ -243,7 +254,7 @@ export function SmartSearch({
               type="button"
               onClick={() => {
                 setQuery("");
-                setResults(null);
+                setFetched(null);
                 inputRef.current?.focus();
               }}
               aria-label="Clear search"
@@ -352,7 +363,15 @@ export function SmartSearch({
                               {product.title}
                             </span>
                             <span className="block text-xs text-tertiary">
-                              ₹{product.price}
+                              {product.compareAtPrice ? (
+                                <span className="mr-1 line-through">
+                                  ₹{product.compareAtPrice}
+                                </span>
+                              ) : null}
+                              <span className="font-semibold text-primary">
+                                ₹{product.price}
+                              </span>
+                              {product.size ? ` · ${product.size}` : ""}
                             </span>
                           </span>
                           <span
@@ -400,6 +419,15 @@ export function SmartSearch({
                     {results!.products.map((product) => {
                       const idx = flatIdx++;
                       const isActive = activeIndex === idx;
+                      const sellingPrice = Number(
+                        product.priceRange.minVariantPrice.amount
+                      );
+                      const compareAtAmount = Number(
+                        product.variants?.[0]?.compareAtPrice?.amount
+                      );
+                      const showCompareAt =
+                        Number.isFinite(compareAtAmount) &&
+                        compareAtAmount > sellingPrice;
                       return (
                         <li
                           key={product.id}
@@ -440,19 +468,35 @@ export function SmartSearch({
                               <span className="block truncate text-sm font-semibold text-primary">
                                 {product.title}
                               </span>
-                              {product.productType && (
-                                <span className="block truncate text-xs text-tertiary">
-                                  {product.productType}
-                                </span>
-                              )}
+                              {(() => {
+                                const size = product.metafields
+                                  ?.find((m) => m.key === "size")
+                                  ?.value?.trim();
+                                const detail = [product.productType, size]
+                                  .filter(Boolean)
+                                  .join(" · ");
+                                return detail ? (
+                                  <span className="block truncate text-xs text-tertiary">
+                                    {detail}
+                                  </span>
+                                ) : null;
+                              })()}
                             </span>
-                            <span className="shrink-0 text-xs text-tertiary">
-                              ₹
-                              {Math.round(
-                                Number(
-                                  product.priceRange.minVariantPrice.amount
-                                )
-                              ).toLocaleString("en-IN")}
+                            <span className="flex shrink-0 items-baseline gap-1.5 text-xs text-tertiary">
+                              {showCompareAt ? (
+                                <span className="line-through">
+                                  ₹
+                                  {Math.round(compareAtAmount).toLocaleString(
+                                    "en-IN"
+                                  )}
+                                </span>
+                              ) : null}
+                              <span className="text-sm font-semibold text-primary">
+                                ₹
+                                {Math.round(sellingPrice).toLocaleString(
+                                  "en-IN"
+                                )}
+                              </span>
                             </span>
                           </Link>
                         </li>
