@@ -44,8 +44,8 @@ const quickLinks = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com/tvalokawellness", Icon: InstagramIcon },
-  { label: "Facebook", href: "https://facebook.com/tvalokawellness", Icon: FacebookIcon },
+  { label: "Instagram", href: "https://www.instagram.com/tvalokawellness", Icon: InstagramIcon },
+  { label: "Facebook", href: "https://www.facebook.com/people/Tvaloka-Wellness/61586842281139/", Icon: FacebookIcon },
   // { label: "YouTube", href: "https://youtube.com/@tvalokawellness", Icon: YoutubeIcon },
   // { label: "X (Twitter)", href: "https://x.com/tvalokawellness", Icon: XIcon },
   // { label: "LinkedIn", href: "https://linkedin.com/company/tvalokawellness", Icon: LinkedinIcon },

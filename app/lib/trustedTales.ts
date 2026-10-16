@@ -22,23 +22,27 @@ export const TRUSTED_TALES: TrustedTaleEntry[] = [
     videoSrc: "https://cdn.shopify.com/videos/c/o/v/21a92f5342dd4d089d66617b5911b9d9.mp4",
   },
   {
+    handle: "Nyra Baby Hair Oil Sesame, Castor & Rosemary Oil",
+    videoSrc: "https://cdn.shopify.com/videos/c/o/v/75475243923d47e4a60d458f4e1d9f88.mp4",
+  },
+  {
+    handle: "Castor Cold Pressed Oil For Hair & Skin 100% Pure",
+    videoSrc: "https://cdn.shopify.com/videos/c/o/v/b51d8927330845adb68a25d289302439.mp4",
+  },
+  {
+    handle: "Aabhaa Baby Face Cream Aloe Vera, Rose, Shea Butter & Vitamin E",
+    videoSrc: "https://cdn.shopify.com/videos/c/o/v/b2d3ac2f4ba94fdaa57bf564646c8e17.mp4",
+  },
+  {
     handle: "Castor Cold Pressed Oil For Hair & Skin 100% Pure",
     videoSrc: "https://cdn.shopify.com/videos/c/o/v/1325f802c6c44162b7d25dcbca11f33f.mp4",
   },
   {
-    handle: "Prabha Hair Nourishment Oil Amla, Bhringraj, Neem & Methi",
-    videoSrc: PLACEHOLDER_VIDEO_URL,
+    handle: "Navya Baby Massage Oil Almond & Sandalwood Oil",
+    videoSrc: "https://cdn.shopify.com/videos/c/o/v/75475243923d47e4a60d458f4e1d9f88.mp4",
   },
-  {
-    handle: "tea-tree-essential-oil-for-hair-skin-100-pure",
-    videoSrc: PLACEHOLDER_VIDEO_URL,
-  },
-  {
-    handle: "sugandha-body-lotion-vanilla-shea-butter",
-    videoSrc: PLACEHOLDER_VIDEO_URL,
-  },
-  {
-    handle: "lavender-essential-oil-for-hair-skin",
-    videoSrc: PLACEHOLDER_VIDEO_URL,
-  },
+  // {
+  //   handle: "lavender-essential-oil-for-hair-skin",
+  //   videoSrc: PLACEHOLDER_VIDEO_URL,
+  // },
 ];

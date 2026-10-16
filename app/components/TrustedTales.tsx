@@ -146,7 +146,7 @@ export function TrustedTales({ items }: { items: TrustedTaleItem[] }) {
 
               return (
                 <li
-                  key={product.id}
+                  key={`${product.id}-${index}`}
                   data-story-card
                   className="w-[78%] shrink-0 snap-start sm:w-[45%] md:w-[32%] lg:w-[24%] xl:w-[19%]"
                 >
