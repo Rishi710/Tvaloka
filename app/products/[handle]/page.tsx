@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductByHandle, getProducts } from "../../lib/shopify/queries/product";
 import { ShareButton } from "../../components/ShareButton";
+import { ProductViewTracker } from "../../components/AnalyticsTrackers";
 import { ProductRating } from "../../components/ProductRating";
 import ProductGallery from "./ProductGallery";
 import { ProductAccordion } from "../../components/ProductAccordion";
@@ -117,6 +118,17 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   return (
     <main className="flex-1 bg-white py-4 sm:py-10 md:py-16">
+      {product.variants?.[0] && price && (
+        <ProductViewTracker
+          id={product.id}
+          title={product.title}
+          vendor={product.vendor || ""}
+          productType={product.productType || undefined}
+          variantId={product.variants[0].id}
+          variantTitle={product.variants[0].title || ""}
+          price={{ amount: price.amount, currencyCode: price.currencyCode }}
+        />
+      )}
       <div className="mx-auto max-w-7xl px-0 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-4 sm:mb-8 px-4 sm:px-0">

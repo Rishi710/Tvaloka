@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getCollectionWithProducts, getNavCollections } from "../lib/shopify/queries/collection";
 import type { ShopifyProduct } from "../lib/shopify/types";
 import { CollectionCatalog } from "../components/CollectionCatalog";
+import { CollectionViewTracker } from "../components/AnalyticsTrackers";
 
 export const revalidate = 21600; // 6 h, literal as Next requires. Collection edits refresh via webhook.
 
@@ -78,6 +79,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
   return (
     <main className="flex-1 bg-white">
+      <CollectionViewTracker id={collection.id} handle={collection.handle} />
       {/* ── Collection Hero Banner ────────────────────────────────────────── */}
       <section className="relative min-h-[175px] sm:min-h-[320px] lg:min-h-[480px] flex items-end justify-center overflow-hidden bg-[#111111]">
         {collection.image ? (

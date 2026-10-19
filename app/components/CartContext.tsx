@@ -10,6 +10,11 @@ import {
   useState,
 } from "react";
 import type { ShopifyProduct, ShopifyProductVariant } from "../lib/shopify/types";
+import {
+  getAnalyticsCartId,
+  publishAddToCart,
+  type CartLineLike,
+} from "../lib/shopifyAnalytics";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -132,6 +137,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const isHydrated = useRef(false);
 
+  // The latest lines, so an add-to-cart event can describe the cart as it was
+  // just before the add without making addItem depend on (and re-create with) it.
+  const itemsRef = useRef<CartItem[]>([]);
+  useEffect(() => {
+    itemsRef.current = state.items;
+  }, [state.items]);
+
   // Hydrate from localStorage on mount (client only)
   useEffect(() => {
     try {
@@ -227,6 +239,45 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
       dispatch({ type: "ADD_ITEM", payload: item });
       setIsOpen(true);
+
+      // Shopify Analytics: feeds the "Added to cart" step. Describes the cart as
+      // it is after this add; a no-op when analytics is off.
+      const addedQuantity = item.quantity;
+      const previousLines = itemsRef.current;
+      const previousQuantity =
+        previousLines.find((l) => l.variantId === variantId)?.quantity ?? 0;
+      const toLine = (l: CartItem, qty = l.quantity): CartLineLike => ({
+        id: l.variantId,
+        quantity: qty,
+        merchandise: {
+          id: l.variantId,
+          title: l.variantTitle || l.title,
+          price: { amount: String(l.priceAmount), currencyCode: l.currencyCode },
+          product: { id: l.productId, title: l.title, handle: l.handle },
+        },
+      });
+      const currentLine: CartLineLike = {
+        id: variantId,
+        quantity: previousQuantity + addedQuantity,
+        merchandise: {
+          id: variantId,
+          title: variant.title === "Default Title" ? product.title : variant.title,
+          price: { amount: String(priceAmount), currencyCode: currency },
+          product: {
+            id: product.id,
+            title: product.title,
+            vendor: product.vendor,
+            productType: product.productType,
+            handle: product.handle,
+          },
+        },
+      };
+      const otherLines = previousLines.filter((l) => l.variantId !== variantId).map((l) => toLine(l));
+      publishAddToCart(
+        { id: getAnalyticsCartId(), lines: { nodes: [...otherLines, currentLine] } },
+        currentLine,
+        addedQuantity,
+      );
     },
     []
   );

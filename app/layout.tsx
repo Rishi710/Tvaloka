@@ -6,6 +6,7 @@ import { SideCart } from "./components/SideCart";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import type { NavItem } from "./components/SiteHeader";
+import ShopifyAnalytics from "./components/ShopifyAnalytics";
 import { getNavCollections } from "./lib/shopify/queries/collection";
 import "./globals.css";
 
@@ -89,6 +90,7 @@ export default async function RootLayout({
           <SiteFooter />
           <SideCart />
         </CartProvider>
+        <ShopifyAnalytics />
       </body>
     </html>
   );
