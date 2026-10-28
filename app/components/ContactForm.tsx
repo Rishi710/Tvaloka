@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
+import { pixelContact } from "../lib/pixel";
 
 type FieldName = "name" | "email" | "subject" | "message";
 type Errors = Partial<Record<FieldName, string>>;
@@ -68,6 +69,7 @@ export function ContactForm() {
       return;
     }
 
+    pixelContact("form");
     setIsSubmitted(true);
   }
 

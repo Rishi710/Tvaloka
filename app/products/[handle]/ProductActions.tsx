@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ShopifyProduct } from "../../lib/shopify/types";
 import { useCart } from "../../components/CartContext";
+import { pixelCustomizeProduct } from "../../lib/pixel";
 import { CartIcon, CheckIcon, CloseIcon, CopyIcon } from "../../components/icons";
 
 function MinusIcon({ className }: { className?: string }) {
@@ -320,6 +321,11 @@ export function ProductActions({ product }: ProductActionsProps) {
                   <Link
                     href={`/products/${option.handle}`}
                     scroll={false}
+                    onClick={() => {
+                      if (!option.isCurrent) {
+                        pixelCustomizeProduct({ id: option.id, title: option.title, size: option.label });
+                      }
+                    }}
                     aria-current={option.isCurrent ? "true" : undefined}
                     aria-label={
                       option.availableForSale ? option.label : `${option.label}, sold out`

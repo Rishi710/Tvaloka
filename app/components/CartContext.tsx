@@ -15,6 +15,7 @@ import {
   publishAddToCart,
   type CartLineLike,
 } from "../lib/shopifyAnalytics";
+import { pixelAddToCart } from "../lib/pixel";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -278,6 +279,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         currentLine,
         addedQuantity,
       );
+      pixelAddToCart({
+        id: product.id,
+        variantId,
+        title: product.title,
+        price: String(priceAmount),
+        currencyCode: currency,
+        quantity: item.quantity,
+      });
     },
     []
   );

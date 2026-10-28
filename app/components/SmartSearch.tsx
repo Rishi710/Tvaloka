@@ -14,6 +14,7 @@ import { CloseIcon, SearchIcon } from "./icons";
 import type { ShopifyProduct } from "../lib/shopify/types";
 import type { ShopifyCollection } from "../lib/shopify/types";
 import Image from "next/image";
+import { pixelSearch } from "../lib/pixel";
 
 interface SearchResults {
   products: ShopifyProduct[];
@@ -125,6 +126,7 @@ export function SmartSearch({
         );
         const data: SearchResults = await res.json();
         if (cancelled) return;
+        pixelSearch(debouncedQuery);
         setFetched(data);
         setActiveIndex(-1);
       } catch {

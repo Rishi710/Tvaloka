@@ -7,6 +7,7 @@ import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
 import type { NavItem } from "./components/SiteHeader";
 import ShopifyAnalytics from "./components/ShopifyAnalytics";
+import MetaPixel from "./components/MetaPixel";
 import { getNavCollections } from "./lib/shopify/queries/collection";
 import "./globals.css";
 
@@ -25,6 +26,11 @@ const aboreto = Aboreto({
 export const metadata: Metadata = {
   title: "Tvaloka",
   description: "Tvaloka",
+  // Meta Business Suite → Brand Safety → Domains: paste the code it gives you
+  // into NEXT_PUBLIC_META_DOMAIN_VERIFICATION to use the meta-tag method.
+  ...(process.env.NEXT_PUBLIC_META_DOMAIN_VERIFICATION && {
+    other: { "facebook-domain-verification": process.env.NEXT_PUBLIC_META_DOMAIN_VERIFICATION },
+  }),
 };
 
 /**
@@ -91,6 +97,7 @@ export default async function RootLayout({
           <SideCart />
         </CartProvider>
         <ShopifyAnalytics />
+        <MetaPixel />
       </body>
     </html>
   );

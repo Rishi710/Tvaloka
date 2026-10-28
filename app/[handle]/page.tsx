@@ -79,7 +79,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
 
   return (
     <main className="flex-1 bg-white">
-      <CollectionViewTracker id={collection.id} handle={collection.handle} />
+      <CollectionViewTracker id={collection.id} handle={collection.handle} title={collection.title} />
       {/* ── Collection Hero Banner ────────────────────────────────────────── */}
       <section className="relative min-h-[175px] sm:min-h-[320px] lg:min-h-[480px] flex items-end justify-center overflow-hidden bg-[#111111]">
         {collection.image ? (

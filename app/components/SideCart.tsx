@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useCart } from "./CartContext";
 import { CloseIcon } from "./icons";
 import { createCart } from "../lib/shopify/queries/cart";
+import { pixelInitiateCheckout, toContentId } from "../lib/pixel";
 
 // ---------------------------------------------------------------------------
 // Minus / Plus icons (inline — no extra import needed)
@@ -59,6 +60,12 @@ export function SideCart() {
   async function handleCheckout() {
     setCheckoutError(null);
     setIsCheckingOut(true);
+    pixelInitiateCheckout({
+      contentIds: items.map((item) => toContentId(item.productId, item.variantId)),
+      numItems: items.reduce((sum, item) => sum + item.quantity, 0),
+      value: items.reduce((sum, item) => sum + item.priceAmount * item.quantity, 0),
+      currencyCode: items[0]?.currencyCode,
+    });
     try {
       const lines = items.map((item) => ({
         merchandiseId: item.variantId,

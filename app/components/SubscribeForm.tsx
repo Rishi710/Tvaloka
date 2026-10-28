@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { pixelLead } from "../lib/pixel";
 
 type Status = "idle" | "loading" | "success" | "already";
 
@@ -67,6 +68,7 @@ export function SubscribeForm() {
       });
       const data: { ok: boolean; alreadyRegistered?: boolean; error?: string } = await res.json();
       if (data.ok) {
+        if (!data.alreadyRegistered) pixelLead(value);
         setStatus(data.alreadyRegistered ? "already" : "success");
         setEmail("");
         return;
