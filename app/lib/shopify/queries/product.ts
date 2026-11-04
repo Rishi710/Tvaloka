@@ -123,6 +123,7 @@ const productFragment = `
       }
     }
     metafields(identifiers: [
+      { namespace: "custom", key: "inside_the_box" },
       { namespace: "custom", key: "benefits" },
       { namespace: "custom", key: "how_to_use" },
       { namespace: "custom", key: "faqs" },

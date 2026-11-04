@@ -229,7 +229,17 @@ export function ProductAccordion({
 
   const sections: AccordionSection[] = [];
 
-  // 1. Benefits
+  // 1. Inside the Box (kits/sets)
+  const insideTheBox = metafieldMap.get("inside_the_box");
+  if (insideTheBox && insideTheBox.value) {
+    sections.push({
+      id: "inside_the_box",
+      title: "Inside the Box",
+      content: renderRichText(insideTheBox.value),
+    });
+  }
+
+  // 2. Benefits
   const benefits = metafieldMap.get("benefits");
   if (benefits && benefits.value) {
     sections.push({
