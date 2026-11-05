@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ShopifyProduct } from "../../lib/shopify/types";
 import { useCart } from "../../components/CartContext";
+import { CartQuantityStepper } from "../../components/CartQuantityStepper";
 import { pixelCustomizeProduct } from "../../lib/pixel";
 import { CartIcon, CheckIcon, CloseIcon, CopyIcon } from "../../components/icons";
 
@@ -190,7 +191,7 @@ export function ProductActions({ product }: ProductActionsProps) {
   );
   const [openPanel, setOpenPanel] = useState<"offers" | "whatsNew" | null>(null);
 
-  const { addItem } = useCart();
+  const { addItem, items, updateQuantity } = useCart();
 
   useEffect(() => {
     if (!openPanel) return;
@@ -205,6 +206,12 @@ export function ProductActions({ product }: ProductActionsProps) {
     product.variants?.find((v) => v.id === selectedVariantId) ||
     product.variants?.[0] ||
     null;
+
+  // Once the chosen size is in the cart, the pre-add quantity picker and the
+  // Add to Cart button give way to a − qty + control tied to the cart.
+  const quantityInCart = selectedVariant
+    ? (items.find((i) => i.variantId === selectedVariant.id)?.quantity ?? 0)
+    : 0;
 
   const isAvailable =
     product.availableForSale && (selectedVariant?.availableForSale ?? true);
@@ -278,6 +285,7 @@ export function ProductActions({ product }: ProductActionsProps) {
 
       {/* Quantity Stepper + Size (custom.size metafield) + assurance pills, side by side */}
       <div className="flex flex-wrap items-end gap-2">
+        {quantityInCart === 0 && (
         <div>
           <label className="block text-xs font-semibold uppercase tracking-wider text-primary mb-2">
             Quantity
@@ -306,6 +314,7 @@ export function ProductActions({ product }: ProductActionsProps) {
             </button>
           </div>
         </div>
+        )}
 
         {sizeChoices.length > 0 ? (
           <div>
@@ -430,6 +439,15 @@ export function ProductActions({ product }: ProductActionsProps) {
 
       {/* Add to Cart Action Button */}
       <div>
+        {selectedVariant && quantityInCart > 0 ? (
+          <CartQuantityStepper
+            tone="solid"
+            quantity={quantityInCart}
+            title={product.title}
+            onDecrease={() => updateQuantity(selectedVariant.id, quantityInCart - 1)}
+            onIncrease={() => addItem(product, selectedVariant.id, 1)}
+          />
+        ) : (
         <button
           type="button"
           disabled={!isAvailable || adding}
@@ -450,6 +468,7 @@ export function ProductActions({ product }: ProductActionsProps) {
             <span>Sold Out</span>
           )}
         </button>
+        )}
       </div>
     </div>
   );

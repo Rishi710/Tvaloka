@@ -45,7 +45,24 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
   const menuTriggerRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const searchToggleRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const drawerTitleId = useId();
+
+  // The header is sticky, so anything else that sticks to the top of the page
+  // (filter sidebar, product gallery, A–Z bar) offsets itself by --header-h.
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+    const root = document.documentElement;
+    const update = () => root.style.setProperty("--header-h", `${header.offsetHeight}px`);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(header);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--header-h");
+    };
+  }, []);
 
   // Trap focus + lock scroll while the mobile drawer is open; restore
   // focus to the trigger on close (WCAG 2.4.3, 2.1.2).
@@ -95,7 +112,12 @@ export function SiteHeader({ navItems = [] }: SiteHeaderProps) {
   }
 
   return (
-    <header className="bg-surface-muted">
+    // Raised above the floating back-to-top button while the drawer or search
+    // overlay (which live inside the header) is open.
+    <header
+      ref={headerRef}
+      className={`sticky top-0 bg-surface-muted ${isMenuOpen || isSearchOpen ? "z-[60]" : "z-30"}`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-[var(--space-4)] px-[var(--space-4)] py-[var(--space-2)]">
         {/* Left utility — search trigger */}
         <div className="flex flex-1 items-center gap-[var(--space-4)]">

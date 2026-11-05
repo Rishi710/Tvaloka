@@ -405,7 +405,7 @@ export function CollectionCatalog({
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[240px_1fr]">
           {/* ── Left Sidebar Filter (Desktop) ──────────────────────────────── */}
           <aside className="hidden lg:block">
-            <div className="sticky top-24 space-y-6">
+            <div className="sticky top-[calc(var(--header-h,0px)+1.5rem)] space-y-6">
               {/* Header */}
               <div className="flex items-center justify-between border-b border-[#e5e5e5] pb-3">
                 <span className="text-xs font-bold uppercase tracking-widest text-black">

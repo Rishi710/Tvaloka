@@ -24,7 +24,7 @@ const aboreto = Aboreto({
 });
 
 export const metadata: Metadata = {
-  title: "Tvaloka",
+  title: "Tvaloka Wellness | Authentic Ayurveda",
   description: "Tvaloka",
   // Meta Business Suite → Brand Safety → Domains: paste the code it gives you
   // into NEXT_PUBLIC_META_DOMAIN_VERIFICATION to use the meta-tag method.

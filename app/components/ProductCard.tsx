@@ -6,6 +6,7 @@ import { useState } from "react";
 import type { ShopifyProduct } from "../lib/shopify/types";
 import { useCart } from "./CartContext";
 import { CartIcon } from "./icons";
+import { CartQuantityStepper } from "./CartQuantityStepper";
 import { ProductRating, StarRating } from "./ProductRating";
 
 // ---------------------------------------------------------------------------
@@ -73,7 +74,7 @@ export function ProductCard({
 }: ProductCardProps) {
   const [addingToBag, setAddingToBag] = useState(false);
   const [showSizePicker, setShowSizePicker] = useState(false);
-  const { addItem } = useCart();
+  const { addItem, items, updateQuantity } = useCart();
 
   // Use the passed-in handler or fall back to the global cart addItem
   const handleAddToBag: ProductCardProps["onAddToBag"] =
@@ -151,6 +152,12 @@ export function ProductCard({
   // Real reviews only — no rating shown when a product has none yet, and no
   // caller-supplied override, so ProductRating fetches it from Judge.me.
   const hasRatingOverride = rating !== undefined && reviewCount !== undefined && reviewCount > 0;
+
+  // Single-size products swap the button for a − qty + control once added.
+  const singleVariantId = !hasMultipleVariants ? variants[0]?.id : undefined;
+  const quantityInCart = singleVariantId
+    ? (items.find((i) => i.variantId === singleVariantId)?.quantity ?? 0)
+    : 0;
 
   const pdpHref = `/products/${product.handle}`;
   const isSoldOut = !product.availableForSale;
@@ -389,6 +396,13 @@ export function ProductCard({
               />
             </svg>
           </button>
+        ) : singleVariantId && quantityInCart > 0 ? (
+          <CartQuantityStepper
+            quantity={quantityInCart}
+            title={product.title}
+            onDecrease={() => updateQuantity(singleVariantId, quantityInCart - 1)}
+            onIncrease={() => void handleAddToBag?.(product, singleVariantId)}
+          />
         ) : (
           <button
             type="button"

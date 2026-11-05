@@ -155,7 +155,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
         <div className="grid grid-cols-1 gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
           {/* Product Gallery (Sticky on desktop, full-width on mobile) */}
-          <div className="lg:sticky lg:top-8 w-full">
+          <div className="lg:sticky lg:top-[calc(var(--header-h,0px)+2rem)] w-full">
             <ProductGallery
               images={
                 product.images && product.images.length > 0

@@ -258,7 +258,7 @@ export function IngredientsView({ ingredients, products = [] }: IngredientsViewP
       </section>
 
       {/* ── 2. Alphabetical Index Quick Jump Bar ─────────────────────────── */}
-      <section className="sticky top-0 z-20 border-b border-[#e5e5e5] bg-white/95 backdrop-blur-md">
+      <section className="sticky top-[var(--header-h,0px)] z-20 border-b border-[#e5e5e5] bg-white/95 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-4 py-2.5 sm:px-6 lg:px-8">
           {/* A-Z Quick Jump Bar (Centered, only existing letters, no "Index:" word) */}
           <div className="relative flex items-center justify-center">

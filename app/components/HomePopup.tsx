@@ -9,7 +9,7 @@ import { CheckIcon, CloseIcon, CopyIcon } from "./icons";
 const POPUP_STORAGE_KEY = "tvaloka_home_popup_dismissed";
 
 // Default promo lifestyle image for the right side
-export const DEFAULT_POPUP_IMAGE = "/Image/img-1.jpg";
+export const DEFAULT_POPUP_IMAGE = "https://cdn.shopify.com/s/files/1/1005/3045/4892/files/WhatsApp_Image_2026-11-05_at_17.27.51.webp?v=1793881575";
 
 type HomePopupProps = {
   /** Eyebrow text (e.g. WELCOME!!) */
