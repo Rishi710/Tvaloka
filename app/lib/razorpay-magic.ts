@@ -107,7 +107,7 @@ export interface MagicCompletedOrder {
   payment_method?: string;
   payment_currency?: string;
   total_amount: number; // paise
-  order_status_url: string;
+  order_status_url?: string;
   customer_details?: {
     email?: string;
     contact?: string;

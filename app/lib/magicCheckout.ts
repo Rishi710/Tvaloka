@@ -10,6 +10,9 @@ const SCRIPT_SRC = "https://checkout.razorpay.com/v1/magic-checkout.js";
 
 export const MAGIC_CHECKOUT_ENABLED = Boolean(KEY_ID);
 
+/** Where the order summary is kept for the /order-confirmation page. */
+export const LAST_ORDER_KEY = "tvaloka_last_order";
+
 interface RazorpayResponse {
   razorpay_payment_id: string;
   razorpay_order_id: string;
@@ -38,15 +41,38 @@ export interface MagicCheckoutItem {
   variantId: string;
   productId: string;
   quantity: number;
+  title: string;
+  variantTitle?: string;
+  sizeLabel?: string | null;
+  imageUrl?: string | null;
+  priceAmount: number;
+}
+
+/** What /order-confirmation shows. Kept in sessionStorage, never sent anywhere. */
+export interface LastOrder {
+  /** "confirmed": the Shopify order exists. "processing": paid, order still being created. */
+  status: "confirmed" | "processing";
+  orderName?: string;
+  razorpayOrderId: string;
+  paymentMethod?: string;
+  email?: string;
+  total: number;
+  currency: string;
+  orderStatusUrl?: string;
+  items: Array<{
+    title: string;
+    subtitle?: string;
+    imageUrl?: string | null;
+    quantity: number;
+    priceAmount: number;
+  }>;
 }
 
 export interface MagicCheckoutCallbacks {
-  /** Payment confirmed and the Shopify order exists. */
-  onPaid: (result: { orderStatusUrl: string }) => void;
+  /** The shopper paid. The order summary is saved under LAST_ORDER_KEY; show the confirmation page. */
+  onPaid: () => void;
   /** The shopper closed the modal without paying. */
   onDismiss: () => void;
-  /** The shopper paid, but we couldn't confirm the order on our side. */
-  onConfirmError: () => void;
 }
 
 let scriptPromise: Promise<void> | null = null;
@@ -70,6 +96,49 @@ function loadScript(): Promise<void> {
 function getCookie(name: string): string {
   const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
   return match ? decodeURIComponent(match[1]) : "";
+}
+
+interface CompleteResponse {
+  ok: boolean;
+  orderStatusUrl?: string;
+  orderName?: string;
+  paymentMethod?: string;
+  email?: string;
+  value?: number;
+  currency?: string;
+  purchaseEventId?: string;
+}
+
+/**
+ * Asks our server to create the order in Shopify for a payment that went
+ * through. Card and UPI payments can take a moment to be marked as captured, so
+ * a failed attempt is retried a couple of times before giving up.
+ */
+async function confirmOrder(
+  payment: RazorpayResponse,
+  contentIds: string[],
+): Promise<CompleteResponse | null> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt > 0) await new Promise((r) => setTimeout(r, 2500));
+    try {
+      const res = await fetch("/api/magic-checkout/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          paymentId: payment.razorpay_payment_id,
+          orderId: payment.razorpay_order_id,
+          contentIds,
+          sourceUrl: window.location.href,
+        }),
+      });
+      const done: CompleteResponse = await res.json();
+      if (res.ok && done.ok) return done;
+      if (res.status === 400) return null; // our own validation rejected it; retrying won't help
+    } catch {
+      // network hiccup: try again
+    }
+  }
+  return null;
 }
 
 /**
@@ -101,6 +170,7 @@ export async function startMagicCheckout(
   }
 
   const contentIds = items.map((i) => toContentId(i.productId, i.variantId));
+  const subtotal = items.reduce((sum, i) => sum + i.priceAmount * i.quantity, 0);
 
   const options: RazorpayOptions = {
     key: KEY_ID,
@@ -109,26 +179,35 @@ export async function startMagicCheckout(
     show_coupons: true,
     theme: { color: "#000000" },
     handler: async (payment) => {
-      try {
-        const res = await fetch("/api/magic-checkout/complete", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            paymentId: payment.razorpay_payment_id,
-            orderId: payment.razorpay_order_id,
-            contentIds,
-            sourceUrl: window.location.href,
-          }),
-        });
-        const done: {
-          ok: boolean;
-          orderStatusUrl?: string;
-          value?: number;
-          currency?: string;
-          purchaseEventId?: string;
-        } = await res.json();
-        if (!res.ok || !done.ok || !done.orderStatusUrl) throw new Error("Order not confirmed");
+      const done = await confirmOrder(payment, contentIds);
 
+      // The shopper has paid either way, so they always land on the
+      // confirmation page. If our confirmation call failed, Razorpay still
+      // creates the order in Shopify on its own shortly afterwards.
+      const summary: LastOrder = {
+        status: done ? "confirmed" : "processing",
+        orderName: done?.orderName,
+        razorpayOrderId: payment.razorpay_order_id,
+        paymentMethod: done?.paymentMethod,
+        email: done?.email,
+        total: done?.value ?? subtotal,
+        currency: done?.currency ?? "INR",
+        orderStatusUrl: done?.orderStatusUrl,
+        items: items.map((i) => ({
+          title: i.title,
+          subtitle: [i.variantTitle, i.sizeLabel].filter(Boolean).join(" · ") || undefined,
+          imageUrl: i.imageUrl,
+          quantity: i.quantity,
+          priceAmount: i.priceAmount,
+        })),
+      };
+      try {
+        sessionStorage.setItem(LAST_ORDER_KEY, JSON.stringify(summary));
+      } catch {
+        // The page still works without the summary.
+      }
+
+      if (done) {
         // Same event ID as the server's Purchase, so Meta counts it once.
         pixelPurchase({
           eventId: done.purchaseEventId,
@@ -136,10 +215,8 @@ export async function startMagicCheckout(
           currency: done.currency,
           contentIds,
         });
-        callbacks.onPaid({ orderStatusUrl: done.orderStatusUrl });
-      } catch {
-        callbacks.onConfirmError();
       }
+      callbacks.onPaid();
     },
     modal: { ondismiss: callbacks.onDismiss },
   };

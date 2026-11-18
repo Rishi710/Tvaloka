@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "./CartContext";
 import { CloseIcon } from "./icons";
@@ -53,6 +54,7 @@ export function SideCart() {
   const { items, isOpen, closeCart, removeItem, clearCart, updateQuantity, subtotal, currencyCode, totalQuantity } =
     useCart();
 
+  const router = useRouter();
   const drawerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -74,19 +76,20 @@ export function SideCart() {
             variantId: item.variantId,
             productId: item.productId,
             quantity: item.quantity,
+            title: item.title,
+            variantTitle: item.variantTitle,
+            sizeLabel: item.sizeLabel,
+            imageUrl: item.imageUrl,
+            priceAmount: item.priceAmount,
           })),
           {
-            onPaid: ({ orderStatusUrl }) => {
+            onPaid: () => {
               clearCart();
-              window.location.href = orderStatusUrl;
+              closeCart();
+              setIsCheckingOut(false);
+              router.push("/order-confirmation");
             },
             onDismiss: () => setIsCheckingOut(false),
-            onConfirmError: () => {
-              setCheckoutError(
-                "Your payment went through, but we couldn't confirm the order yet. Please don't pay again: check your email, or contact support@tvaloka.com.",
-              );
-              setIsCheckingOut(false);
-            },
           },
         );
         return;

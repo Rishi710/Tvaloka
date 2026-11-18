@@ -40,12 +40,14 @@ export function tagsForWebhook(topic: string, payload: { handle?: unknown }): st
         ...(handle ? [`product-${handle}`] : []),
       ];
 
-    // An update just changes that product's own fields (price, description,
-    // images, …) — only its own page needs to be fresh immediately. The
-    // shared listing pages catch up on their normal timed refresh instead of
-    // regenerating sitewide on every single edit.
+    // An update can change what the cards show (price, sold-out, image, title),
+    // so the listings are refreshed too: otherwise a price edit showed on the
+    // product page at once but stayed old on cards for up to 6 hours. They
+    // refresh lazily on the next visit, so this costs a few page regenerations
+    // per edit/order, not a constant rate. "product-lookup" (the big 250-product
+    // list every product page uses) is left to its 24 h refresh.
     case "products/update":
-      return handle ? [`product-${handle}`] : [];
+      return ["products", "collection-products", ...(handle ? [`product-${handle}`] : [])];
 
     case "collections/create":
     case "collections/delete":

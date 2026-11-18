@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    // See app/lib/imageLoader.ts: Shopify's CDN resizes the images, not Vercel.
+    loader: "custom",
+    loaderFile: "./app/lib/imageLoader.ts",
     remotePatterns: [
       {
         protocol: "https",

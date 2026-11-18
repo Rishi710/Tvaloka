@@ -66,11 +66,15 @@ export async function POST(request: NextRequest) {
       ok: true,
       orderStatusUrl: order.order_status_url,
       orderName: order.order_id,
+      paymentMethod: order.payment_method,
+      email: order.customer_details?.email,
       value,
       currency,
       purchaseEventId,
     });
-  } catch {
+  } catch (error) {
+    // Razorpay's own response is logged where it failed (razorpay-magic.ts).
+    console.error("[Magic Checkout] complete failed for", orderId, paymentId, error);
     return NextResponse.json({ ok: false, error: "Could not complete the order" }, { status: 502 });
   }
 }
