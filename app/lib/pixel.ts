@@ -26,7 +26,10 @@ export const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "";
  * Set NEXT_PUBLIC_META_TRACK_CHECKOUT=true only if the Facebook & Instagram
  * channel is NOT reporting InitiateCheckout, otherwise it is counted twice.
  */
-const TRACK_CHECKOUT = process.env.NEXT_PUBLIC_META_TRACK_CHECKOUT === "true";
+// Magic Checkout opens on our own page (not Shopify's checkout), so the channel
+// never sees it: with it on, InitiateCheckout is always sent from here.
+const TRACK_CHECKOUT =
+  process.env.NEXT_PUBLIC_META_TRACK_CHECKOUT === "true" || Boolean(process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID);
 
 /**
  * How product IDs are written in `content_ids`. They must match the Content ID
@@ -221,4 +224,27 @@ export function pixelInitiateCheckout(p: {
     value: p.value,
     currency: p.currencyCode || "INR",
   });
+}
+
+/**
+ * Order paid through Magic Checkout. Browser only: the server already sent the
+ * matching Purchase to the Conversions API under the same event ID.
+ */
+export function pixelPurchase(p: {
+  eventId?: string;
+  value: number;
+  currency?: string;
+  contentIds: string[];
+}): void {
+  if (!enabled() || typeof window.fbq !== "function") return;
+  try {
+    window.fbq(
+      "track",
+      "Purchase",
+      { content_ids: p.contentIds, content_type: "product", value: p.value, currency: p.currency || "INR" },
+      p.eventId ? { eventID: p.eventId } : undefined,
+    );
+  } catch {
+    // The Pixel must never break the page.
+  }
 }

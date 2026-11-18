@@ -7,6 +7,7 @@ import { useCart } from "./CartContext";
 import { CloseIcon } from "./icons";
 import { createCart } from "../lib/shopify/queries/cart";
 import { pixelInitiateCheckout, toContentId } from "../lib/pixel";
+import { MAGIC_CHECKOUT_ENABLED, startMagicCheckout } from "../lib/magicCheckout";
 
 // ---------------------------------------------------------------------------
 // Minus / Plus icons (inline — no extra import needed)
@@ -49,7 +50,7 @@ function PlusIcon({ className }: { className?: string }) {
 // ---------------------------------------------------------------------------
 
 export function SideCart() {
-  const { items, isOpen, closeCart, removeItem, updateQuantity, subtotal, currencyCode, totalQuantity } =
+  const { items, isOpen, closeCart, removeItem, clearCart, updateQuantity, subtotal, currencyCode, totalQuantity } =
     useCart();
 
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -66,6 +67,35 @@ export function SideCart() {
       value: items.reduce((sum, item) => sum + item.priceAmount * item.quantity, 0),
       currencyCode: items[0]?.currencyCode,
     });
+    if (MAGIC_CHECKOUT_ENABLED) {
+      try {
+        await startMagicCheckout(
+          items.map((item) => ({
+            variantId: item.variantId,
+            productId: item.productId,
+            quantity: item.quantity,
+          })),
+          {
+            onPaid: ({ orderStatusUrl }) => {
+              clearCart();
+              window.location.href = orderStatusUrl;
+            },
+            onDismiss: () => setIsCheckingOut(false),
+            onConfirmError: () => {
+              setCheckoutError(
+                "Your payment went through, but we couldn't confirm the order yet. Please don't pay again: check your email, or contact support@tvaloka.com.",
+              );
+              setIsCheckingOut(false);
+            },
+          },
+        );
+        return;
+      } catch (error) {
+        // Magic Checkout couldn't open (not linked yet, blocked, API error):
+        // carry on to the normal Shopify checkout below.
+        console.error("Magic Checkout unavailable, using Shopify checkout:", error);
+      }
+    }
     try {
       const lines = items.map((item) => ({
         merchandiseId: item.variantId,

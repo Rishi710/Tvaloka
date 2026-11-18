@@ -49,6 +49,7 @@ type CartAction =
   | { type: "ADD_ITEM"; payload: CartItem }
   | { type: "REMOVE_ITEM"; variantId: string }
   | { type: "UPDATE_QUANTITY"; variantId: string; quantity: number }
+  | { type: "CLEAR" }
   | { type: "HYDRATE"; items: CartItem[] };
 
 // ---------------------------------------------------------------------------
@@ -82,6 +83,9 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       }
       return { items: [...state.items, { ...action.payload, quantity: addQty }] };
     }
+
+    case "CLEAR":
+      return { items: [] };
 
     case "REMOVE_ITEM":
       return {
@@ -122,6 +126,7 @@ interface CartContextValue {
   closeCart: () => void;
   addItem: (product: ShopifyProduct, variantId: string, quantity?: number) => void;
   removeItem: (variantId: string) => void;
+  clearCart: () => void;
   updateQuantity: (variantId: string, quantity: number) => void;
 }
 
@@ -295,6 +300,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "REMOVE_ITEM", variantId });
   }, []);
 
+  const clearCart = useCallback(() => {
+    dispatch({ type: "CLEAR" });
+  }, []);
+
   const updateQuantity = useCallback((variantId: string, quantity: number) => {
     dispatch({ type: "UPDATE_QUANTITY", variantId, quantity });
   }, []);
@@ -318,6 +327,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         closeCart,
         addItem,
         removeItem,
+        clearCart,
         updateQuantity,
       }}
     >
